@@ -1,0 +1,27 @@
+Detecting C compiler ABI info failed to compile with the following output:
+Change Dir: D:/project under development/C++ proj/basic of programming 2021-2022/array ordering ✓/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake -f Makefile /nologo cmTC_36136\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_36136.dir\build.make /nologo -L                  CMakeFiles\cmTC_36136.dir\build
+Building C object CMakeFiles/cmTC_36136.dir/CMakeCCompilerABI.c.obj
+	"D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\cmTC_36136.dir\CMakeCCompilerABI.c.obj.d --working-dir="D:\project under development\C++ proj\basic of programming 2021-2022\array ordering ?\cmake-build-debug\CMakeFiles\CMakeTmp" --filter-prefix="" -- C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1429~1.301\bin\Hostx86\x86\cl.exe @C:\Users\Egor\AppData\Local\Temp\nm7750.tmp
+NMAKE : fatal error U1077: "D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" : тючтЁр∙хээ√щ ъюф "0x2"
+Stop.
+NMAKE : fatal error U1077: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe" : тючтЁр∙хээ√щ ъюф "0x2"
+Stop.
+
+
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: D:/project under development/C++ proj/basic of programming 2021-2022/array ordering ✓/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake -f Makefile /nologo cmTC_f0a4a\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_f0a4a.dir\build.make /nologo -L                  CMakeFiles\cmTC_f0a4a.dir\build
+Building C object CMakeFiles/cmTC_f0a4a.dir/testCCompiler.c.obj
+	"D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\cmTC_f0a4a.dir\testCCompiler.c.obj.d --working-dir="D:\project under development\C++ proj\basic of programming 2021-2022\array ordering ?\cmake-build-debug\CMakeFiles\CMakeTmp" --filter-prefix="" -- C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1429~1.301\bin\Hostx86\x86\cl.exe @C:\Users\Egor\AppData\Local\Temp\nm77FC.tmp
+NMAKE : fatal error U1077: "D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" : тючтЁр∙хээ√щ ъюф "0x2"
+Stop.
+NMAKE : fatal error U1077: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe" : тючтЁр∙хээ√щ ъюф "0x2"
+Stop.
+
+
+

@@ -1,0 +1,4 @@
+﻿  testVS.cpp
+D:\project under development\C++ proj\basic of programming 2021-2022\array ordering\testVS\testVS\testVS.cpp(4,15): warning C4101: q: неиспользованная локальная переменная
+D:\project under development\C++ proj\basic of programming 2021-2022\array ordering\testVS\testVS\testVS.cpp(4,18): warning C4101: w: неиспользованная локальная переменная
+  testVS.vcxproj -> D:\project under development\C++ proj\basic of programming 2021-2022\array ordering\testVS\Debug\testVS.exe
