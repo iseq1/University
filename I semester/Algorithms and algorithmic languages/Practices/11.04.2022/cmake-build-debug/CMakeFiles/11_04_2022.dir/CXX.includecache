@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/project under development/C++ proj/algorithms and algorithmic languages 2021-2022/11.04.2022/main.cpp
+iostream
+-
+fstream
+-
+queue
+-
+vector
+-
+iomanip
+-
+

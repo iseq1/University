@@ -1,0 +1,3 @@
+D:/project under development/C++ proj/algorithms and algorithmic languages 2021-2022/lab.work1 task1/cmake-build-debug/CMakeFiles/lab_work1_task1.dir
+D:/project under development/C++ proj/algorithms and algorithmic languages 2021-2022/lab.work1 task1/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/project under development/C++ proj/algorithms and algorithmic languages 2021-2022/lab.work1 task1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
