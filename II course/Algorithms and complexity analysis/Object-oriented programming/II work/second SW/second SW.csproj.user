@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ReferencePath>C:\Program Files (x86)\MySQL\MySQL Connector NET 8.0.31\Assemblies\v4.5.2</ReferencePath>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,23 @@
+D:\project under development\C# proj\OOP\second SW\second SW\obj\Debug\second SW.csproj.AssemblyReference.cache
+D:\project under development\C# proj\OOP\second SW\second SW\obj\Debug\second_SW.Properties.Resources.resources
+D:\project under development\C# proj\OOP\second SW\second SW\obj\Debug\second SW.csproj.GenerateResource.cache
+D:\project under development\C# proj\OOP\second SW\second SW\obj\Debug\second SW.csproj.CoreCompileInputs.cache
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\second_SW.exe.config
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\second_SW.exe
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\second_SW.pdb
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\MySql.Data.dll
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\Google.Protobuf.dll
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\ZstdNet.dll
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\K4os.Compression.LZ4.Streams.dll
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\BouncyCastle.Crypto.dll
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\System.Memory.dll
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\System.Buffers.dll
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\K4os.Compression.LZ4.dll
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\K4os.Hash.xxHash.dll
+D:\project under development\C# proj\OOP\second SW\second SW\bin\Debug\MySql.Data.xml
+D:\project under development\C# proj\OOP\second SW\second SW\obj\Debug\second_SW.exe.config
+D:\project under development\C# proj\OOP\second SW\second SW\obj\Debug\second SW.csproj.CopyComplete
+D:\project under development\C# proj\OOP\second SW\second SW\obj\Debug\second_SW.exe
+D:\project under development\C# proj\OOP\second SW\second SW\obj\Debug\second_SW.pdb
+D:\project under development\C# proj\OOP\second SW\second SW\obj\Debug\second_SW.Form1.resources
+D:\project under development\C# proj\OOP\second SW\second SW\obj\Debug\second_SW.MainFormDB.resources

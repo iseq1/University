@@ -1,0 +1,12 @@
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\bin\Debug\third_SW_vol_2._0.exe.config
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\bin\Debug\third_SW_vol_2._0.exe
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\bin\Debug\third_SW_vol_2._0.pdb
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\obj\Debug\third SW vol 2.0.csproj.AssemblyReference.cache
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\obj\Debug\third_SW_vol_2._0.Properties.Resources.resources
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\obj\Debug\third SW vol 2.0.csproj.GenerateResource.cache
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\obj\Debug\third SW vol 2.0.csproj.CoreCompileInputs.cache
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\obj\Debug\third_SW_vol_2._0.exe
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\obj\Debug\third_SW_vol_2._0.pdb
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\obj\Debug\third_SW_vol_2._0.Form1.resources
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\obj\Debug\third_SW_vol_2._0.GameForm.resources
+D:\project under development\C# proj\OOP\third SW vol 2.0\third SW vol 2.0\obj\Debug\third_SW_vol_2._0.ShopForm.resources

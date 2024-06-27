@@ -1,0 +1,13 @@
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\bin\Debug\MicroControler.exe.config
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\bin\Debug\MicroControler.exe
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\bin\Debug\MicroControler.pdb
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\obj\Debug\MicroControler.csproj.AssemblyReference.cache
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\obj\Debug\MicroControler.Properties.Resources.resources
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\obj\Debug\MicroControler.csproj.GenerateResource.cache
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\obj\Debug\MicroControler.csproj.CoreCompileInputs.cache
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\obj\Debug\MicroControler.exe
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\obj\Debug\MicroControler.pdb
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\obj\Debug\MicroControler.Form1.resources
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\bin\Debug\System.IO.Ports.dll
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\bin\Debug\System.IO.Ports.xml
+D:\project under development\C# proj\Computing architecture\MicroControler\MicroControler\MicroControler\obj\Debug\MicroControler.csproj.CopyComplete

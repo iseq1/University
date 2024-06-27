@@ -1,0 +1,10 @@
+D:\project under development\C# proj\OOP\first SW\first SW\bin\Debug\first_SW.exe.config
+D:\project under development\C# proj\OOP\first SW\first SW\bin\Debug\first_SW.exe
+D:\project under development\C# proj\OOP\first SW\first SW\bin\Debug\first_SW.pdb
+D:\project under development\C# proj\OOP\first SW\first SW\obj\Debug\first SW.csproj.AssemblyReference.cache
+D:\project under development\C# proj\OOP\first SW\first SW\obj\Debug\first_SW.Properties.Resources.resources
+D:\project under development\C# proj\OOP\first SW\first SW\obj\Debug\first SW.csproj.GenerateResource.cache
+D:\project under development\C# proj\OOP\first SW\first SW\obj\Debug\first SW.csproj.CoreCompileInputs.cache
+D:\project under development\C# proj\OOP\first SW\first SW\obj\Debug\first_SW.exe
+D:\project under development\C# proj\OOP\first SW\first SW\obj\Debug\first_SW.pdb
+D:\project under development\C# proj\OOP\first SW\first SW\obj\Debug\first_SW.Form1.resources
