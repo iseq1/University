@@ -1,0 +1,10 @@
+D:\project under development\C# proj\Theory of information\mini-project 1\minipr1\minipr1\bin\Debug\minipr1.exe.config
+D:\project under development\C# proj\Theory of information\mini-project 1\minipr1\minipr1\bin\Debug\minipr1.exe
+D:\project under development\C# proj\Theory of information\mini-project 1\minipr1\minipr1\bin\Debug\minipr1.pdb
+D:\project under development\C# proj\Theory of information\mini-project 1\minipr1\minipr1\obj\Debug\minipr1.csproj.AssemblyReference.cache
+D:\project under development\C# proj\Theory of information\mini-project 1\minipr1\minipr1\obj\Debug\minipr1.Form1.resources
+D:\project under development\C# proj\Theory of information\mini-project 1\minipr1\minipr1\obj\Debug\minipr1.Properties.Resources.resources
+D:\project under development\C# proj\Theory of information\mini-project 1\minipr1\minipr1\obj\Debug\minipr1.csproj.GenerateResource.cache
+D:\project under development\C# proj\Theory of information\mini-project 1\minipr1\minipr1\obj\Debug\minipr1.csproj.CoreCompileInputs.cache
+D:\project under development\C# proj\Theory of information\mini-project 1\minipr1\minipr1\obj\Debug\minipr1.exe
+D:\project under development\C# proj\Theory of information\mini-project 1\minipr1\minipr1\obj\Debug\minipr1.pdb
