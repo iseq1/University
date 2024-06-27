@@ -1,0 +1,22 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+#board {
+    background-color: black;
+}
+
+.action-btn{
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.5;
+    text-transform: uppercase;
+    width: 50%;
+    height: 50px;
+    border-radius: 25px;
+    margin: auto auto;
+    padding: 0 25px;
+    transition: all .4s;
+}
