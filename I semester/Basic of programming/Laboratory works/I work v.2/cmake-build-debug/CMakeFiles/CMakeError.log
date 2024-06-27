@@ -1,0 +1,18 @@
+Detecting C compiler ABI info failed to compile with the following output:
+Change Dir: D:/project under development/C++ proj/basic of programming 2021-2022/lab.work1 task1 v.2/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake -f Makefile /nologo cmTC_819da\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_819da.dir\build.make /nologo -L                  CMakeFiles\cmTC_819da.dir\build
+Building C object CMakeFiles/cmTC_819da.dir/CMakeCCompilerABI.c.obj
+	"D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\cmTC_819da.dir\CMakeCCompilerABI.c.obj.d --working-dir="D:\project under development\C++ proj\basic of programming 2021-2022\lab.work1 task1 v.2\cmake-build-debug\CMakeFiles\CMakeTmp" --filter-prefix="" -- C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1429~1.301\bin\Hostx86\x86\cl.exe @C:\Users\Egor\AppData\Local\Temp\nm2D85.tmp
+Linking C executable cmTC_819da.exe
+	"D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\cmTC_819da.dir --rc=C:\PROGRA~2\WI3CF2~1\10\bin\100190~1.0\x86\rc.exe --mt=C:\PROGRA~2\WI3CF2~1\10\bin\100190~1.0\x86\mt.exe --manifests -- C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1429~1.301\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\cmTC_819da.dir\objects1.rsp @C:\Users\Egor\AppData\Local\Temp\nm2E51.tmp
+FINAL LINK: command "C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1429~1.301\bin\Hostx86\x86\link.exe /nologo @CMakeFiles\cmTC_819da.dir\objects1.rsp /out:cmTC_819da.exe /implib:cmTC_819da.lib /pdb:D:\project under development\C++ proj\basic of programming 2021-2022\lab.work1 task1 v.2\cmake-build-debug\CMakeFiles\CMakeTmp\cmTC_819da.pdb /version:0.0 /machine:X86 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\cmTC_819da.dir/intermediate.manifest CMakeFiles\cmTC_819da.dir/manifest.res" failed (exit code 1168) with the following output:
+LINK : fatal error LNK1168: не удается открыть cmTC_819da.exe для записи
+NMAKE : fatal error U1077: "D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" : тючтЁр∙хээ√щ ъюф "0xffffffff"
+Stop.
+NMAKE : fatal error U1077: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe" : тючтЁр∙хээ√щ ъюф "0x2"
+Stop.
+
+
+
+
