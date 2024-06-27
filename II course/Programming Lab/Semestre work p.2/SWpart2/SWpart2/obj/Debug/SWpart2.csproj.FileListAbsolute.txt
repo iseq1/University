@@ -1,0 +1,10 @@
+D:\project under development\C# proj\Programming Lab\sem 2nd part\SWpart2\SWpart2\bin\Debug\SWpart2.exe.config
+D:\project under development\C# proj\Programming Lab\sem 2nd part\SWpart2\SWpart2\bin\Debug\SWpart2.exe
+D:\project under development\C# proj\Programming Lab\sem 2nd part\SWpart2\SWpart2\bin\Debug\SWpart2.pdb
+D:\project under development\C# proj\Programming Lab\sem 2nd part\SWpart2\SWpart2\obj\Debug\SWpart2.csproj.AssemblyReference.cache
+D:\project under development\C# proj\Programming Lab\sem 2nd part\SWpart2\SWpart2\obj\Debug\SWpart2.Properties.Resources.resources
+D:\project under development\C# proj\Programming Lab\sem 2nd part\SWpart2\SWpart2\obj\Debug\SWpart2.csproj.GenerateResource.cache
+D:\project under development\C# proj\Programming Lab\sem 2nd part\SWpart2\SWpart2\obj\Debug\SWpart2.csproj.CoreCompileInputs.cache
+D:\project under development\C# proj\Programming Lab\sem 2nd part\SWpart2\SWpart2\obj\Debug\SWpart2.exe
+D:\project under development\C# proj\Programming Lab\sem 2nd part\SWpart2\SWpart2\obj\Debug\SWpart2.pdb
+D:\project under development\C# proj\Programming Lab\sem 2nd part\SWpart2\SWpart2\obj\Debug\SWpart2.Form1.resources

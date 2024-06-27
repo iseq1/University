@@ -1,0 +1,6 @@
+D:\project under development\C# proj\Programming Lab\sem 1st part\SW1stPart\SW1stPart\bin\Debug\SW1stPart.exe
+D:\project under development\C# proj\Programming Lab\sem 1st part\SW1stPart\SW1stPart\bin\Debug\SW1stPart.pdb
+D:\project under development\C# proj\Programming Lab\sem 1st part\SW1stPart\SW1stPart\obj\Debug\SW1stPart.csproj.AssemblyReference.cache
+D:\project under development\C# proj\Programming Lab\sem 1st part\SW1stPart\SW1stPart\obj\Debug\SW1stPart.csproj.CoreCompileInputs.cache
+D:\project under development\C# proj\Programming Lab\sem 1st part\SW1stPart\SW1stPart\obj\Debug\SW1stPart.exe
+D:\project under development\C# proj\Programming Lab\sem 1st part\SW1stPart\SW1stPart\obj\Debug\SW1stPart.pdb
