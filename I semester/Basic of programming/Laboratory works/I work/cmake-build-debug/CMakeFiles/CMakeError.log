@@ -1,0 +1,27 @@
+Detecting C compiler ABI info failed to compile with the following output:
+Change Dir: D:/project under development/C++ proj/basic of programming 2021-2022/lab.work1 task1 ✓/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake -f Makefile /nologo cmTC_a74a1\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_a74a1.dir\build.make /nologo -L                  CMakeFiles\cmTC_a74a1.dir\build
+Building C object CMakeFiles/cmTC_a74a1.dir/CMakeCCompilerABI.c.obj
+	"D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\cmTC_a74a1.dir\CMakeCCompilerABI.c.obj.d --working-dir="D:\project under development\C++ proj\basic of programming 2021-2022\lab.work1 task1 ?\cmake-build-debug\CMakeFiles\CMakeTmp" --filter-prefix="" -- C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1429~1.301\bin\Hostx86\x86\cl.exe @C:\Users\Egor\AppData\Local\Temp\nm2571.tmp
+NMAKE : fatal error U1077: "D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" : тючтЁр∙хээ√щ ъюф "0x2"
+Stop.
+NMAKE : fatal error U1077: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe" : тючтЁр∙хээ√щ ъюф "0x2"
+Stop.
+
+
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: D:/project under development/C++ proj/basic of programming 2021-2022/lab.work1 task1 ✓/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):nmake -f Makefile /nologo cmTC_63abc\fast && 	"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe"  -f CMakeFiles\cmTC_63abc.dir\build.make /nologo -L                  CMakeFiles\cmTC_63abc.dir\build
+Building C object CMakeFiles/cmTC_63abc.dir/testCCompiler.c.obj
+	"D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\cmTC_63abc.dir\testCCompiler.c.obj.d --working-dir="D:\project under development\C++ proj\basic of programming 2021-2022\lab.work1 task1 ?\cmake-build-debug\CMakeFiles\CMakeTmp" --filter-prefix="" -- C:\PROGRA~2\MICROS~3\2019\COMMUN~1\VC\Tools\MSVC\1429~1.301\bin\Hostx86\x86\cl.exe @C:\Users\Egor\AppData\Local\Temp\nm262D.tmp
+NMAKE : fatal error U1077: "D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" : тючтЁр∙хээ√щ ъюф "0x2"
+Stop.
+NMAKE : fatal error U1077: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\bin\HostX86\x86\nmake.exe" : тючтЁр∙хээ√щ ъюф "0x2"
+Stop.
+
+
+
