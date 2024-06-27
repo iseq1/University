@@ -1,0 +1,4 @@
+"D:\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - NMake Makefiles" "D:\project under development\C++ proj\basic of programming 2021-2022\lab.work1 task4"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/project under development/C++ proj/basic of programming 2021-2022/lab.work1 task4/cmake-build-debug
