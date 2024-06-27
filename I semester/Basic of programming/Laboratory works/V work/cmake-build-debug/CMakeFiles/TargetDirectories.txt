@@ -1,0 +1,3 @@
+D:/project under development/C++ proj/basic of programming 2021-2022/lab.work1 task5/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/project under development/C++ proj/basic of programming 2021-2022/lab.work1 task5/cmake-build-debug/CMakeFiles/lab_work1_task5.dir
+D:/project under development/C++ proj/basic of programming 2021-2022/lab.work1 task5/cmake-build-debug/CMakeFiles/rebuild_cache.dir
