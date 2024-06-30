@@ -39,29 +39,29 @@
 
 ## II курс
 ### Алгоритмы и анализ сложности (С#)
-  1) Экспериментальный анализ различных методов сортировки.
+  1) [Экспериментальный анализ различных методов сортировки.](https://github.com/iseq1/University/tree/main/II%20course/Algorithms%20and%20complexity%20analysis/Experimental%20analysis%20of%20various%20sorting%20methods)
 ### Компьютерная архитектура (C#)
-  1) Десктопное приложение для взаимодействие с web-камерой;
-  2) Десктопное приложение для взаимодействия с микросхемой;
+  1) [Десктопное приложение для взаимодействие с web-камерой;](https://github.com/iseq1/University/tree/main/II%20course/Computing%20architecture/WebCamera/WebCamera)
+  2) [Десктопное приложение для взаимодействия с микросхемой;](https://github.com/iseq1/University/tree/main/II%20course/Computing%20architecture/MicroControler/MicroControler/MicroControler)
 ### Математическая статистика (Python)
-  1) Строительство гистограммы;
-  2) Определить функции основных понятий мат.стата;
-  3) Проверить гипотезу однородности по двухвыборочному критерию Стьюдента;
-  4) Критерий согласия Колмогорова;
-  5) Оценка параметра;
-  6) Построить доверительные границы для среднего значения нормального распределения.
+  1) [Строительство гистограммы;](https://github.com/iseq1/University/blob/main/II%20course/Mathematical%20statictics/lab1/main.py)
+  2) [Определить функции основных понятий мат.стата;](https://github.com/iseq1/University/blob/main/II%20course/Mathematical%20statictics/lab2/main.py)
+  3) [Проверить гипотезу однородности по двухвыборочному критерию Стьюдента;](https://github.com/iseq1/University/blob/main/II%20course/Mathematical%20statictics/lab3/main.py)
+  4) [Критерий согласия Колмогорова;](https://github.com/iseq1/University/blob/main/II%20course/Mathematical%20statictics/lab4/main.py)
+  5) [Оценка параметра;](https://github.com/iseq1/University/blob/main/II%20course/Mathematical%20statictics/lab5/main.py)
+  6) [Построить доверительные границы для среднего значения нормального распределения.](https://github.com/iseq1/University/blob/main/II%20course/Mathematical%20statictics/lab6/main.py)
 ### Объектно-ориентированное программирование (C#)
-  1) Реализовать десктопное приложение для взаимодействия и анализа текстовых файлов;
-  2) Реализовать десктопное приложение для взаимодействия с БД (MySQL);
-  3) Реализовать десктпоное приложение-игру.
+  1) [Реализовать десктопное приложение для взаимодействия и анализа текстовых файлов;](https://github.com/iseq1/University/tree/main/II%20course/Object-oriented%20programming/I%20work/first%20SW)
+  2) [Реализовать десктопное приложение для взаимодействия с БД (MySQL);](https://github.com/iseq1/University/tree/main/II%20course/Object-oriented%20programming/II%20work/second%20SW)
+  3) [Реализовать десктпоное приложение-игру.](https://github.com/iseq1/University/tree/main/II%20course/Object-oriented%20programming/III%20work/third%20SW%20vol%202.0)
 ### Лабораторное программирование (C#)
-  1) Реализовать лесктопное приложение для работы с геометрическими фигурами.
+  1) [Реализовать лесктопное приложение для работы с геометрическими фигурами.](https://github.com/iseq1/University/tree/main/II%20course/Programming%20Lab/Semestre%20work%20p.2/SWpart2/SWpart2)
 
 ## I курс
 ### Алгоритмы и алгоритмические языки (C++)
-  1) Изучение принципов программирования и структур данных.
+  1) [Изучение принципов программирования и структур данных.](https://github.com/iseq1/University/tree/main/I%20course/Algorithms%20and%20algorithmic%20languages)
 ### Основы программирования (C++)
-  1) Решение разнообразных задач.
+  1) [Решение разнообразных задач.](https://github.com/iseq1/University/tree/main/I%20course/Basic%20of%20programming)
 ### Введение в информационную безопасность (C++)
-  1) Реализация шифра Цезаря.
+  1) [Реализация шифра Цезаря.](https://github.com/iseq1/University/blob/main/I%20course/Introduction%20to%20Information%20Security/Caesar's%20cipher/main.cpp)
 
