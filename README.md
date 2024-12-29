@@ -15,7 +15,7 @@
   3) [Выделение границ на изображении.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/III%20labwork)
   4) [Выделение прямых линий на изображении.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/IV%20labwork)
 ### Кодирование информации (Python)
-  1) [Реализация кода Хэмминга](https://github.com/iseq1/University/tree/main/IV%20course/Encoding%20information/Semester%20work)
+  1) [Реализация кода Хэмминга]()
   2) [Реализация кода Рида-Соломона]()
 ### Технологии и стандарты разработки программного обеспечения
   1) [Обзор стандарта ISO/IEC 12207.](https://github.com/iseq1/University/blob/main/IV%20course/Software%20development%20technologies%20and%20standards/%D0%A1%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82_12207.pdf)
