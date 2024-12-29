@@ -5,6 +5,10 @@
 ## IV курс
 ### Информационная безопасность (Python)
   1) [Приложение для шифрования, расшифрования и дешифрования текста при помощи шифра Цезаря.](https://github.com/iseq1/University/tree/main/IV%20course/Information%20Security/I%20labwork)
+  2) [Приложение для шифрования, расшифрования и дешифрования текста при помощи шифра Виженера.](https://github.com/iseq1/University/tree/main/IV%20course/Information%20Security/II%20labwork)
+  3) [Приложение для шифрования и расшифрования текста при помощи шифра Вернама (XOR-шифр).](https://github.com/iseq1/University/tree/main/IV%20course/Information%20Security/III%20labwork)
+  4) [Приложение клиент-сервер с возможностью регистрации и авторизации, поддерживающее SW-вызов. Включает форму чата с шифрованием сообщений на основе алгоритма RC4, ключ которого генерируется при помощи алгоритма Диффи-Хеллмана. Также реализована поддержка электронно-цифровой подписи с использованием RSA.](https://github.com/iseq1/University/tree/main/IV%20course/Information%20Security/IV%20labwork)
+  5) [Приложение для факторизации большого чилса на два простых множителя, реализация квадратичного решета.](https://github.com/iseq1/University/tree/main/IV%20course/Information%20Security/V%20labwork)
 
 
 ## III курс
