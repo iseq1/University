@@ -14,6 +14,11 @@
   2) [Сегментация изображений.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/II%20labwork)
   3) [Выделение границ на изображении.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/III%20labwork)
   4) [Выделение прямых линий на изображении.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/IV%20labwork)
+### Технологии и стандарты разработки программного обеспечения
+  1) [Обзор стандарта ISO/IEC 12207.](https://github.com/iseq1/University/blob/main/IV%20course/Software%20development%20technologies%20and%20standards/%D0%A1%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82_12207.pdf)
+  2) [Обзор стандарта IEEE 829.](https://github.com/iseq1/University/blob/main/IV%20course/Software%20development%20technologies%20and%20standards/%D0%A1%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82-IEEE-829.pptx)
+  3) [Спецификация на курсовую работу «Web-сайт для кофейни» по стандарту IEEE 830.](https://github.com/iseq1/University/blob/main/IV%20course/Software%20development%20technologies%20and%20standards/IEEE_830.pdf)
+  4) [Метрики кода курсовой работы «Web-сайт для кофейни».](https://github.com/iseq1/University/blob/main/IV%20course/Software%20development%20technologies%20and%20standards/%D0%9C%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B8_%D0%BA%D0%BE%D0%B4%D0%B0.pdf)
 
 
 ## III курс
