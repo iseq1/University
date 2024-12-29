@@ -9,6 +9,11 @@
   3) [Приложение для шифрования и расшифрования текста при помощи шифра Вернама (XOR-шифр).](https://github.com/iseq1/University/tree/main/IV%20course/Information%20Security/III%20labwork)
   4) [Приложение клиент-сервер с возможностью регистрации и авторизации, поддерживающее SW-вызов. Включает форму чата с шифрованием сообщений на основе алгоритма RC4, ключ которого генерируется при помощи алгоритма Диффи-Хеллмана. Также реализована поддержка электронно-цифровой подписи с использованием RSA.](https://github.com/iseq1/University/tree/main/IV%20course/Information%20Security/IV%20labwork)
   5) [Приложение для факторизации большого чилса на два простых множителя, реализация квадратичного решета.](https://github.com/iseq1/University/tree/main/IV%20course/Information%20Security/V%20labwork)
+### Компьютерное зрение (Python)
+  1) [Операции обработки изображений.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/I%20labwork)
+  2) [Сегментация изображений.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/II%20labwork)
+  3) [Выделение границ на изображении.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/III%20labwork)
+  4) [Выделение прямых линий на изображении.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/IV%20labwork)
 
 
 ## III курс
