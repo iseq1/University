@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\project under development\\C\u002B\u002B proj\\\u0421\u0438\u0441\u0442\u0435\u043C\u044B \u043F\u0430\u0440\u0430\u043B\u0435\u043B\u044C\u043D\u044B\u0445 \u0432\u044B\u0447\u0438\u0441\u043B\u0435\u043D\u0438\u0439\\\u041F\u0440\u0430\u043A\u0442\u0438\u043A\u0430\\test\\11-22-2024\\ConsoleApplication2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0A28CCE9-4802-4623-9D53-252EF960954C}|ConsoleApplication2\\ConsoleApplication2.vcxproj|D:\\project under development\\C\u002B\u002B proj\\\u0421\u0438\u0441\u0442\u0435\u043C\u044B \u043F\u0430\u0440\u0430\u043B\u0435\u043B\u044C\u043D\u044B\u0445 \u0432\u044B\u0447\u0438\u0441\u043B\u0435\u043D\u0438\u0439\\\u041F\u0440\u0430\u043A\u0442\u0438\u043A\u0430\\test\\11-22-2024\\ConsoleApplication2\\ConsoleApplication2\\ConsoleApplication2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{0A28CCE9-4802-4623-9D53-252EF960954C}|ConsoleApplication2\\ConsoleApplication2.vcxproj|solutionrelative:ConsoleApplication2\\ConsoleApplication2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ConsoleApplication2.cpp",
+              "DocumentMoniker": "D:\\project under development\\C\u002B\u002B proj\\\u0421\u0438\u0441\u0442\u0435\u043C\u044B \u043F\u0430\u0440\u0430\u043B\u0435\u043B\u044C\u043D\u044B\u0445 \u0432\u044B\u0447\u0438\u0441\u043B\u0435\u043D\u0438\u0439\\\u041F\u0440\u0430\u043A\u0442\u0438\u043A\u0430\\test\\11-22-2024\\ConsoleApplication2\\ConsoleApplication2\\ConsoleApplication2.cpp",
+              "RelativeDocumentMoniker": "ConsoleApplication2\\ConsoleApplication2.cpp",
+              "ToolTip": "D:\\project under development\\C\u002B\u002B proj\\\u0421\u0438\u0441\u0442\u0435\u043C\u044B \u043F\u0430\u0440\u0430\u043B\u0435\u043B\u044C\u043D\u044B\u0445 \u0432\u044B\u0447\u0438\u0441\u043B\u0435\u043D\u0438\u0439\\\u041F\u0440\u0430\u043A\u0442\u0438\u043A\u0430\\test\\11-22-2024\\ConsoleApplication2\\ConsoleApplication2\\ConsoleApplication2.cpp",
+              "RelativeToolTip": "ConsoleApplication2\\ConsoleApplication2.cpp",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-13T14:57:25.492Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
