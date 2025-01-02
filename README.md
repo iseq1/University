@@ -14,6 +14,7 @@
   2) [Сегментация изображений.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/II%20labwork)
   3) [Выделение границ на изображении.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/III%20labwork)
   4) [Выделение прямых линий на изображении.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/IV%20labwork)
+  5) [Вычисление дескрипторов особых точек ORB.](https://github.com/iseq1/University/tree/main/IV%20course/Computer%20Vision/V%20labwork)
 ### Системы параллельных вычислений (C++)
   1) [Практика с OpenMP.](https://github.com/iseq1/University/tree/main/IV%20course/Parallel%20computing%20systems/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0%20%D1%81%20OpenMP)
   2) [Практика с MPI.](https://github.com/iseq1/University/tree/main/IV%20course/Parallel%20computing%20systems/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0%20%D1%81%20MPI)
