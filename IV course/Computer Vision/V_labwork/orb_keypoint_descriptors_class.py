@@ -1,5 +1,4 @@
 from hough_transform_class import *
-import json
 import math
 
 
@@ -235,97 +234,106 @@ class KeypointDescriptor(HoughTransform):
         plt.savefig(f'{file_path}', bbox_inches='tight')
         plt.show()
 
-    def generate_random_pairs(self, n, patch_size):
-        """Генерация n пар точек внутри патча размером patch_size x patch_size."""
-        sigma = patch_size ** 2 / 25  # Стандартное отклонение
-        pairs = np.random.normal(loc=0, scale=np.sqrt(sigma), size=(n, 2, 2))
-        pairs = np.clip(pairs + patch_size // 2, 0, patch_size - 1).astype(int)  # Ограничение в пределах патча
-        return pairs
 
-    def apply_rotation(self, pairs, angle, patch_center):
-        """Поворот пар точек на заданный угол вокруг центра патча."""
-        rotation_matrix = np.array([[np.cos(angle), -np.sin(angle)],
-                                    [np.sin(angle), np.cos(angle)]])
-        rotated_pairs = []
-        for p1, p2 in pairs:
-            p1_rot = np.dot(rotation_matrix, p1 - patch_center) + patch_center
-            p2_rot = np.dot(rotation_matrix, p2 - patch_center) + patch_center
-            rotated_pairs.append((p1_rot, p2_rot))
-        return np.array(rotated_pairs).astype(int)
+    def generate_matrix_S(self, patch_size=31, descriptor_length=256):
+        """
+        Генерация случайных пар точек для построения дескрипторов.
+        Координаты точек генерируются с нормальным распределением.
+        """
+        p = patch_size
+        scale = p ** 2 / 25  # дисперсия для нормального распределения
+        random_pairs = np.random.normal(0, scale, (descriptor_length, 2, 2))
+        random_pairs = np.clip(random_pairs, -p // 2, p // 2)  #Ограничиваем внутри патча
+        random_pairs = random_pairs.astype(int)  # Делаем индексы целыми числами
+        return random_pairs
 
-    def compute_brief_descriptor(self, image, keypoint, pairs, angle, patch_size=31):
-        """Вычисляет BRIEF-дескриптор для одной ключевой точки."""
+
+    def generate_matrix_S_thetha(self, S):
+        """
+        Предвычисление S_поворота для 30 углов (шаг 2pi/30).
+        """
+        rotated_pairs_by_angle = {}
+        angles = np.linspace(0, 2 * np.pi, 30, endpoint=False)  # Углы от 0 до 2pi с шагом 2pi/30
+
+        for angle in angles:
+            # Матрица поворота
+            cos_theta = np.cos(angle)
+            sin_theta = np.sin(angle)
+            rotation_matrix = np.array([[cos_theta, -sin_theta], [sin_theta, cos_theta]])
+
+            rotated_pairs = np.dot(S, rotation_matrix.T)  # Поворачиваем пары точек
+            rotated_pairs_by_angle[angle] = rotated_pairs
+
+        return rotated_pairs_by_angle
+
+    def find_closest_angle(self, angle):
+        step = 2 * np.pi / 30
+
+        normalized_angle = angle % (2 * np.pi)
+
+        # Вычисление индекса ближайшего угла
+        closest_index = round(normalized_angle / step) % 30  # Модуль на случай превышения 30
+        closest_angle = closest_index * step  # Угол, соответствующий индексу
+
+        return closest_angle
+
+    def compute_brief_for_keypoint(self, image, keypoint, angle, S_thetha, patch_size=31):
+        """
+        Вычисление дескриптора BRIEF для одной ключевой точки.
+        :param keypoint: координаты ключевой точки (x, y)
+        :return: бинарный дескриптор (numpy array) или None, если точка близка к границе изображения
+        """
         x, y = keypoint
-        patch = image[y - patch_size // 2 : y + patch_size // 2 + 1,
-                      x - patch_size // 2 : x + patch_size // 2 + 1]
+        half_size = patch_size // 2
 
-        # Центр патча
-        patch_center = np.array([patch_size // 2, patch_size // 2])
+        # Проверка на границы изображения
+        if (x - half_size < 0 or y - half_size < 0 or
+                x + half_size >= image.shape[1] or
+                y + half_size >= image.shape[0]):
+            return None
 
-        # Повернуть пары точек в соответствии с ориентацией
-        rotated_pairs = self.apply_rotation(pairs, angle, patch_center)
+        # Извлекаем патч вокруг ключевой точки
+        patch = image[y - half_size: y + half_size + 1,
+                      x - half_size: x + half_size + 1]
 
-        # Построение бинарного дескриптора
+        closest_angle = self.find_closest_angle(angle)
+        rotated_pairs = S_thetha[closest_angle]
+
+        # Строим дескриптор
         descriptor = []
-        for (x1, y1), (x2, y2) in rotated_pairs:
-            if 0 <= x1 < patch_size and 0 <= y1 < patch_size and 0 <= x2 < patch_size and 0 <= y2 < patch_size:
-                descriptor.append(int(patch[y1, x1] < patch[y2, x2]))
+        for (p1, p2) in rotated_pairs:
+            # Координаты точек в патче
+            # x1, y1 = half_size + p1[0], half_size + p1[1]
+            # x2, y2 = half_size + p2[0], half_size + p2[1]
+
+            y1, x1 = int(round(p1[0])), int(round(p1[1]))
+            y2, x2 = int(round(p2[0])), int(round(p2[1]))
+
+            # Сравнение интенсивностей
+            if patch[y1, x1] < patch[y2, x2]:
+                descriptor.append(1)
             else:
-                descriptor.append(0)  # Если точка выходит за границы
+                descriptor.append(0)
 
-        return np.array(descriptor, dtype=np.uint8)
+        return np.array(descriptor)
 
-    def compute_descriptors(self, image, keypoints, angles, patch_size=31, n_pairs=256):
-        """Вычисляет дескрипторы для всех ключевых точек."""
-        # Генерация случайных пар точек
-        pairs = self.generate_random_pairs(n_pairs, patch_size)
+    def get_brief_descriptors(self):
 
-        # Построение дескрипторов
-        descriptors = []
-        for keypoint, angle in zip(keypoints, angles):
-            descriptor = self.compute_brief_descriptor(image, keypoint, pairs, angle, patch_size)
-            descriptors.append(descriptor)
-
-        return np.array(descriptors)
-
-    def set_descriptor(self):
         if self.blurred_image is None:
             self.get_blured_image(file_path='images/blured_image')
 
-        self.descriptors = self.compute_descriptors(self.blurred_image, self.keypoints, self.angle, patch_size=31, n_pairs=256)
+        # Генерация пар точек
+        S_thetha = self.generate_matrix_S_thetha(self.generate_matrix_S())
 
-    def get_descriptor(self, file_path):
-        """
-        Визуализация ключевых точек на изображении и их дескрипторов.
-        """
-        self.set_descriptor()
-        self.save_descriptors('descriptor_data', self.keypoints, self.angle, self.descriptors, self.generate_random_pairs(256, 31))
-        plt.figure(figsize=(10, 10))
-        plt.imshow(self.blurred_image, cmap='gray')
+        # Вычисление дескрипторов
+        valid_keypoints = []
+        self.descriptors = []
+        for keypoint, angle in zip(self.keypoints, self.angle):
+            descriptor = self.compute_brief_for_keypoint(self.blurred_image, keypoint, angle, S_thetha)
+            if descriptor is not None:
+                self.descriptors.append(descriptor)
+                valid_keypoints.append(keypoint)
 
-        for i, (x, y) in enumerate(self.keypoints):  # Ограничимся первыми 30 точками
-            plt.scatter(x, y, color="red", s=10)
-            plt.text(x, y, f"{i}", color="yellow", fontsize=8)
-            print(f"Ключевая точка {i}: ({x}, {y}), Дескриптор: {np.array(self.descriptors).tolist()[i]}")
+        self.descriptors = np.array(self.descriptors)
+        return self.descriptors, valid_keypoints
 
-        plt.title("Ключевые точки с номерами")
-        plt.axis("off")
-        plt.savefig(f'{file_path}')
-        plt.show()
-
-    def save_descriptors(self, file_path, keypoints, angles, descriptors, pairs):
-        """
-        Сохраняет дескрипторы, ключевые точки, их ориентации и пары точек в файл.
-        """
-        # Преобразуем все данные в удобный для сохранения формат
-        data = {
-            "keypoints": keypoints,
-            "angles": [float(a) for a in angles],
-            "descriptors": np.array(descriptors).tolist(),
-            "pairs": np.array(pairs).tolist(),
-        }
-
-        # Сохраняем как JSON для читаемости
-        with open(file_path, "w") as f:
-            json.dump(data, f, indent=4)
-        print(f"Данные сохранены в {file_path}")

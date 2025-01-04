@@ -46,7 +46,7 @@ class EdgeDetector(Segmentation):
         return np.clip(blurred_image, 0, 255).astype(np.uint8)
 
     def get_blured_image(self, file_path):
-        sigma, size = 1, 3
+        sigma, size = 1, 5
 
         kernel = self.gaussian_kernel(sigma, size)
         blurred_image = self.apply_gaussian_blur(self.gray_image_array, kernel)
