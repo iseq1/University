@@ -14,8 +14,10 @@ def read_file(file_path):
 
 
 if __name__ == '__main__':
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(current_dir, "speedup_data.txt")
 
-    file_path = "D:/project under development/C++ proj/Системы паралельных вычислений/Практика/test/11-22-2024/Private sum openMP/Private sum openMP/speedup_data.txt"
+    # file_path = "D:/project under development/C++ proj/Системы паралельных вычислений/Практика/test/11-22-2024/Private sum openMP/Private sum openMP/speedup_data.txt"
     file_data = read_file(file_path)
 
     if file_data:
