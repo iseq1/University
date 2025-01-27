@@ -21,8 +21,11 @@
   2) [Практика с MPI.](https://github.com/iseq1/University/tree/main/IV%20course/Parallel%20computing%20systems/%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0%20%D1%81%20MPI)
   3) [Реализация частичных сумм OpenMP.](https://github.com/iseq1/University/tree/main/IV%20course/Parallel%20computing%20systems/Partial%20amounts%20-%20OpenMP)
 ### Кодирование информации (Python)
-  1) [Реализация кода Хэмминга.]()
+  1) [Реализация кода Хэмминга.](https://github.com/iseq1/University/tree/main/IV%20course/Encoding%20information/Semester%20work)
   2) [Реализация кода Рида-Соломона.]()
+### Интеллектуальные системы
+  1) [Развертывание алгоритма определения болезни в системе ExPRO](https://github.com/iseq1/University/tree/main/IV%20course/Intelligent%20systems/I_labwork)
+  2) [Развертывание алгоритма определения болезни в системе ClipsIDE](https://github.com/iseq1/University/tree/main/IV%20course/Intelligent%20systems/II_labwork)
 ### Технологии и стандарты разработки программного обеспечения
   1) [Обзор стандарта ISO/IEC 12207.](https://github.com/iseq1/University/blob/main/IV%20course/Software%20development%20technologies%20and%20standards/%D0%A1%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82_12207.pdf)
   2) [Обзор стандарта IEEE 829.](https://github.com/iseq1/University/blob/main/IV%20course/Software%20development%20technologies%20and%20standards/Standarty-IEEE-829.pdf)
