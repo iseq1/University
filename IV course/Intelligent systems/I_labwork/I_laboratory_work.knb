@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<BZ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="I_laboratory_work" Version="1.14" Author="Yegor" IsRelease="false" CreateDate="15.01.2025 8:12:10" UpdateDate="19.09.2024 17:58:55">
+  <Comment />
+  <Rule Name="Ввод1">
+    <Act>temp=ВВОД("Какова ваша текущая температура тела?")</Act>
+    <Comment />
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Уровень температуры нормальный">
+    <Condition>temp&lt;37.2</Condition>
+    <Act>temp_level="нормальный"</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Уровень температуры умеренный">
+    <Condition>temp&gt;=37.2</Condition>
+    <Condition>temp&lt;=38.3</Condition>
+    <Act>temp_level="умеренный"</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Уровень температуры высокий">
+    <Condition>temp&gt;38.3</Condition>
+    <Act>temp_level="высокий"</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Диагноз здоров">
+    <Condition>temp_level=="нормальный"</Condition>
+    <Act>diagnos="здоров"</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Диагноз ОРВИ">
+    <Condition>temp_level=="умеренный"</Condition>
+    <Condition>start=="постепенно"</Condition>
+    <Act>diagnos="ОРВИ"</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Диагноз грипп">
+    <Condition>temp_level=="высокий"</Condition>
+    <Condition>start=="лихорадочно"</Condition>
+    <Act>diagnos="грипп"</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Ввод2">
+    <Condition>temp_level!="нормальный"</Condition>
+    <Act>start=ВЫБОР("Как протекало ваше заболевание?",["лихорадочно","постепенно"])</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Rule Name="Диагноз не определен">
+    <Act>diagnos="не определен"</Act>
+    <Enable>true</Enable>
+    <Priority>40</Priority>
+  </Rule>
+  <Rule Name="Заключение">
+    <Condition>ОПРЕДЕЛЕНА("diagnos")</Condition>
+    <Act>заключениеВрача=ДОКУМЕНТ(шаблонЗаключения)</Act>
+    <Enable>true</Enable>
+    <Priority>50</Priority>
+  </Rule>
+  <Variable xsi:type="NoType" Name="temp" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="temp_level" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="diagnos" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="start" Goal="false">
+    <IsBackward>false</IsBackward>
+    <Goal>False</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <Variable xsi:type="NoType" Name="заключениеВрача" Goal="true">
+    <IsBackward>false</IsBackward>
+    <Goal>True</Goal>
+    <Comment />
+    <StartValue />
+    <Opredelena>false</Opredelena>
+  </Variable>
+  <CommentHtml>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.10570.1001"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</CommentHtml>
+  <SearchStrategy>Прямой вывод</SearchStrategy>
+  <Templates Name="шаблонЗаключения">
+    <Comment />
+    <Value>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"&gt;
+&lt;HTML&gt;&lt;HEAD&gt;
+&lt;META content="text/html; charset=unicode" http-equiv=Content-Type&gt;
+&lt;META name=GENERATOR content="MSHTML 11.00.10570.1001"&gt;&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;P align=center&gt;&lt;STRONG&gt;Заключение врача&lt;/STRONG&gt;&lt;/P&gt;
+&lt;P&gt;Температура: #temp &lt;/P&gt;
+&lt;P&gt;Уровень температуры: #temp_level&lt;/P&gt;
+&lt;P&gt;Диагноз: #diagnos&lt;/P&gt;&lt;/BODY&gt;&lt;/HTML&gt;
+</Value>
+  </Templates>
+</BZ>
