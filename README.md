@@ -26,6 +26,7 @@
 ### Интеллектуальные системы
   1) [Развертывание алгоритма определения болезни в системе ExPRO](https://github.com/iseq1/University/tree/main/IV%20course/Intelligent%20systems/I_labwork)
   2) [Развертывание алгоритма определения болезни в системе ClipsIDE](https://github.com/iseq1/University/tree/main/IV%20course/Intelligent%20systems/II_labwork)
+  3) [Развертывания алгоритма уборки роботом-пылесосом на PDDL домене](https://github.com/iseq1/University/tree/main/IV%20course/Intelligent%20systems/IV_labwork)
 ### Технологии и стандарты разработки программного обеспечения
   1) [Обзор стандарта ISO/IEC 12207.](https://github.com/iseq1/University/blob/main/IV%20course/Software%20development%20technologies%20and%20standards/%D0%A1%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82_12207.pdf)
   2) [Обзор стандарта IEEE 829.](https://github.com/iseq1/University/blob/main/IV%20course/Software%20development%20technologies%20and%20standards/Standarty-IEEE-829.pdf)
