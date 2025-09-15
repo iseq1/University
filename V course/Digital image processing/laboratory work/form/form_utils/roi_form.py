@@ -3,6 +3,8 @@ from core.image_utils import array_to_pixmap
 
 
 class ROIForm(QWidget):
+    """Форма для работы с ROI"""
+
     def __init__(self, roi_array, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Работа с ROI")

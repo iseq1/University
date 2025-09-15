@@ -2,6 +2,8 @@ from PyQt6.QtWidgets import QDialog, QLabel, QPushButton, QVBoxLayout
 
 
 class ROISelectionDialog(QDialog):
+    """Диалоговая форма для урегулирования работы с ROI"""
+
     def __init__(self, roi_pixmap, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Предпросмотр ROI")

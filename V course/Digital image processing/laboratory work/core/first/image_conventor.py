@@ -22,7 +22,12 @@ class ByteConverter(IByteConverter):
     """
 
     def to_bytes(self, gray_image: np.ndarray) -> tuple[bytes, str] | tuple[None, str]:
-        """Преобразование RGB-изображения в градациях серого (из объекта типа Bitmap) в массив из объектов типа byte """
+        """
+        Преобразование RGB-изображения в градациях серого (из объекта типа Bitmap) в массив из объектов типа byte
+
+        :param gray_image: Изображение в градациях серого в формате numpy-массива
+        :return: Байт-массив/None и соответсвующий комментарий
+        """
         if np.all(gray_image[..., 0] == gray_image[..., 1]) and np.all(gray_image[..., 0] == gray_image[..., 2]):
             return gray_image[...,0].tobytes(), f'Сохранили {len(gray_image.tobytes())} байт'
         else:
@@ -30,7 +35,14 @@ class ByteConverter(IByteConverter):
 
 
     def from_bytes(self, gray_bytes: bytes, height: int, width: int) -> tuple[None, str] | tuple[np.ndarray, str]:
-        """Преобразование массива байтов в RGB NumPy-массив в градациях серого"""
+        """
+        Преобразование массива байтов в RGB NumPy-массив в градациях серого
+
+        :param gray_bytes: Массив байтов
+        :param height: Высота исходного изображения
+        :param width: Длина исходного изображения
+        :return: numpy-массив/None и соответсвующий комментарий
+        """
         if not isinstance(gray_bytes, (bytes, bytearray)):
             return None, 'Нет массива байтов'
 

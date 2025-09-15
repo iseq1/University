@@ -18,19 +18,22 @@ from form.form_utils.roi_selecting import ROISelector
 
 
 class MainWindow(QMainWindow):
+    """Основная форма для взаимодействия с изображением"""
+
     mouse_moved = pyqtSignal(float, float)  # x, y координаты относительно QLabel
 
     def __init__(self):
         super().__init__()
         self.image_transfer = LocalImageTransfer()
-        self.current_array = None    # Текущее изображение как NumPy-массив
-        self.history = []            # Стек истории (для undo)
+        self.current_array = None  # Текущее изображение как NumPy-массив
+        self.history = []  # Стек истории (для undo)
         self.setMouseTracking(True)  # Получение события без нажатия кнопок
 
         # UI
         self.label = ROISelector("Здесь будет ваше изображение")
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
+        self.label.mouse_moved.connect(self.on_mouse_move)  # координаты пикселей
+        self.label.roi_selected.connect(self.handle_roi_selection)  # выделение ROI
         self.status_label = QLabel("Статус: ничего не сделано")
 
         # кнопки
@@ -63,7 +66,7 @@ class MainWindow(QMainWindow):
         # четвёртая строка: отмена по центру
         right_layout.addWidget(self.btn_undo, 3, 0, 1, 2, alignment=Qt.AlignmentFlag.AlignCenter)
 
-        right_layout.setRowStretch(0, 0)  # первая строка — не тянем
+        right_layout.setRowStretch(0, 0)  # первая строка
         right_layout.setRowStretch(1, 0)  # вторая строка
         right_layout.setRowStretch(2, 0)  # третья строка
         right_layout.setRowStretch(3, 0)  # четвёртая строка
@@ -71,27 +74,12 @@ class MainWindow(QMainWindow):
 
         # общий layout
         main_layout = QHBoxLayout()
-        main_layout.addLayout(left_layout, stretch=3)   # картинка + подписи
-        main_layout.addLayout(right_layout, stretch=1) # панель кнопок
+        main_layout.addLayout(left_layout, stretch=3)  # картинка + подписи
+        main_layout.addLayout(right_layout, stretch=1)  # панель кнопок
 
         container = QWidget()
         container.setLayout(main_layout)
         self.setCentralWidget(container)
-
-        # статусбар (если нужен именно внизу окна)
-        self.statusBar().showMessage("Координаты пикселя и RGB")
-
-
-
-        self.label.mouse_moved.connect(self.on_mouse_move)  # координаты пикселей
-        self.label.roi_selected.connect(self.handle_roi_selection)  # выделение ROI
-        # self.button_load = QPushButton("Загрузить")
-        # self.button_save = QPushButton("Сохранить")
-        # self.button_grayscale = QPushButton("Серый (BT.601)")
-        # self.btn_to_bytes = QPushButton("В байты (grayscale)")
-        # self.btn_from_bytes = QPushButton("Из байтов → изображение")
-        # self.button_undo = QPushButton("Отменить")
-        # self.status_label = QLabel("Статус: ничего не сделано")
 
         # Handlers
         self.btn_load.clicked.connect(self.load_image)
@@ -101,45 +89,49 @@ class MainWindow(QMainWindow):
         self.btn_to_bytes.clicked.connect(self.convert_to_bytes)
         self.btn_from_bytes.clicked.connect(self.convert_from_bytes)
         self.mouse_moved.connect(self.on_mouse_move)
-        #
-        # # layout
-        # layout = QVBoxLayout()
-        # layout.addWidget(self.label)
-        # layout.addWidget(self.status_label)
-        # layout.addWidget(self.button_load)
-        # layout.addWidget(self.button_save)
-        # layout.addWidget(self.button_grayscale)
-        # layout.addWidget(self.btn_to_bytes)
-        # layout.addWidget(self.btn_from_bytes)
-        # layout.addWidget(self.button_undo)
-        #
-        # container = QWidget()
-        # container.setLayout(layout)
-        # self.setCentralWidget(container)
+
+        # статусбар
         self.statusBar().showMessage("Координаты пикселя и RGB")
 
-    def on_mouse_move(self, x, y):
-        if isinstance(self.current_array, ndarray):
-            h, w, _ = self.current_array.shape
+    def on_mouse_move(self, x, y) -> None:
+        """
+        Передача координат курсора на изображении
 
-            label_w = self.label.width()
-            label_h = self.label.height()
-            if label_w == 0 or label_h == 0:
-                return
+        :param x: координата по оси абсцисс
+        :param y: координата по оси ординат
+        :return: None
+        """
+        try:
+            if isinstance(self.current_array, ndarray):
+                h, w, _ = self.current_array.shape
 
-            # координаты в исходном изображении
-            x_img = int(x * w / label_w)
-            y_img = int(y * h / label_h)
+                label_w = self.label.width()
+                label_h = self.label.height()
+                if label_w == 0 or label_h == 0:
+                    return
 
-            if 0 <= x_img < w and 0 <= y_img < h:
-                r, g, b = self.current_array[y_img, x_img]
-                self.statusBar().showMessage(f"X: {x_img}, Y: {y_img} | R: {r}, G: {g}, B: {b}")
-        elif isinstance(self.current_array, (bytes, bytearray)):
-            self.statusBar().showMessage("Текущее состояние — массив байтов")
-        else:
-            self.statusBar().showMessage("Нет изображения")
+                # координаты в исходном изображении
+                x_img = int(x * w / label_w)
+                y_img = int(y * h / label_h)
 
-    def handle_roi_selection(self, rect: QRect):
+                if 0 <= x_img < w and 0 <= y_img < h:
+                    r, g, b = self.current_array[y_img, x_img]
+                    self.statusBar().showMessage(f"X: {x_img}, Y: {y_img} | R: {r}, G: {g}, B: {b}")
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusBar().showMessage("Текущее состояние — массив байтов")
+            else:
+                self.statusBar().showMessage("Нет изображения")
+
+        except Exception as e:
+            print(f'Ошибка при отслеживании координат курсора: {e}')
+
+    def handle_roi_selection(self, rect: QRect) -> None:
+        """
+        Обработчик выбора ROI на форме
+
+        :param rect: Класс-представление прямоугольной плоскости
+        :return: None
+        """
         try:
             if self.current_array is None or not isinstance(self.current_array, ndarray):
                 return
@@ -172,11 +164,11 @@ class MainWindow(QMainWindow):
                 # открываем отдельное окно с ROI
                 self.roi_window = ROIForm(roi_array)
                 self.roi_window.show()
+
         except Exception as e:
             print(f'Ошибка при выделении ROI на форме: {e}')
 
-
-    def push_history(self):
+    def push_history(self) -> None:
         """Сохраняет копию текущего изображения в историю перед изменением."""
 
         try:
@@ -191,7 +183,7 @@ class MainWindow(QMainWindow):
         except Exception as e:
             print(f'Ошибка при добавлении в буфер в форме: {e}')
 
-    def undo(self):
+    def undo(self) -> None:
         """Отмена последнего действия (восстановление из истории)."""
 
         try:
@@ -206,6 +198,7 @@ class MainWindow(QMainWindow):
             print(f'Ошибка при отмене последнего действия в форме: {e}')
 
     def load_image(self):
+        """Загрузка выбранного изображения в форму"""
         try:
             file_path, _ = QFileDialog.getOpenFileName(self, "Выбрать изображение", "", "Images (*.png *.jpg *.bmp)")
             if file_path:
@@ -217,13 +210,14 @@ class MainWindow(QMainWindow):
         except Exception as e:
             print(f'Ошибка при загрузке изображения в форме: {e}')
 
-
     def save_image(self):
+        """Сохранение обработанного изображения"""
         try:
             if self.current_array is None:
                 self.status_label.setText("Невозможно сохранить изображение")
                 return
-            file_path, _ = QFileDialog.getSaveFileName(self, "Сохранить изображение", "", "PNG (*.png);;JPEG (*.jpg *.jpeg)")
+            file_path, _ = QFileDialog.getSaveFileName(self, "Сохранить изображение", "",
+                                                       "PNG (*.png);;JPEG (*.jpg *.jpeg)")
             if file_path:
                 self.image_transfer.save_image(self.current_array, file_path)
                 self.status_label.setText("Изображение сохранено!")
@@ -301,7 +295,8 @@ class MainWindow(QMainWindow):
                 # Bitmap
                 pixmap = array_to_pixmap(self.current_array)
                 self.label.setPixmap(
-                    pixmap.scaled(400, 400, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                    pixmap.scaled(400, 400, Qt.AspectRatioMode.KeepAspectRatio,
+                                  Qt.TransformationMode.SmoothTransformation)
                 )
             elif isinstance(self.current_array, (bytes, bytearray)):
                 # bytes array

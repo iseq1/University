@@ -5,6 +5,8 @@ from form.form_utils.mouse_tracking import MouseTracker
 
 
 class ROISelector(MouseTracker):
+    """Форма для выбора ROI на изображении"""
+
     roi_selected = pyqtSignal(QRect)  # сигнал, когда выделили область
 
     def __init__(self, parent=None):
@@ -14,6 +16,8 @@ class ROISelector(MouseTracker):
         self.drawing = False
 
     def mousePressEvent(self, event):
+        """Обработчик нажатия мыши"""
+
         if event.button() == Qt.MouseButton.LeftButton:
             self.start_pos = event.pos()
             self.end_pos = self.start_pos
@@ -22,12 +26,15 @@ class ROISelector(MouseTracker):
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event):
+        """Обработчик движения мыши"""
+
         if self.drawing:
             self.end_pos = event.pos()
             self.update()
-        super().mouseMoveEvent(event)  # важно, чтобы сигнал mouse_moved из ImageLabel продолжал работать
+        super().mouseMoveEvent(event)
 
     def mouseReleaseEvent(self, event):
+        """Обработчик события отжатия ЛКМ"""
         if event.button() == Qt.MouseButton.LeftButton and self.drawing:
             self.drawing = False
             rect = QRect(self.start_pos, self.end_pos).normalized()
@@ -36,6 +43,8 @@ class ROISelector(MouseTracker):
         super().mouseReleaseEvent(event)
 
     def paintEvent(self, event):
+        """Обработчик отображения границ ROI"""
+
         super().paintEvent(event)
         if self.start_pos and self.end_pos and self.drawing:
             painter = QPainter(self)

@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import QLabel
 
 
 class MouseTracker(QLabel):
+    """Форма для отслеживания движения курсора мыши"""
     mouse_moved = pyqtSignal(float, float)
 
     def __init__(self, parent=None):
@@ -10,6 +11,7 @@ class MouseTracker(QLabel):
         self.setMouseTracking(True)
 
     def mouseMoveEvent(self, event):
+        """Обработчик движения курсора мыши"""
         pos = event.position()
         self.mouse_moved.emit(pos.x(), pos.y())
         super().mouseMoveEvent(event)
