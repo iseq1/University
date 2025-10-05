@@ -1,4 +1,9 @@
+"""
+Вспомогательные функции для взаимодействия с изображением
+"""
 import numpy as np
+import matplotlib.pyplot as plt
+from io import BytesIO
 from PyQt6.QtGui import QImage, QPixmap
 
 def pixmap_to_array(pixmap: QPixmap) -> np.ndarray:
@@ -18,13 +23,6 @@ def pixmap_to_array(pixmap: QPixmap) -> np.ndarray:
     arr = np.frombuffer(ptr, dtype=np.uint8).reshape((height, bytes_per_line // 3, 3))
     return arr[:, :width, :]  # обрезаем паддинг
 
-# def array_to_pixmap(arr: np.ndarray) -> QPixmap:
-#     """Конвертирует NumPy-массив (H x W x 3, RGB) в QPixmap."""
-#     h, w, ch = arr.shape
-#     assert ch == 3, "Ожидается RGB массив с 3 каналами"
-#     bytes_per_line = ch * w
-#     q_image = QImage(arr.data, w, h, bytes_per_line, QImage.Format.Format_RGB888)
-#     return QPixmap.fromImage(q_image.copy())  # copy() чтобы избежать проблем с памятью
 
 def array_to_pixmap(array: np.ndarray) -> QPixmap:
     """
@@ -45,3 +43,24 @@ def array_to_pixmap(array: np.ndarray) -> QPixmap:
         QImage.Format.Format_RGB888
     )
     return QPixmap.fromImage(q_image.copy())
+
+
+def plot_histogram_to_pixmap(hist_data: dict) -> QPixmap:
+    """Строим гистограмму и возвращаем как QPixmap."""
+    fig, ax = plt.subplots()
+    xs = sorted(hist_data.keys())
+    ys = [hist_data[x] for x in xs]
+    ax.bar(xs, ys, width=1, color="blue")
+    ax.set_title("Гистограмма амплитуд")
+    ax.set_xlabel("Амплитуда") # Амплитуда от 0 до 255
+    ax.set_ylabel("Частота") # Частота пикселей с определенной амплитудой
+
+    # сохраняем в буфер
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    plt.close(fig)
+
+    # превращаем в QPixmap
+    buf.seek(0)
+    qimg = QImage.fromData(buf.read(), "PNG")
+    return QPixmap.fromImage(qimg)
