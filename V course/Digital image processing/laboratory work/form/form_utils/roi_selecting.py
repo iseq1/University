@@ -1,3 +1,6 @@
+"""
+Вспомогательная форма для выбора ROI на изображении
+"""
 from PyQt6.QtCore import pyqtSignal, QRect, Qt
 from PyQt6.QtGui import QPainter, QPen
 
@@ -19,16 +22,18 @@ class ROISelector(MouseTracker):
         """Обработчик нажатия мыши"""
 
         if event.button() == Qt.MouseButton.LeftButton:
-            self.start_pos = event.pos()
-            self.end_pos = self.start_pos
-            self.drawing = True
-            self.update()
+            if self._inside_pixmap(event.pos()):
+
+                self.start_pos = event.pos()
+                self.end_pos = self.start_pos
+                self.drawing = True
+                self.update()
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event):
         """Обработчик движения мыши"""
 
-        if self.drawing:
+        if self.drawing and self._inside_pixmap(event.pos()):
             self.end_pos = event.pos()
             self.update()
         super().mouseMoveEvent(event)
@@ -38,9 +43,36 @@ class ROISelector(MouseTracker):
         if event.button() == Qt.MouseButton.LeftButton and self.drawing:
             self.drawing = False
             rect = QRect(self.start_pos, self.end_pos).normalized()
+            rect = self._clip_to_pixmap(rect)
             self.roi_selected.emit(rect)
             self.update()
         super().mouseReleaseEvent(event)
+
+    def _inside_pixmap(self, pos):
+        """Проверка, что позиция внутри картинки"""
+        pixmap = self.pixmap()
+        if not pixmap:
+            return False
+        scaled_w = pixmap.width()
+        scaled_h = pixmap.height()
+        offset_x = (self.width() - scaled_w) // 2
+        offset_y = (self.height() - scaled_h) // 2
+        return offset_x <= pos.x() <= offset_x + scaled_w and offset_y <= pos.y() <= offset_y + scaled_h
+
+    def _clip_to_pixmap(self, rect):
+        """Обрезаем ROI по границам картинки"""
+        pixmap = self.pixmap()
+        if not pixmap:
+            return rect
+        scaled_w = pixmap.width()
+        scaled_h = pixmap.height()
+        offset_x = (self.width() - scaled_w) // 2
+        offset_y = (self.height() - scaled_h) // 2
+        x1 = max(rect.left(), offset_x)
+        y1 = max(rect.top(), offset_y)
+        x2 = min(rect.right(), offset_x + scaled_w)
+        y2 = min(rect.bottom(), offset_y + scaled_h)
+        return QRect(x1, y1, x2 - x1, y2 - y1)
 
     def paintEvent(self, event):
         """Обработчик отображения границ ROI"""
