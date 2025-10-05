@@ -1,5 +1,5 @@
 """
-Классы для фильтрации
+Класс-обработчик для применения фильтра в градациях серого
 """
 from abc import ABC, abstractmethod
 import numpy as np

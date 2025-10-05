@@ -1,5 +1,5 @@
 """
-Классы для открытия и сохранения изображений
+Классы-обработчик для открытия и сохранения изображений
 """
 from abc import ABC, abstractmethod
 from PIL import Image
