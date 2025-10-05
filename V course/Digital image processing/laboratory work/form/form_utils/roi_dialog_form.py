@@ -1,3 +1,6 @@
+"""
+Вспомогательная форма для реализации диалогового окна ROI
+"""
 from PyQt6.QtWidgets import QDialog, QLabel, QPushButton, QVBoxLayout
 
 
