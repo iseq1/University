@@ -2,96 +2,120 @@
 Основная форма приложения
 """
 from PyQt6.QtCore import Qt, pyqtSignal, QRect
+from PyQt6.QtGui import QPainter, QPen
 from PyQt6.QtWidgets import (
-    QMainWindow, QLabel, QVBoxLayout,
-    QPushButton, QFileDialog, QWidget,
-    QDialog, QGridLayout, QHBoxLayout,
+    QMainWindow, QVBoxLayout, QFileDialog, QWidget,
+    QDialog, QComboBox, QToolBar, QMessageBox,
 )
-from core.first.image_transfer import LocalImageTransfer
-from core.first.image_conventor import ByteConverter
-from core.first.image_filter import Grayscale24Filter
-from core.image_utils import array_to_pixmap
+
+from core.image_hist_computer import ImageHistogram
+from core.image_stat_computer import ImageStats
+from core.image_transfer import LocalImageTransfer
+from core.image_conventor import ByteConverter
+from core.image_filter import Grayscale24Filter
+from core.image_utils import array_to_pixmap, plot_histogram_to_pixmap
 from numpy import copy, ndarray
+import form.const as c
+from form.form_utils.popup_form import PopupDialog
 from form.form_utils.roi_dialog_form import ROISelectionDialog
-from form.form_utils.roi_form import ROIForm
 from form.form_utils.roi_selecting import ROISelector
+from form.form_utils.statusbar_form import CustomStatusBar
 
 
 class MainWindow(QMainWindow):
     """Основная форма для взаимодействия с изображением"""
 
-    mouse_moved = pyqtSignal(float, float)  # x, y координаты относительно QLabel
+    mouse_moved = pyqtSignal(float, float)  # Координаты (x, y) относительно QLabel
 
     def __init__(self):
         super().__init__()
-        self.image_transfer = LocalImageTransfer()
-        self.current_array = None  # Текущее изображение как NumPy-массив
-        self.history = []  # Стек истории (для undo)
-        self.setMouseTracking(True)  # Получение события без нажатия кнопок
 
-        # UI
+        self.image_transfer = LocalImageTransfer() # Взаимодействие с медиа-файлами
+        self.setMouseTracking(True)  # Отслеживание действий курсора
+        self.mouse_moved.connect(self.on_mouse_move) # Обработчик местоположения курсора
+        self.current_array = None  # Изображение (NumPy-массив)
+        self.current_roi_array = None  # ROI (NumPy-массив)
+        self.current_roi_rect = None  # координаты ROI в системе исходного массива (x, y, w, h)
+        self.history = []  # Стек истории
+        self.init_ui() # Пользовательский интерфейс
+
+    def resizeEvent(self, event):
+        """Автоматическое масштабирование"""
+        self.update_display()
+        super().resizeEvent(event)
+
+    def init_toolbar(self):
+        """ UI: Главное панель взаимодействия """
+
+        toolbar = QToolBar("Главная панель")
+        self.addToolBar(toolbar)
+
+        # Кнопки
+        self.image_combo = QComboBox()
+        self.image_combo.addItems(c.IMAGE_COMBO_MAP.keys())
+        self.image_combo.currentTextChanged.connect(self._img_action_selected)
+        toolbar.addWidget(self.image_combo)
+
+        toolbar.addSeparator()
+
+        # Комбо-бокс с кнопками
+        self.roi_combo = QComboBox()
+        self.roi_combo.addItems(c.ROI_COMBO_MAP.keys())
+        self.roi_combo.currentTextChanged.connect(self._roi_action_selected)
+        toolbar.addWidget(self.roi_combo)
+
+        toolbar.addSeparator()
+        toolbar.addAction("Отменить", self.undo)
+        toolbar.addSeparator()
+
+    def init_statusbar(self):
+        """ UI: Панель статусов """
+        self.statusbar = CustomStatusBar(self)
+        self.setStatusBar(self.statusbar)
+
+    def init_label(self):
+        """ UI: Лейбл под изображение """
         self.label = ROISelector("Здесь будет ваше изображение")
+        self.label.setScaledContents(False)  # пусть скейлим сами
+        self.label.setMinimumSize(200, 200)  # чтобы не схлопывалась
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label.mouse_moved.connect(self.on_mouse_move)  # координаты пикселей
         self.label.roi_selected.connect(self.handle_roi_selection)  # выделение ROI
-        self.status_label = QLabel("Статус: ничего не сделано")
 
-        # кнопки
-        self.btn_load = QPushButton("Загрузить")
-        self.btn_save = QPushButton("Сохранить")
-        self.btn_to_bytes = QPushButton("В байты")
-        self.btn_from_bytes = QPushButton("Из байтов")
-        self.btn_gray = QPushButton("В серый")
-        self.btn_undo = QPushButton("Отмена")
+    def init_ui(self):
+        """ UI: Сборка полного пользовательского интерфейса """
+        self.init_toolbar()
+        self.init_statusbar()
+        self.init_label()
 
-        # левая часть (картинка + подписи)
-        left_layout = QVBoxLayout()
-        left_layout.addWidget(self.label, stretch=5)
-        left_layout.addWidget(self.status_label)
-
-        # правая часть (кнопки в 2 колонки + одна посередине)
-        right_layout = QGridLayout()
-
-        # первая строка: загрузить / сохранить
-        right_layout.addWidget(self.btn_load, 0, 0)
-        right_layout.addWidget(self.btn_save, 0, 1)
-
-        # вторая строка: в байты / из байтов
-        right_layout.addWidget(self.btn_to_bytes, 1, 0)
-        right_layout.addWidget(self.btn_from_bytes, 1, 1)
-
-        # третья строка: кнопка по центру (занимает 2 колонки)
-        right_layout.addWidget(self.btn_gray, 2, 0, 1, 2, alignment=Qt.AlignmentFlag.AlignCenter)
-
-        # четвёртая строка: отмена по центру
-        right_layout.addWidget(self.btn_undo, 3, 0, 1, 2, alignment=Qt.AlignmentFlag.AlignCenter)
-
-        right_layout.setRowStretch(0, 0)  # первая строка
-        right_layout.setRowStretch(1, 0)  # вторая строка
-        right_layout.setRowStretch(2, 0)  # третья строка
-        right_layout.setRowStretch(3, 0)  # четвёртая строка
-        right_layout.setRowStretch(4, 1)  # пятая "пустая" строка тянется и забирает всё место
-
-        # общий layout
-        main_layout = QHBoxLayout()
-        main_layout.addLayout(left_layout, stretch=3)  # картинка + подписи
-        main_layout.addLayout(right_layout, stretch=1)  # панель кнопок
+        layout = QVBoxLayout()
+        layout.addWidget(self.label, stretch=5)
 
         container = QWidget()
-        container.setLayout(main_layout)
+        container.setLayout(layout)
         self.setCentralWidget(container)
 
-        # Handlers
-        self.btn_load.clicked.connect(self.load_image)
-        self.btn_save.clicked.connect(self.save_image)
-        self.btn_gray.clicked.connect(self.apply_grayscale)
-        self.btn_undo.clicked.connect(self.undo)
-        self.btn_to_bytes.clicked.connect(self.convert_to_bytes)
-        self.btn_from_bytes.clicked.connect(self.convert_from_bytes)
-        self.mouse_moved.connect(self.on_mouse_move)
+    def _img_action_selected(self, action: str):
+        """Обработчик кнопок из комбо-бокса Изображения"""
+        try:
+            func = c.IMAGE_COMBO_MAP.get(action, None)
+            if func is not None:
+                func(self)
+            self.image_combo.setCurrentIndex(0)
 
-        # статусбар
-        self.statusBar().showMessage("Координаты пикселя и RGB")
+        except Exception as e:
+            print(f'Ошибка при выборе действия над изображением: {e}')
+
+    def _roi_action_selected(self, action):
+        """Обработчик кнопок из комбо-бокса"""
+        try:
+            func = c.ROI_COMBO_MAP.get(action, None)
+            if func is not None:
+                func(self)
+            self.roi_combo.setCurrentIndex(0)
+
+        except Exception as e:
+            print(f'Ошибка при выборе действия над ROI: {e}')
 
     def on_mouse_move(self, x, y) -> None:
         """
@@ -102,26 +126,39 @@ class MainWindow(QMainWindow):
         :return: None
         """
         try:
-            if isinstance(self.current_array, ndarray):
-                h, w, _ = self.current_array.shape
 
-                label_w = self.label.width()
-                label_h = self.label.height()
-                if label_w == 0 or label_h == 0:
+            if isinstance(self.current_array, ndarray):
+                pixmap = self.label.pixmap()
+                if pixmap is None:
                     return
 
-                # координаты в исходном изображении
-                x_img = int(x * w / label_w)
-                y_img = int(y * h / label_h)
+                # размеры оригинального массива
+                h, w, _ = self.current_array.shape
+
+                # размеры отмасштабированного изображения (на экране)
+                scaled_w, scaled_h = pixmap.width(), pixmap.height()
+
+                # размеры QLabel
+                label_w, label_h = self.label.width(), self.label.height()
+
+                # пересчёт координат курсора → в исходное изображение
+                x_img = int((x) * w / scaled_w)
+                y_img = int((y) * h / scaled_h)
 
                 if 0 <= x_img < w and 0 <= y_img < h:
                     r, g, b = self.current_array[y_img, x_img]
-                    self.statusBar().showMessage(f"X: {x_img}, Y: {y_img} | R: {r}, G: {g}, B: {b}")
-            elif isinstance(self.current_array, (bytes, bytearray)):
-                self.statusBar().showMessage("Текущее состояние — массив байтов")
-            else:
-                self.statusBar().showMessage("Нет изображения")
+                    amp = round((int(r) + int(g) + int(b)) / 3, 1)
 
+                    # выводим значения в кастомный статусбар
+                    self.statusbar.status_left.setText(f"X: {x_img}, Y: {y_img} | "
+                                                       f"R: {r}, G: {g}, B: {b} | "
+                                                       f"Amplitude: {amp}")
+
+
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusbar.status_left.setText(c.STATUS_BAR_MSG.get('no_update_display'))
+            else:
+                self.statusbar.status_left.setText(c.STATUS_BAR_MSG.get('no_image'))
         except Exception as e:
             print(f'Ошибка при отслеживании координат курсора: {e}')
 
@@ -133,40 +170,67 @@ class MainWindow(QMainWindow):
         :return: None
         """
         try:
+            # Проверка на корректное наличие изображения на форме
             if self.current_array is None or not isinstance(self.current_array, ndarray):
                 return
 
-            # размеры QLabel и NumPy-изображения
-            label_w, label_h = self.label.width(), self.label.height()
+            # Размеры исходного изображения
             img_h, img_w, _ = self.current_array.shape
 
-            if label_w == 0 or label_h == 0:
+            # Проверка отображения текущего изображения
+            pixmap = self.label.pixmap()
+            if pixmap is None:
                 return
 
-            # пересчёт координат из QLabel → в NumPy-массив
-            scale_x = img_w / label_w
-            scale_y = img_h / label_h
+            # Размеры текущего изображения
+            scaled_w, scaled_h = pixmap.width(), pixmap.height()
+            label_w, label_h = self.label.width(), self.label.height()
 
-            x, y, w, h = rect.x(), rect.y(), rect.width(), rect.height()
-            x, y, w, h = int(x * scale_x), int(y * scale_y), int(w * scale_x), int(h * scale_y)
+            # Смещение для центрирования
+            offset_x = (label_w - scaled_w) // 2
+            offset_y = (label_h - scaled_h) // 2
 
-            # извлекаем ROI
-            roi_array = self.current_array[y:y + h, x:x + w]
+            # Вычисление координат ROI с учетом масштабирования изображения
+            x, y, w, h = max(rect.x() - offset_x, 0), max(rect.y() - offset_y, 0), rect.width(), rect.height() # Коорд.
 
+            scale_x = img_w / scaled_w # Коэф. масштабирования по Х
+            scale_y = img_h / scaled_h # Коэф. Масштабирования по Y
+
+            x_img, y_img, w_img, h_img = int(x * scale_x), int(y * scale_y), int(w * scale_x), int(h * scale_y) # Масштаб.
+
+            x_img, y_img = max(0, min(x_img, img_w - 1)), max(0, min(y_img, img_h - 1)) #
+            w_img, h_img = min(w_img, img_w - x_img), min(h_img, img_h - y_img) #
+
+            roi_array = self.current_array[y_img:y_img + h_img, x_img:x_img + w_img]
             if roi_array.size == 0:
-                self.statusBar().showMessage("ROI пустой, выберите снова")
+                self.statusbar.status_left.setText("ROI пустой, выберите снова")
                 return
 
-            # превью ROI (QDialog)
-            roi_pixmap = array_to_pixmap(roi_array)
+            self.current_roi_rect = (x_img, y_img, w_img, h_img)
+            self.current_roi_array = roi_array
+
+            # отобразим подтверждение
+            roi_pixmap = array_to_pixmap(self.current_roi_array)
             dialog = ROISelectionDialog(roi_pixmap, self)
             if dialog.exec() == QDialog.DialogCode.Accepted:
-                # открываем отдельное окно с ROI
-                self.roi_window = ROIForm(roi_array)
-                self.roi_window.show()
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('set_roi_corrected'))
+                self.update_display()  # перерисовать с ROI
+            else:
+                self.clear_roi()
+
 
         except Exception as e:
             print(f'Ошибка при выделении ROI на форме: {e}')
+
+    def clear_roi(self):
+        """Очистка ROI"""
+        try:
+            self.current_roi_rect = None
+            self.current_roi_array = None
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('clear_roi_corrected'))
+            self.update_display()
+        except Exception as e:
+            print(f"Ошибка при очистке ROI: {e}")
 
     def push_history(self) -> None:
         """Сохраняет копию текущего изображения в историю перед изменением."""
@@ -188,10 +252,10 @@ class MainWindow(QMainWindow):
 
         try:
             if not self.history:
-                self.status_label.setText("Нет истории для \"Отмены\"")
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('undo_failed'))
                 return
             self.current_array = self.history.pop()
-            self.status_label.setText("Последнее действие отменено!")
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('undo_corrected'))
             self.update_display()
 
         except Exception as e:
@@ -204,23 +268,25 @@ class MainWindow(QMainWindow):
             if file_path:
                 self.current_array = self.image_transfer.load_image(file_path)
                 self.history.clear()  # новая картинка — история сбрасывается
-                self.status_label.setText("Изображение загружено в форму!")
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('load_corrected'))
                 self.update_display()
 
         except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('load_failed'))
             print(f'Ошибка при загрузке изображения в форме: {e}')
 
     def save_image(self):
         """Сохранение обработанного изображения"""
         try:
             if self.current_array is None:
-                self.status_label.setText("Невозможно сохранить изображение")
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('save_failed'))
+
                 return
             file_path, _ = QFileDialog.getSaveFileName(self, "Сохранить изображение", "",
-                                                       "PNG (*.png);;JPEG (*.jpg *.jpeg)")
+                                                       "PNG (*.png);;JPEG (*.jpg *.jpeg);;BMP (*.bmp)")
             if file_path:
                 self.image_transfer.save_image(self.current_array, file_path)
-                self.status_label.setText("Изображение сохранено!")
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('save_corrected'))
 
         except Exception as e:
             print(f'Ошибка при сохранении изображения на форме: {e}')
@@ -230,17 +296,20 @@ class MainWindow(QMainWindow):
 
         try:
             if self.current_array is None:
-                self.status_label.setText("Нет изображения")
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+
                 return
             if isinstance(self.current_array, ndarray):
                 # Bitmap
                 self.push_history()  # сохраняем текущее состояние перед изменением
                 filter = Grayscale24Filter(mode="bt601")
                 self.current_array = filter.apply(self.current_array)
-                self.status_label.setText("Изображение конвертировано в градациях серого!")
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('grayscale_corrected'))
+
             self.update_display()
 
         except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('grayscale_failed'))
             print(f'Ошибка при применении градации серого на форме: {e}')
 
     def convert_to_bytes(self):
@@ -253,15 +322,16 @@ class MainWindow(QMainWindow):
                 arr_bytes, msg = convertor.to_bytes(self.current_array)
                 if arr_bytes is not None:
                     self.current_array = arr_bytes
-                    self.status_label.setText(msg)
+                    self.statusbar.status_right.setText(msg)
                 else:
-                    self.status_label.setText(msg)
+                    self.statusbar.status_right.setText(msg)
                     return
             else:
-                self.status_label.setText("Нет изображения")
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
                 return
 
         except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('convert_tb_failed'))
             print(f'Ошибка при конвертации в массив байтов на форме: {e}')
 
     def convert_from_bytes(self):
@@ -275,17 +345,107 @@ class MainWindow(QMainWindow):
                         h, w, _ = prev.shape
                         break
                 else:
-                    self.status_label.setText("Не найдено исходное изображение для размеров")
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
                     return
 
                 convertor = ByteConverter()
                 self.push_history()
                 self.current_array, msg = convertor.from_bytes(self.current_array, h, w)
-                self.status_label.setText(msg)
+                self.statusbar.status_right.setText(msg)
                 self.update_display()
 
         except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('convert_fb_failed'))
             print(f'Ошибка при конвертации из массива байтов на форме: {e}')
+
+    def compute_stats(self, array, border_only=False):
+        """Обёртка для вызова расчёта статистики."""
+        try:
+            if isinstance(array, ndarray):
+                response = ImageStats.compute(array, border_only=border_only)
+                if response.get('data'):
+                    msg, img = self.format_data(response)
+                    popup = PopupDialog(title="Статистика изображения",
+                                        message=msg,
+                                        pixmap=img,
+                                        parent=self)
+                    popup.exec()
+
+                if response.get('code'):
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+            elif self.current_array is not None and self.current_roi_array is None:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_roi'))
+            else:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+        except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_stat_failed'))
+            print(f'Ошибка при расчёте статистики изображении: {e}')
+
+    def compute_hist(self, array, border_only=False):
+        """Обёртка для построения гистограммы."""
+        try:
+            if isinstance(array, ndarray):
+                response = ImageHistogram.compute(array, border_only=border_only)
+                if response.get("data"):
+                    msg, img = self.format_data(response)
+                    popup = PopupDialog(title="Гистограмма изображения",
+                                        message=msg,
+                                        pixmap=img,
+                                        parent=self)
+                    popup.exec()
+                if response.get('code'):
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+            elif self.current_array is not None and self.current_roi_array is None:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_roi'))
+            else:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+        except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_hist_failed'))
+            print(f"Ошибка при построении гистограммы: {e}")
+
+    def format_data(self, data: dict):
+        """
+        Форматирование полученных данных для последующей демонстрации
+        :param data: словарь с рассчитанными значениями
+        :param title: заголовок окна
+        """
+        try:
+            code = data.get('code')
+            func = c.FORMAT_DATA_MAP.get(code, None)
+            if func is not None:
+                return func(self, data.get('data'))
+
+        except Exception as e:
+            print(f'Ошибка при демонстрации PopUp статистики: {e}')
+
+    def format_stat_img(self, stats: dict):
+        """
+        Форматирование информации для вывода статистики изображения
+        :param stats: Рассчитанная статистика
+        :return: Текст сообщения и сопроводительное изображение
+        """
+        text = (
+            f"{'Минимальное значение:':30} {stats.get('min')}\n"
+            f"{'Максимальное значение:':30} {stats.get('max')}\n"
+            f"{'Выборочное среднее:':30} {stats.get('mean'):.2f}\n"
+            f"{'Стандартное отклонение:':30} {stats.get('std'):.2f}"
+        )
+        img = None
+        return text, img
+
+    def format_hist_img(self, hist: dict):
+        """
+
+        :param hist:
+        :return:
+        """
+        text = None
+        img = plot_histogram_to_pixmap(hist)
+        return text, img
 
     def update_display(self):
         """Обновляет QLabel с текущим изображением."""
@@ -294,13 +454,38 @@ class MainWindow(QMainWindow):
             if isinstance(self.current_array, ndarray):
                 # Bitmap
                 pixmap = array_to_pixmap(self.current_array)
-                self.label.setPixmap(
-                    pixmap.scaled(400, 400, Qt.AspectRatioMode.KeepAspectRatio,
-                                  Qt.TransformationMode.SmoothTransformation)
-                )
+                # масштабируем под размеры QLabel
+                label_w = self.label.width()
+                label_h = self.label.height()
+                if label_w > 0 and label_h > 0:
+                    scaled_pixmap = pixmap.scaled(
+                        label_w, label_h,
+                        Qt.AspectRatioMode.KeepAspectRatio,
+                        Qt.TransformationMode.SmoothTransformation
+                    )
+
+                    if self.current_roi_rect:
+                        img_h, img_w, _ = self.current_array.shape
+                        x_img, y_img, w_img, h_img = self.current_roi_rect
+
+                        # переводим ROI из координат изображения → в координаты scaled_pixmap
+                        roi_rect = QRect(
+                            int(x_img * scaled_pixmap.width() / img_w),
+                            int(y_img * scaled_pixmap.height() / img_h),
+                            int(w_img * scaled_pixmap.width() / img_w),
+                            int(h_img * scaled_pixmap.height() / img_h),
+                        )
+
+                        painter = QPainter(scaled_pixmap)
+                        painter.setPen(QPen(Qt.GlobalColor.green, 2, Qt.PenStyle.DashLine))
+                        painter.drawRect(roi_rect)
+                        painter.end()
+
+                    self.label.setPixmap(scaled_pixmap)
+
             elif isinstance(self.current_array, (bytes, bytearray)):
-                # bytes array
-                self.status_label.setText("Текущее состояние — массив байтов")
+                self.statusbar.status_left.setText(c.STATUS_BAR_MSG.get('no_update_display'))
 
         except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('update_display_failed'))
             print(f'Ошибка при обновлении дисплея на форме: {e}')
