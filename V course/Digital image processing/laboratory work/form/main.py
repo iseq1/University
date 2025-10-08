@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import (
 )
 
 from core.image_hist_computer import ImageHistogram
+from core.image_linear_contrast import ImageLinearContrast
 from core.image_stat_computer import ImageStats
 from core.image_transfer import LocalImageTransfer
 from core.image_conventor import ByteConverter
@@ -407,6 +408,31 @@ class MainWindow(QMainWindow):
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_hist_failed'))
             print(f"Ошибка при построении гистограммы: {e}")
 
+    def compute_contrast(self, array):
+        """Обёртка для рассчитывания контраста"""
+        try:
+            if isinstance(array, ndarray):
+                response = ImageLinearContrast.apply(array)
+                if response.get("data", None) is not None:
+                    msg, img = self.format_data(response)
+                    popup = PopupDialog(title="Контрастное изображения",
+                                        message=msg,
+                                        pixmap=img,
+                                        parent=self)
+                    popup.exec()
+                if response.get('code'):
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+            elif self.current_array is not None and self.current_roi_array is None:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_roi'))
+            else:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+        except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_contrast_failed'))
+            print(f"Ошибка при построении контрастного изображения: {e}")
+
+
     def format_data(self, data: dict):
         """
         Форматирование полученных данных для последующей демонстрации
@@ -439,12 +465,23 @@ class MainWindow(QMainWindow):
 
     def format_hist_img(self, hist: dict):
         """
-
-        :param hist:
-        :return:
+        Форматирование информации для вывода гистограммы изображения
+        :param hist: Рассчитанная гистограмма
+        :return: Текст сообщения и сопроводительное изображение
         """
         text = None
         img = plot_histogram_to_pixmap(hist)
+        return text, img
+
+    def format_contrast_img(self, contrast):
+        """
+        Форматирование информации для вывода линейного контрастированного изображения
+        :param contrast:
+        :return:
+        """
+        text = None
+        img = array_to_pixmap(contrast) if contrast is not None else None
+
         return text, img
 
     def update_display(self):
