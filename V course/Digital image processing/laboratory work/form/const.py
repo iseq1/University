@@ -23,6 +23,8 @@ STATUS_BAR_MSG = {
     'get_stat_failed': "⚠️ Ошибка при получении статистики! ⚠️",
     'get_hist_corrected': "✅ Гистограмма успешно получена! ✅",
     'get_hist_failed': "⚠️ Ошибка при получении гистограммы! ⚠️",
+    'get_contrast_corrected': "✅ Контрастное изображение успешно получено! ✅",
+    'get_contrast_failed': "⚠️ Ошибка при получении контрастного изображения! ⚠️",
 }
 
 IMAGE_COMBO_MAP = {
@@ -36,6 +38,7 @@ IMAGE_COMBO_MAP = {
     'Статистика границы изоб.': lambda self: self.compute_stats(self.current_array, border_only=True),
     'Гистограмма изображения': lambda self: self.compute_hist(self.current_array, border_only=False),
     'Гистограмма границы изоб.': lambda self: self.compute_hist(self.current_array, border_only=True),
+    'Линейное контрастирование': lambda self: self.compute_contrast(self.current_array),
 }
 
 ROI_COMBO_MAP = {
@@ -44,10 +47,12 @@ ROI_COMBO_MAP = {
     "Статистика границы ROI": lambda self: self.compute_stats(self.current_roi_array, border_only=True),
     "Гистограмма ROI": lambda self: self.compute_hist(self.current_roi_array, border_only=False),
     "Гистограмма границы ROI": lambda self: self.compute_hist(self.current_roi_array, border_only=True),
+    "Линейное контрастирование": lambda self: self.compute_contrast(self.current_roi_array),
     "Отменить ROI": lambda self: self.clear_roi(),
 }
 
 FORMAT_DATA_MAP = {
     'stat': lambda self, stats: self.format_stat_img(stats),
     'hist': lambda self, hist: self.format_hist_img(hist),
+    'contrast': lambda self, contrast: self.format_contrast_img(contrast),
 }
