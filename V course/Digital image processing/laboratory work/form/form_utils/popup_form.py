@@ -1,7 +1,7 @@
 """
 Вспомогательна форма для реализации универсального PopUp инструмента
 """
-from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QTextEdit, QFileDialog
+from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QTextEdit, QFileDialog, QScrollArea
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
 
@@ -13,6 +13,7 @@ class PopupDialog(QDialog):
         super().__init__(parent)
         self.setWindowTitle(title)
         self.pixmap = pixmap
+        self.setMinimumSize(800, 450)
 
         layout = QVBoxLayout(self)
 
@@ -36,7 +37,11 @@ class PopupDialog(QDialog):
             img_label = QLabel()
             img_label.setPixmap(pixmap.scaledToWidth(800, Qt.TransformationMode.SmoothTransformation))
             img_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            layout.addWidget(img_label)
+
+            scroll_area = QScrollArea()
+            scroll_area.setWidgetResizable(True)
+            scroll_area.setWidget(img_label)
+            layout.addWidget(scroll_area)
 
             btn_save = QPushButton("Сохранить")
             btn_save.clicked.connect(self.save_img)
