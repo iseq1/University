@@ -33,9 +33,7 @@ class ImageHistogram(IImageHistogram):
             if border_only:
                 # берём только границу
                 mask = np.zeros_like(gray, dtype=bool)
-                print(mask.shape)
                 mask[0, :] = mask[-1, :] = mask[:, 0] = mask[:, -1] = True
-                print(mask.shape)
                 pixels = gray[mask]
             else:
                 pixels = gray.flatten()
