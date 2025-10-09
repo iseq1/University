@@ -13,7 +13,6 @@ class PopupDialog(QDialog):
         super().__init__(parent)
         self.setWindowTitle(title)
         self.pixmap = pixmap
-        self.setMinimumSize(800, 450)
 
         layout = QVBoxLayout(self)
 
@@ -34,6 +33,7 @@ class PopupDialog(QDialog):
 
         # Картинка
         if pixmap:
+            self.setMinimumSize(800, 450)
             img_label = QLabel()
             img_label.setPixmap(pixmap.scaledToWidth(800, Qt.TransformationMode.SmoothTransformation))
             img_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
