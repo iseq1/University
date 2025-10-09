@@ -21,6 +21,9 @@ from form.form_utils.popup_form import PopupDialog
 from form.form_utils.roi_dialog_form import ROISelectionDialog
 from form.form_utils.roi_selecting import ROISelector
 from form.form_utils.statusbar_form import CustomStatusBar
+from core.logger import CustomLogger
+
+logger = CustomLogger.get_logger()
 
 
 class MainWindow(QMainWindow):
@@ -105,7 +108,7 @@ class MainWindow(QMainWindow):
             self.image_combo.setCurrentIndex(0)
 
         except Exception as e:
-            print(f'Ошибка при выборе действия над изображением: {e}')
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def _roi_action_selected(self, action):
         """Обработчик кнопок из комбо-бокса"""
@@ -116,7 +119,7 @@ class MainWindow(QMainWindow):
             self.roi_combo.setCurrentIndex(0)
 
         except Exception as e:
-            print(f'Ошибка при выборе действия над ROI: {e}')
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def on_mouse_move(self, x, y) -> None:
         """
@@ -161,7 +164,7 @@ class MainWindow(QMainWindow):
             else:
                 self.statusbar.status_left.setText(c.STATUS_BAR_MSG.get('no_image'))
         except Exception as e:
-            print(f'Ошибка при отслеживании координат курсора: {e}')
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def handle_roi_selection(self, rect: QRect) -> None:
         """
@@ -219,9 +222,8 @@ class MainWindow(QMainWindow):
             else:
                 self.clear_roi()
 
-
         except Exception as e:
-            print(f'Ошибка при выделении ROI на форме: {e}')
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def clear_roi(self):
         """Очистка ROI"""
@@ -231,7 +233,7 @@ class MainWindow(QMainWindow):
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('clear_roi_corrected'))
             self.update_display()
         except Exception as e:
-            print(f"Ошибка при очистке ROI: {e}")
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def push_history(self) -> None:
         """Сохраняет копию текущего изображения в историю перед изменением."""
@@ -246,7 +248,7 @@ class MainWindow(QMainWindow):
                     self.history.append(self.current_array[:])
 
         except Exception as e:
-            print(f'Ошибка при добавлении в буфер в форме: {e}')
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def undo(self) -> None:
         """Отмена последнего действия (восстановление из истории)."""
@@ -260,7 +262,7 @@ class MainWindow(QMainWindow):
             self.update_display()
 
         except Exception as e:
-            print(f'Ошибка при отмене последнего действия в форме: {e}')
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def load_image(self):
         """Загрузка выбранного изображения в форму"""
@@ -271,26 +273,41 @@ class MainWindow(QMainWindow):
                 self.history.clear()  # новая картинка — история сбрасывается
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('load_corrected'))
                 self.update_display()
+                CustomLogger.auto(logger, msg_map=c.LOGGER_MSG_MAP)
 
         except Exception as e:
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('load_failed'))
-            print(f'Ошибка при загрузке изображения в форме: {e}')
+            CustomLogger.auto(
+                logger=logger,
+                msg_map=c.LOGGER_MSG_MAP,
+                level="error",
+                status="error",
+                extra_msg=str(e)
+            )
 
     def save_image(self):
         """Сохранение обработанного изображения"""
         try:
             if self.current_array is None:
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('save_failed'))
-
                 return
+
             file_path, _ = QFileDialog.getSaveFileName(self, "Сохранить изображение", "",
                                                        "PNG (*.png);;JPEG (*.jpg *.jpeg);;BMP (*.bmp)")
             if file_path:
                 self.image_transfer.save_image(self.current_array, file_path)
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('save_corrected'))
+                CustomLogger.auto(logger, msg_map=c.LOGGER_MSG_MAP)
 
         except Exception as e:
-            print(f'Ошибка при сохранении изображения на форме: {e}')
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('save_failed'))
+            CustomLogger.auto(
+                logger=logger,
+                msg_map=c.LOGGER_MSG_MAP,
+                level="error",
+                status="error",
+                extra_msg=str(e)
+            )
 
     def apply_grayscale(self):
         """Применение серого фильтра"""
@@ -298,24 +315,30 @@ class MainWindow(QMainWindow):
         try:
             if self.current_array is None:
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
-
                 return
+
             if isinstance(self.current_array, ndarray):
                 # Bitmap
                 self.push_history()  # сохраняем текущее состояние перед изменением
                 filter = Grayscale24Filter(mode="bt601")
                 self.current_array = filter.apply(self.current_array)
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('grayscale_corrected'))
+                CustomLogger.auto(logger, msg_map=c.LOGGER_MSG_MAP)
 
             self.update_display()
 
         except Exception as e:
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('grayscale_failed'))
-            print(f'Ошибка при применении градации серого на форме: {e}')
+            CustomLogger.auto(
+                logger=logger,
+                msg_map=c.LOGGER_MSG_MAP,
+                level="error",
+                status="error",
+                extra_msg=str(e)
+            )
 
     def convert_to_bytes(self):
         """Конвертируем текущее RGB-изображение в массив байтов (grayscale)."""
-
         try:
             convertor = ByteConverter()
             if self.current_array is not None:
@@ -324,20 +347,34 @@ class MainWindow(QMainWindow):
                 if arr_bytes is not None:
                     self.current_array = arr_bytes
                     self.statusbar.status_right.setText(msg)
+                    CustomLogger.auto(logger, msg_map=c.LOGGER_MSG_MAP, extra_msg=msg)
                 else:
                     self.statusbar.status_right.setText(msg)
+                    CustomLogger.auto(logger,
+                                      msg_map=c.LOGGER_MSG_MAP,
+                                      level='warning',
+                                      status='warning')
                     return
             else:
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                CustomLogger.auto(logger,
+                                  msg_map=c.LOGGER_MSG_MAP,
+                                  level='warning',
+                                  status='warning')
                 return
 
         except Exception as e:
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('convert_tb_failed'))
-            print(f'Ошибка при конвертации в массив байтов на форме: {e}')
+            CustomLogger.auto(
+                logger=logger,
+                msg_map=c.LOGGER_MSG_MAP,
+                level="error",
+                status="error",
+                extra_msg=str(e)
+            )
 
     def convert_from_bytes(self):
         """Восстанавливаем изображение из массива байтов и отображаем в main_window."""
-
         try:
             if isinstance(self.current_array, (bytes, bytearray)):
                 # ищем последнее состояние NumPy в истории
@@ -347,6 +384,10 @@ class MainWindow(QMainWindow):
                         break
                 else:
                     self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                    CustomLogger.auto(logger,
+                                      msg_map=c.LOGGER_MSG_MAP,
+                                      level='warning',
+                                      status='warning')
                     return
 
                 convertor = ByteConverter()
@@ -354,10 +395,17 @@ class MainWindow(QMainWindow):
                 self.current_array, msg = convertor.from_bytes(self.current_array, h, w)
                 self.statusbar.status_right.setText(msg)
                 self.update_display()
+                CustomLogger.auto(logger, msg_map=c.LOGGER_MSG_MAP)
 
         except Exception as e:
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('convert_fb_failed'))
-            print(f'Ошибка при конвертации из массива байтов на форме: {e}')
+            CustomLogger.auto(
+                logger=logger,
+                msg_map=c.LOGGER_MSG_MAP,
+                level="error",
+                status="error",
+                extra_msg=str(e)
+            )
 
     def compute_stats(self, array, border_only=False):
         """Обёртка для вызова расчёта статистики."""
@@ -370,19 +418,23 @@ class MainWindow(QMainWindow):
                                         message=msg,
                                         pixmap=img,
                                         parent=self)
+                    CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, extra_msg=str(msg))
                     popup.exec()
 
                 if response.get('code'):
                     self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
             elif isinstance(self.current_array, (bytes, bytearray)):
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
             elif self.current_array is not None and self.current_roi_array is None:
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_roi'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
             else:
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
         except Exception as e:
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_stat_failed'))
-            print(f'Ошибка при расчёте статистики изображении: {e}')
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def compute_hist(self, array, border_only=False):
         """Обёртка для построения гистограммы."""
@@ -395,18 +447,22 @@ class MainWindow(QMainWindow):
                                         message=msg,
                                         pixmap=img,
                                         parent=self)
+                    CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP)
                     popup.exec()
                 if response.get('code'):
                     self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
             elif isinstance(self.current_array, (bytes, bytearray)):
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
             elif self.current_array is not None and self.current_roi_array is None:
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_roi'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
             else:
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
         except Exception as e:
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_hist_failed'))
-            print(f"Ошибка при построении гистограммы: {e}")
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def compute_contrast(self, array):
         """Обёртка для рассчитывания контраста"""
@@ -419,19 +475,22 @@ class MainWindow(QMainWindow):
                                         message=msg,
                                         pixmap=img,
                                         parent=self)
+                    CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP)
                     popup.exec()
                 if response.get('code'):
                     self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
             elif isinstance(self.current_array, (bytes, bytearray)):
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
             elif self.current_array is not None and self.current_roi_array is None:
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_roi'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
             else:
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
         except Exception as e:
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_contrast_failed'))
-            print(f"Ошибка при построении контрастного изображения: {e}")
-
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def format_data(self, data: dict):
         """
@@ -446,7 +505,7 @@ class MainWindow(QMainWindow):
                 return func(self, data.get('data'))
 
         except Exception as e:
-            print(f'Ошибка при демонстрации PopUp статистики: {e}')
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def format_stat_img(self, stats: dict):
         """
@@ -525,4 +584,4 @@ class MainWindow(QMainWindow):
 
         except Exception as e:
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('update_display_failed'))
-            print(f'Ошибка при обновлении дисплея на форме: {e}')
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
