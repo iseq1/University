@@ -5,11 +5,12 @@ from PyQt6.QtCore import Qt, pyqtSignal, QRect
 from PyQt6.QtGui import QPainter, QPen
 from PyQt6.QtWidgets import (
     QMainWindow, QVBoxLayout, QFileDialog, QWidget,
-    QDialog, QComboBox, QToolBar, QMessageBox,
+    QDialog, QComboBox, QToolBar, QMessageBox, QPushButton, QMenu,
 )
 
 from core.image_hist_computer import ImageHistogram
 from core.image_linear_contrast import ImageLinearContrast
+from core.image_smooth import ImageSmoothing
 from core.image_stat_computer import ImageStats
 from core.image_transfer import LocalImageTransfer
 from core.image_conventor import ByteConverter
@@ -50,27 +51,68 @@ class MainWindow(QMainWindow):
 
     def init_toolbar(self):
         """ UI: Главное панель взаимодействия """
-
         toolbar = QToolBar("Главная панель")
         self.addToolBar(toolbar)
 
-        # Кнопки
-        self.image_combo = QComboBox()
-        self.image_combo.addItems(c.IMAGE_COMBO_MAP.keys())
-        self.image_combo.currentTextChanged.connect(self._img_action_selected)
-        toolbar.addWidget(self.image_combo)
-
+        toolbar.addWidget(self.init_image_button())
         toolbar.addSeparator()
-
-        # Комбо-бокс с кнопками
-        self.roi_combo = QComboBox()
-        self.roi_combo.addItems(c.ROI_COMBO_MAP.keys())
-        self.roi_combo.currentTextChanged.connect(self._roi_action_selected)
-        toolbar.addWidget(self.roi_combo)
-
+        toolbar.addWidget(self.init_roi_button())
         toolbar.addSeparator()
         toolbar.addAction("Отменить", self.undo)
         toolbar.addSeparator()
+
+    def init_image_button(self):
+        """UI: кнопка взаимодействия с изображением"""
+        image_btn = QPushButton("Изображение")
+        image_btn.setStyleSheet(c.BUTTON_STYLE)
+        menu_img = QMenu(self)
+
+        for name, cfg in c.IMAGE_COMBO_MAP.items():
+            if not cfg:
+                continue
+
+            t = cfg.get('type')
+
+            if t == 'btn':
+                menu_img.addAction(name, lambda checked=False, n=name: self._img_action_selected(n))
+            elif t == 'menu':
+                _menu = QMenu(name, self)
+                menu_params = cfg.get('menu_params')
+
+                items = menu_params.get('items', [])
+                for item in items:
+                    _menu.addAction(item['label'], lambda checked=False, f=item['action']: f(self))
+
+                menu_img.addMenu(_menu)
+
+        image_btn.setMenu(menu_img)
+        return image_btn
+
+    def init_roi_button(self):
+        roi_btn = QPushButton("ROI")
+        roi_btn.setStyleSheet(c.BUTTON_STYLE)
+        menu_roi = QMenu(self)
+
+        for name, cfg in c.ROI_COMBO_MAP.items():
+            if not cfg:
+                continue
+
+            t = cfg.get('type')
+
+            if t == 'btn':
+                menu_roi.addAction(name, lambda checked=False, n=name: self._roi_action_selected(n))
+            elif t == 'menu':
+                _menu = QMenu(name, self)
+                menu_params = cfg.get('menu_params')
+
+                items = menu_params.get('items', [])
+                for item in items:
+                    _menu.addAction(item['label'], lambda checked=False, f=item['action']: f(self))
+
+                menu_roi.addMenu(_menu)
+
+        roi_btn.setMenu(menu_roi)
+        return roi_btn
 
     def init_statusbar(self):
         """ UI: Панель статусов """
@@ -102,10 +144,16 @@ class MainWindow(QMainWindow):
     def _img_action_selected(self, action: str):
         """Обработчик кнопок из комбо-бокса Изображения"""
         try:
-            func = c.IMAGE_COMBO_MAP.get(action, None)
-            if func is not None:
-                func(self)
-            self.image_combo.setCurrentIndex(0)
+            cfg = c.IMAGE_COMBO_MAP.get(action, None)
+            if not cfg:
+                return
+
+            action_func = cfg.get('action')
+            if callable(action_func):
+                action_func(self)
+            else:
+                raise TypeError(f"Для '{action}' не найдена корректная функция.")
+
 
         except Exception as e:
             CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
@@ -113,10 +161,14 @@ class MainWindow(QMainWindow):
     def _roi_action_selected(self, action):
         """Обработчик кнопок из комбо-бокса"""
         try:
-            func = c.ROI_COMBO_MAP.get(action, None)
-            if func is not None:
-                func(self)
-            self.roi_combo.setCurrentIndex(0)
+            cfg = c.ROI_COMBO_MAP.get(action, None)
+            if not cfg:
+                return
+            action_func = cfg.get('action')
+            if callable(action_func):
+                action_func(self)
+            else:
+                raise TypeError(f"Для '{action}' не найдена корректная функция.")
 
         except Exception as e:
             CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
@@ -492,6 +544,34 @@ class MainWindow(QMainWindow):
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_contrast_failed'))
             CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
+    def compute_smooth(self, array, radius: int=3):
+        """Обертка для получения сглаживания"""
+        try:
+            if isinstance(array, ndarray):
+                response = ImageSmoothing.apply(array, radius=radius)
+                if response.get("data", None) is not None:
+                    msg, img = self.format_data(response)
+                    popup = PopupDialog(title="Сглаженное изображение по R={}".format(radius),
+                                        message=msg,
+                                        pixmap=img,
+                                        parent=self)
+                    CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, extra_msg='R = {}'.format(radius))
+                    popup.exec()
+                if response.get('code'):
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+            elif self.current_array is not None and self.current_roi_array is None:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_roi'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+            else:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+        except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_smooth_failed'))
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
+
     def format_data(self, data: dict):
         """
         Форматирование полученных данных для последующей демонстрации
@@ -540,6 +620,17 @@ class MainWindow(QMainWindow):
         """
         text = None
         img = array_to_pixmap(contrast) if contrast is not None else None
+
+        return text, img
+
+    def format_smooth_img(self, smooth):
+        """
+        Форматирование информации для вывода сглаженного изображения
+        :param smooth:
+        :return:
+        """
+        text = None
+        img = array_to_pixmap(smooth) if smooth is not None else None
 
         return text, img
 
