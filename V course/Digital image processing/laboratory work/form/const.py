@@ -28,11 +28,13 @@ STATUS_BAR_MSG = {
     'get_contrast_failed': "⚠️ Ошибка при получении контрастного изображения! ⚠️",
     'get_smooth_corrected': "✅ Сглаженное изображение успешно получено! ✅",
     'get_smooth_failed': "⚠️ Ошибка при получении сглаженного изображения! ⚠️",
+    'get_rotate_corrected': "✅ Поворот изображение успешно выполнен! ✅",
+    'get_rotate_failed': "⚠️ Ошибка при повороте изображения! ⚠️",
 }
 
-# Кнопки и их обработчики для вкладки "Изображение"
-IMAGE_COMBO_MAP = {
-    'Изображение': None,
+#
+GENERAL_COMBO_MAP = {
+    'Общее': None,
 
     'Загрузить': {
         'type': 'btn',
@@ -64,6 +66,31 @@ IMAGE_COMBO_MAP = {
         'menu_params': None,
     },
 
+    'Поворот вправо': {
+        'type': 'btn',
+        'action': lambda self: self.compute_rotate(self.current_array, angle=90),
+        'menu_params': None,
+    },
+
+    'Поворот влево': {
+        'type': 'btn',
+        'action': lambda self: self.compute_rotate(self.current_array, angle=-90),
+        'menu_params': None,
+    },
+
+    'Отменить': {
+        'type': 'btn',
+        'action': lambda self: self.undo(),
+        'menu_params': None,
+    },
+
+
+}
+
+# Кнопки и их обработчики для вкладки "Изображение"
+IMAGE_COMBO_MAP = {
+    'Изображение': None,
+
     'Статистика изображения': {
         'type': 'btn',
         'action': lambda self: self.compute_stats(self.current_array, border_only=False),
@@ -82,13 +109,11 @@ IMAGE_COMBO_MAP = {
         'menu_params': None,
     },
 
-
     'Гистограмма границы изоб.': {
         'type': 'btn',
         'action': lambda self: self.compute_hist(self.current_array, border_only=True),
         'menu_params': None,
     },
-
 
     'Линейное контрастирование': {
         'type': 'btn',
@@ -219,6 +244,11 @@ LOGGER_MSG_MAP = {
         "success": "Сглаживание амплитуд изображения выполнено.",
         "warning": "Не удалось выполнить сглаживание амплитуд.",
         "error": "Ошибка при сглаживании амплитуд изображения: "
+    },
+    "compute_rotate": {
+        "success": "Поворот изображения выполнен.",
+        "warning": "Не удалось выполнить поворот изображения.",
+        "error": "Ошибка при повороте изображения: "
     },
     "update_display": {
         "error": "Ошибка при обновлении дисплея: "
