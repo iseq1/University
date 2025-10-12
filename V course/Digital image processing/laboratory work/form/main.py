@@ -7,9 +7,9 @@ from PyQt6.QtWidgets import (
     QMainWindow, QVBoxLayout, QFileDialog, QWidget,
     QDialog, QComboBox, QToolBar, QMessageBox, QPushButton, QMenu,
 )
-
 from core.image_hist_computer import ImageHistogram
 from core.image_linear_contrast import ImageLinearContrast
+from core.image_rotate import ImageRotate
 from core.image_smooth import ImageSmoothing
 from core.image_stat_computer import ImageStats
 from core.image_transfer import LocalImageTransfer
@@ -35,7 +35,6 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.image_transfer = LocalImageTransfer() # Взаимодействие с медиа-файлами
         self.setMouseTracking(True)  # Отслеживание действий курсора
         self.mouse_moved.connect(self.on_mouse_move) # Обработчик местоположения курсора
         self.current_array = None  # Изображение (NumPy-массив)
@@ -54,12 +53,39 @@ class MainWindow(QMainWindow):
         toolbar = QToolBar("Главная панель")
         self.addToolBar(toolbar)
 
+        toolbar.addWidget(self.init_general_button())
+        toolbar.addSeparator()
         toolbar.addWidget(self.init_image_button())
         toolbar.addSeparator()
         toolbar.addWidget(self.init_roi_button())
         toolbar.addSeparator()
-        toolbar.addAction("Отменить", self.undo)
-        toolbar.addSeparator()
+
+    def init_general_button(self):
+        """UI: общая кнопка формы"""
+        btn = QPushButton("Общее")
+        btn.setStyleSheet(c.BUTTON_STYLE)
+        menu_gen = QMenu(self)
+
+        for name, cfg in c.GENERAL_COMBO_MAP.items():
+            if not cfg:
+                continue
+
+            t = cfg.get('type')
+
+            if t == 'btn':
+                menu_gen.addAction(name, lambda checked=False, n=name: self._gen_action_selected(n))
+            elif t == 'menu':
+                _menu = QMenu(name, self)
+                menu_params = cfg.get('menu_params')
+
+                items = menu_params.get('items', [])
+                for item in items:
+                    _menu.addAction(item['label'], lambda checked=False, f=item['action']: f(self))
+
+                menu_gen.addMenu(_menu)
+
+        btn.setMenu(menu_gen)
+        return btn
 
     def init_image_button(self):
         """UI: кнопка взаимодействия с изображением"""
@@ -140,6 +166,23 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(layout)
         self.setCentralWidget(container)
+
+    def _gen_action_selected(self, action: str):
+        """обработчик кнопок из комбо-бокса Общее"""
+        try:
+            cfg = c.GENERAL_COMBO_MAP.get(action, None)
+            if not cfg:
+                return
+
+            action_func = cfg.get('action')
+            if callable(action_func):
+                action_func(self)
+            else:
+                raise TypeError(f"Для '{action}' не найдена корректная функция.")
+
+
+        except Exception as e:
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def _img_action_selected(self, action: str):
         """Обработчик кнопок из комбо-бокса Изображения"""
@@ -321,7 +364,7 @@ class MainWindow(QMainWindow):
         try:
             file_path, _ = QFileDialog.getOpenFileName(self, "Выбрать изображение", "", "Images (*.png *.jpg *.bmp)")
             if file_path:
-                self.current_array = self.image_transfer.load_image(file_path)
+                self.current_array = LocalImageTransfer().load_image(file_path)
                 self.history.clear()  # новая картинка — история сбрасывается
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('load_corrected'))
                 self.update_display()
@@ -347,7 +390,7 @@ class MainWindow(QMainWindow):
             file_path, _ = QFileDialog.getSaveFileName(self, "Сохранить изображение", "",
                                                        "PNG (*.png);;JPEG (*.jpg *.jpeg);;BMP (*.bmp)")
             if file_path:
-                self.image_transfer.save_image(self.current_array, file_path)
+                LocalImageTransfer().save_image(self.current_array, file_path)
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('save_corrected'))
                 CustomLogger.auto(logger, msg_map=c.LOGGER_MSG_MAP)
 
@@ -571,6 +614,36 @@ class MainWindow(QMainWindow):
         except Exception as e:
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_smooth_failed'))
             CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
+
+    def compute_rotate(self, array, angle: float=90):
+        """Обертка для поворота изображения"""
+        try:
+            if isinstance(array, ndarray):
+                response = ImageRotate.apply(array, angle_deg=angle)
+                if response.get("data", None) is not None:
+                    self.push_history()
+                    self.current_array = response["data"]
+
+                    if self.current_roi_array is not None:
+                        roi_response = ImageRotate.apply(self.current_roi_array, angle_deg=angle)
+                        self.current_roi_array = roi_response["data"]
+                        self.current_roi_rect = ImageRotate.rotate_roi_rect(self.current_roi_rect, array.shape, angle)
+
+                    self.update_display()
+
+                    CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, extra_msg='Угол поворота = {}'.format(angle))
+                if response.get('code'):
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+            else:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+        except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_rotate_failed'))
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
+
 
     def format_data(self, data: dict):
         """
