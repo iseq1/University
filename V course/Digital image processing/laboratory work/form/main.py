@@ -10,6 +10,7 @@ from PyQt6.QtWidgets import (
 from core.image_hist_computer import ImageHistogram
 from core.image_linear_contrast import ImageLinearContrast
 from core.image_rotate import ImageRotate
+from core.image_scale import ImageScale
 from core.image_smooth import ImageSmoothing
 from core.image_stat_computer import ImageStats
 from core.image_transfer import LocalImageTransfer
@@ -644,6 +645,42 @@ class MainWindow(QMainWindow):
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_rotate_failed'))
             CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
+    def compute_scale(self, array, scale_x: float, scale_y: float, method: str):
+        """Обертка для масштабирования изображения"""
+        try:
+            if isinstance(array, ndarray):
+                response = ImageScale.apply(array, scale_x=scale_x, scale_y=scale_y, method=method)
+                if response.get("data", None) is not None:
+                    self.push_history()
+                    old_shape = self.current_array.shape
+                    self.current_array = response["data"]
+
+                    if self.current_roi_array is not None:
+                        roi_response = ImageScale.apply(self.current_roi_array, scale_x=scale_x, scale_y=scale_y, method=method)
+                        self.current_roi_array = roi_response["data"]
+                        self.current_roi_rect = ImageScale.scale_roi_rect(self.current_roi_rect, scale_x, scale_y)
+
+                    self.update_display()
+                    mthd = 'Выборки' if method == 'nearest' else 'Интерполяции'
+                    CustomLogger.auto(logger=logger,
+                                      msg_map=c.LOGGER_MSG_MAP,
+                                      extra_msg='Масштабирование методом "{mthd}" x{scale}\n'
+                                                'Размеры до: {old_shape}\n'
+                                                'Размеры после: {new_shape}'.format(mthd=mthd,
+                                                                                    scale=scale_x,
+                                                                                    old_shape=old_shape,
+                                                                                    new_shape=self.current_array.shape))
+                if response.get('code'):
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+            else:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+        except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_scale_failed'))
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def format_data(self, data: dict):
         """
