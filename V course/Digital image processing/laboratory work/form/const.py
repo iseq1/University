@@ -30,6 +30,8 @@ STATUS_BAR_MSG = {
     'get_smooth_failed': "⚠️ Ошибка при получении сглаженного изображения! ⚠️",
     'get_rotate_corrected': "✅ Поворот изображение успешно выполнен! ✅",
     'get_rotate_failed': "⚠️ Ошибка при повороте изображения! ⚠️",
+    'get_scale_corrected': "✅ Масштабирование изображение успешно выполнено! ✅",
+    'get_scale_failed': "⚠️ Ошибка при масштабировании изображения! ⚠️",
 }
 
 #
@@ -76,6 +78,20 @@ GENERAL_COMBO_MAP = {
         'type': 'btn',
         'action': lambda self: self.compute_rotate(self.current_array, angle=-90),
         'menu_params': None,
+    },
+
+    'Масштабирование': {
+        'type': 'menu',
+        'action': None,
+        'menu_params': {
+            'label': 'Выберите метод и масштаб',
+            'items': [
+                {'label': 'x2.0 - Выборкой', 'action': lambda self: self.compute_scale(self.current_array, 2.0, 2.0, 'nearest')},
+                {'label': 'x2.0 - Б.И.', 'action': lambda self: self.compute_scale(self.current_array, 2.0, 2.0, 'bilinear')},
+                {'label': 'x0.5 - Выборкой', 'action': lambda self: self.compute_scale(self.current_array, 0.5, 0.5, 'nearest')},
+                {'label': 'x0.5 - Б.И.', 'action': lambda self: self.compute_scale(self.current_array, 0.5, 0.5, 'bilinear')},
+            ],
+        },
     },
 
     'Отменить': {
@@ -249,6 +265,11 @@ LOGGER_MSG_MAP = {
         "success": "Поворот изображения выполнен.",
         "warning": "Не удалось выполнить поворот изображения.",
         "error": "Ошибка при повороте изображения: "
+    },
+    "compute_scale": {
+        "success": "Масштабирование изображения выполнено.",
+        "warning": "Не удалось выполнить масштабирование изображения.",
+        "error": "Ошибка при масштабировании изображения: "
     },
     "update_display": {
         "error": "Ошибка при обновлении дисплея: "
