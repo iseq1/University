@@ -9,6 +9,7 @@ from PyQt6.QtWidgets import (
 )
 from core.image_hist_computer import ImageHistogram
 from core.image_linear_contrast import ImageLinearContrast
+from core.image_piecewise_computer import ImagePiecewiseHandler
 from core.image_rotate import ImageRotate
 from core.image_scale import ImageScale
 from core.image_smooth import ImageSmoothing
@@ -19,7 +20,7 @@ from core.image_filter import Grayscale24Filter
 from core.image_utils import array_to_pixmap, plot_histogram_to_pixmap
 from numpy import copy, ndarray
 import form.const as c
-from form.form_utils.popup_form import PopupDialog
+from form.form_utils.popup_form import PopupDialog, PixelAmplitudeDialog
 from form.form_utils.roi_dialog_form import ROISelectionDialog
 from form.form_utils.roi_selecting import ROISelector
 from form.form_utils.statusbar_form import CustomStatusBar
@@ -682,6 +683,62 @@ class MainWindow(QMainWindow):
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_scale_failed'))
             CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
+    def compute_amplitude(self, array):
+        """Обертка для взаимодействия с амплитудой пикселей"""
+        try:
+            if isinstance(array, ndarray):
+                dialog = PixelAmplitudeDialog(array, self)
+                print(dialog.result_array.shape)
+                if dialog.exec()  == QDialog.DialogCode.Accepted:
+                    self.push_history()
+                    print(dialog.result_array)
+                    result = dialog.get_result()
+                    if result is not None:
+                        self.current_array = result
+
+                        if self.current_roi_array is not None:
+                            x, y, w, h = self.current_roi_rect
+                            self.current_roi_array = self.current_array[y:y + h, x:x + w].copy()
+
+                    self.update_display()
+                    CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP)
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_amplitude_corrected'))
+
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+            else:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+        except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_amplitude_failed'))
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
+
+    def compute_piecewise(self, array, block_size: int):
+        """Обертка для масштабирования изображения"""
+        try:
+            if isinstance(array, ndarray):
+                response = ImagePiecewiseHandler.apply(array, block_size)
+                if response.get("data", None) is not None:
+                    msg, img = self.format_data(response)
+                    popup = PopupDialog(title="Карта изображения с блоками={}x{}".format(block_size, block_size),
+                                        message=msg,
+                                        pixmap=img,
+                                        parent=self)
+                    CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, extra_msg='Блок = {}x{}'.format(block_size, block_size))
+                    popup.exec()
+                if response.get('code'):
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+            else:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+        except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_piecewise_failed'))
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
+
     def format_data(self, data: dict):
         """
         Форматирование полученных данных для последующей демонстрации
@@ -741,6 +798,17 @@ class MainWindow(QMainWindow):
         """
         text = None
         img = array_to_pixmap(smooth) if smooth is not None else None
+
+        return text, img
+
+    def format_piecewise_img(self, piecewise):
+        """
+        Форматирование информации для вывода карты изображения
+        :param piecewise:
+        :return:
+        """
+        text = None
+        img = array_to_pixmap(piecewise) if piecewise is not None else None
 
         return text, img
 
