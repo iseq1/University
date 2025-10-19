@@ -32,6 +32,10 @@ STATUS_BAR_MSG = {
     'get_rotate_failed': "⚠️ Ошибка при повороте изображения! ⚠️",
     'get_scale_corrected': "✅ Масштабирование изображение успешно выполнено! ✅",
     'get_scale_failed': "⚠️ Ошибка при масштабировании изображения! ⚠️",
+    'get_amplitude_corrected': "✅ Изменение амплитуды пикселей успешно выполнено! ✅",
+    'get_amplitude_failed': "⚠️ Ошибка при изменении амплитуды пикселей! ⚠️",
+    'get_piecewise_corrected': "✅ Построение карты изображения успешно выполнено! ✅",
+    'get_piecewise_failed': "⚠️ Ошибка при построении карты изображения! ⚠️",
 }
 
 #
@@ -94,6 +98,12 @@ GENERAL_COMBO_MAP = {
         },
     },
 
+    'Изменить амплитуды': {
+        'type': 'btn',
+        'action': lambda self: self.compute_amplitude(self.current_array),
+        'menu_params': None,
+    },
+
     'Отменить': {
         'type': 'btn',
         'action': lambda self: self.undo(),
@@ -151,6 +161,30 @@ IMAGE_COMBO_MAP = {
         },
     },
 
+    'Построение карты': {
+        'type': 'menu',
+        'action': None,
+        'menu_params': {
+            'label': 'Выберите разиер блока',
+            'items': [
+                {'label': 'Блок 2x2',
+                 'action': lambda self: self.compute_piecewise(self.current_array, 2)},
+                {'label': 'Блок 4x4',
+                 'action': lambda self: self.compute_piecewise(self.current_array, 4)},
+                {'label': 'Блок 8x8',
+                 'action': lambda self: self.compute_piecewise(self.current_array, 8)},
+                {'label': 'Блок 16x16',
+                 'action': lambda self: self.compute_piecewise(self.current_array, 16)},
+                {'label': 'Блок 32x32',
+                 'action': lambda self: self.compute_piecewise(self.current_array, 32)},
+                {'label': 'Блок 64x64',
+                 'action': lambda self: self.compute_piecewise(self.current_array, 64)},
+                {'label': 'Блок 128x128',
+                 'action': lambda self: self.compute_piecewise(self.current_array, 128)},
+            ],
+        },
+    },
+
 }
 
 # Кнопки и их обработчики для вкладки "ROI"
@@ -201,6 +235,30 @@ ROI_COMBO_MAP = {
         },
     },
 
+    'Построение карты': {
+        'type': 'menu',
+        'action': None,
+        'menu_params': {
+            'label': 'Выберите разиер блока',
+            'items': [
+                {'label': 'Блок 2x2',
+                 'action': lambda self: self.compute_piecewise(self.current_roi_array, 2)},
+                {'label': 'Блок 4x4',
+                 'action': lambda self: self.compute_piecewise(self.current_roi_array, 4)},
+                {'label': 'Блок 8x8',
+                 'action': lambda self: self.compute_piecewise(self.current_roi_array, 8)},
+                {'label': 'Блок 16x16',
+                 'action': lambda self: self.compute_piecewise(self.current_roi_array, 16)},
+                {'label': 'Блок 32x32',
+                 'action': lambda self: self.compute_piecewise(self.current_roi_array, 32)},
+                {'label': 'Блок 64x64',
+                 'action': lambda self: self.compute_piecewise(self.current_roi_array, 64)},
+                {'label': 'Блок 128x128',
+                 'action': lambda self: self.compute_piecewise(self.current_roi_array, 128)},
+            ],
+        },
+    },
+
     "Отменить ROI": {
         'type': 'btn',
         'action': lambda self: self.clear_roi(),
@@ -215,6 +273,7 @@ FORMAT_DATA_MAP = {
     'hist': lambda self, hist: self.format_hist_img(hist),
     'contrast': lambda self, contrast: self.format_contrast_img(contrast),
     'smooth': lambda self, smooth: self.format_smooth_img(smooth),
+    'piecewise': lambda self, piecewise: self.format_piecewise_img(piecewise),
 }
 
 # Сообщения для логера
@@ -270,6 +329,16 @@ LOGGER_MSG_MAP = {
         "success": "Масштабирование изображения выполнено.",
         "warning": "Не удалось выполнить масштабирование изображения.",
         "error": "Ошибка при масштабировании изображения: "
+    },
+    "compute_amplitude": {
+        "success": "Изменение амплитуды пикселей изображения выполнено.",
+        "warning": "Не удалось изменить амплитуды пикселей изображения.",
+        "error": "Ошибка при изменении амплитуды пикселей изображения: "
+    },
+    "compute_piecewise": {
+        "success": "Построение изображения с кусочно-постоянными амплитудами выполнено.",
+        "warning": "Не удалось построить изображение с кусочно-постоянными амплитудами.",
+        "error": "Ошибка при построении изображения с кусочно-постоянными амплитудами: "
     },
     "update_display": {
         "error": "Ошибка при обновлении дисплея: "
