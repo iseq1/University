@@ -4,7 +4,9 @@
 
 ## V курс
 ### Цифровая обработка изображений (Python)
-  1) [Desktop-приложение для различного взаимодействия с изображением](https://github.com/iseq1/University/tree/main/V%20course/Digital%20image%20processing/laboratory%20work).
+  1) [Desktop-приложение для различного взаимодействия с изображением.](https://github.com/iseq1/University/tree/main/V%20course/Digital%20image%20processing/laboratory%20work)
+### Нейронные сети (Python)
+  1) [Обучение простой CNN-модели.](https://github.com/iseq1/University/tree/main/V%20course/Neural%20networks)
 ## IV курс
 ### Информационная безопасность (Python)
   1) [Приложение для шифрования, расшифрования и дешифрования текста при помощи шифра Цезаря.](https://github.com/iseq1/University/tree/main/IV%20course/Information%20Security/I%20labwork)
