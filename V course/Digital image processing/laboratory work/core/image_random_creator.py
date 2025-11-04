@@ -38,6 +38,9 @@ class ImageRandomHandler(IImageRandomHandler):
             # Нормализация в диапазон [0,255]
             arr = np.clip(arr, 0, 255).astype(np.uint8)
 
+            if arr.ndim == 2:
+                arr = np.stack([arr] * 3, axis=-1)
+
             return {
                 "code": "random_scene",
                 "data": arr,
