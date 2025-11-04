@@ -1,15 +1,14 @@
-from PyQt6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QPushButton, QComboBox
+from PyQt6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QPushButton, QComboBox, QMessageBox
 
+from core.image_random_creator import ImageRandomHandler
 from form.const import CREATE_IMAGE_MODE
 from form.form_utils.popup_form import PopupDialog
 
 
 class CreateImageDialog(PopupDialog):
-    def __init__(self, array, mode, parent=None):
+    def __init__(self, mode, parent=None):
         super().__init__("Сгенерировать изображение", parent=parent)
-        self.array = array
-        self.result_array = array.copy()
-
+        self.result_array = None
         layout = PopupDialog.layout(self)
 
         if CREATE_IMAGE_MODE.get(mode, None) is not None:
@@ -57,12 +56,12 @@ class CreateImageDialog(PopupDialog):
 
         # Кнопка "Сгенерировать"
         self.btn_generate = QPushButton("Сгенерировать изображение")
-        # self.btn_generate.clicked.connect(self.generate_image)
+        self.btn_generate.clicked.connect(self.generate_mia)
         layout.addWidget(self.btn_generate)
 
         # Кнопка OK
         self.btn_ok = QPushButton("Сохранить и выйти")
-        # self.btn_ok.clicked.connect(self._on_accept)
+        self.btn_ok.clicked.connect(self._on_accept)
         layout.addWidget(self.btn_ok)
 
     def _mia_update_param_fields(self):
@@ -78,3 +77,29 @@ class CreateImageDialog(PopupDialog):
             self.param2_label.setText("σ:")
             self.param1_input.setText("128")
             self.param2_input.setText("20")
+
+    def generate_mia(self):
+        try:
+            new_h = int(self.h_input.text())
+            new_w = int(self.w_input.text())
+            new_dist_type = 'uniform' if self.dist_combo.currentText() == 'Равномерное' else 'normal'
+            params = {
+                'a': int(self.param1_input.text()),
+                'b': int(self.param2_input.text()),
+                'm': int(self.param1_input.text()),
+                'sigma': int(self.param2_input.text()),
+            }
+            request = ImageRandomHandler.apply(h=new_h, w=new_w, dist_type=new_dist_type, params=params)
+            self.result_array = request.get('data', None)
+        except Exception as e:
+            print(e)
+
+    def _on_accept(self):
+        """Закрывает форму, если изображение готово"""
+        if self.result_array is None:
+            QMessageBox.warning(self, "Нет данных", "Сначала сгенерируйте изображение!")
+            return
+        self.accept()
+
+    def get_result(self):
+        return getattr(self, "result_array", None)
