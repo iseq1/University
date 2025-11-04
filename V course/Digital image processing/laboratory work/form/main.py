@@ -20,6 +20,7 @@ from core.image_filter import Grayscale24Filter
 from core.image_utils import array_to_pixmap, plot_histogram_to_pixmap
 from numpy import copy, ndarray
 import form.const as c
+from form.form_utils.create_image_dialog_form import CreateImageDialog
 from form.form_utils.popup_form import PopupDialog, PixelAmplitudeDialog
 from form.form_utils.roi_dialog_form import ROISelectionDialog
 from form.form_utils.roi_selecting import ROISelector
@@ -519,7 +520,7 @@ class MainWindow(QMainWindow):
                     popup.exec()
 
                 if response.get('code'):
-                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response["code"]}_corrected'))
             elif isinstance(self.current_array, (bytes, bytearray)):
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
                 CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
@@ -547,7 +548,7 @@ class MainWindow(QMainWindow):
                     CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP)
                     popup.exec()
                 if response.get('code'):
-                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response["code"]}_corrected'))
             elif isinstance(self.current_array, (bytes, bytearray)):
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
                 CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
@@ -575,7 +576,7 @@ class MainWindow(QMainWindow):
                     CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP)
                     popup.exec()
                 if response.get('code'):
-                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response["code"]}_corrected'))
             elif isinstance(self.current_array, (bytes, bytearray)):
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
                 CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
@@ -603,7 +604,7 @@ class MainWindow(QMainWindow):
                     CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, extra_msg='R = {}'.format(radius))
                     popup.exec()
                 if response.get('code'):
-                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response["code"]}_corrected'))
             elif isinstance(self.current_array, (bytes, bytearray)):
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
                 CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
@@ -635,7 +636,7 @@ class MainWindow(QMainWindow):
 
                     CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, extra_msg='Угол поворота = {}'.format(angle))
                 if response.get('code'):
-                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response["code"]}_corrected'))
             elif isinstance(self.current_array, (bytes, bytearray)):
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
                 CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
@@ -672,7 +673,7 @@ class MainWindow(QMainWindow):
                                                                                     old_shape=old_shape,
                                                                                     new_shape=self.current_array.shape))
                 if response.get('code'):
-                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response["code"]}_corrected'))
             elif isinstance(self.current_array, (bytes, bytearray)):
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
                 CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
@@ -688,10 +689,8 @@ class MainWindow(QMainWindow):
         try:
             if isinstance(array, ndarray):
                 dialog = PixelAmplitudeDialog(array, self)
-                print(dialog.result_array.shape)
                 if dialog.exec()  == QDialog.DialogCode.Accepted:
                     self.push_history()
-                    print(dialog.result_array)
                     result = dialog.get_result()
                     if result is not None:
                         self.current_array = result
@@ -728,7 +727,7 @@ class MainWindow(QMainWindow):
                     CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, extra_msg='Блок = {}x{}'.format(block_size, block_size))
                     popup.exec()
                 if response.get('code'):
-                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response['code']}_corrected'))
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response["code"]}_corrected'))
             elif isinstance(self.current_array, (bytes, bytearray)):
                 self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
                 CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
@@ -737,6 +736,28 @@ class MainWindow(QMainWindow):
                 CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
         except Exception as e:
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_piecewise_failed'))
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
+
+    def compute_mia(self, mode: str):
+        """"""
+        try:
+            dialog = CreateImageDialog(mode, self)
+            if dialog.exec() == QDialog.DialogCode.Accepted:
+                self.push_history()
+                result = dialog.get_result()
+                if result is not None:
+                    self.current_array = result
+
+                    if self.current_roi_array is not None:
+                        x, y, w, h = self.current_roi_rect
+                        self.current_roi_array = self.current_array[y:y + h, x:x + w].copy()
+
+                self.update_display()
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP)
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_mia_corrected'))
+
+        except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_mia_failed'))
             CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def format_data(self, data: dict):
