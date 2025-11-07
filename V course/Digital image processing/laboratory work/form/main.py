@@ -739,12 +739,13 @@ class MainWindow(QMainWindow):
             CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def compute_mia(self, mode: str):
-        """"""
+        """Обертка для построения изображения сцены с взаимно независимыми амплитудами"""
         try:
             dialog = CreateImageDialog(mode, self)
             if dialog.exec() == QDialog.DialogCode.Accepted:
                 self.push_history()
                 result = dialog.get_result()
+                msg = dialog.get_msg()
                 if result is not None:
                     self.current_array = result
 
@@ -753,11 +754,11 @@ class MainWindow(QMainWindow):
                         self.current_roi_array = self.current_array[y:y + h, x:x + w].copy()
 
                 self.update_display()
-                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP)
-                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_mia_corrected'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, extra_msg=msg)
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{str(mode)}_corrected'))
 
         except Exception as e:
-            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_mia_failed'))
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{str(mode)}_failed'))
             CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
     def format_data(self, data: dict):
