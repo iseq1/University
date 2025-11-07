@@ -38,6 +38,8 @@ STATUS_BAR_MSG = {
     'get_piecewise_failed': "⚠️ Ошибка при построении карты изображения! ⚠️",
     'get_mia_corrected': "✅ Построение изображения с взаимно независимыми амплитудами успешно выполнено! ✅",
     'get_mia_failed': "⚠️ Ошибка при построении изображения с взаимно независимыми амплитудами! ⚠️",
+    'get_smoothed_mia_corrected': "✅ Построение изображения методом скользящего суммирования успешно выполнено! ✅",
+    'get_smoothed_mia_failed': "⚠️ Ошибка при построении изображения методом скользящего суммирования ! ⚠️",
 }
 
 #
@@ -114,6 +116,8 @@ GENERAL_COMBO_MAP = {
             'items': [
                 {'label': 'Взаимно независимые амплитуды',
                  'action': lambda self: self.compute_mia(mode='mia')},
+                {'label': 'Скользящее суммирование по кв.окрестности',
+                 'action': lambda self: self.compute_mia(mode='smoothed_mia')},
             ],
         },
     },
@@ -355,9 +359,9 @@ LOGGER_MSG_MAP = {
         "error": "Ошибка при построении изображения с кусочно-постоянными амплитудами: "
     },
     "compute_mia": {
-        "success": "Построение изображения с взаимно независимыми амплитудами выполнено.",
-        "warning": "Не удалось построить изображение с взаимно независимыми амплитудами.",
-        "error": "Ошибка при построении изображения с взаимно независимыми амплитудами: "
+        "success": "Построение изображения выполнено.",
+        "warning": "Не удалось построить изображение.",
+        "error": "Ошибка при построении изображения: "
     },
     "update_display": {
         "error": "Ошибка при обновлении дисплея: "
@@ -389,7 +393,8 @@ LOGGER_MSG_MAP = {
 }
 
 CREATE_IMAGE_MODE = {
-    "mia": lambda self, layout: self.inti_mia_img_ui(layout)
+    "mia": lambda self, layout: self.init_mia_img_ui(layout),
+    "smoothed_mia": lambda self, layout: self.init_smoothed_mia_img_ui(layout),
 }
 
 BUTTON_STYLE = """
