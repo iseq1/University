@@ -64,3 +64,26 @@ def plot_histogram_to_pixmap(hist_data: dict) -> QPixmap:
     buf.seek(0)
     qimg = QImage.fromData(buf.read(), "PNG")
     return QPixmap.fromImage(qimg)
+
+def plot_correlation_estimation(corr_data):
+    """Строим график оценки корреляционной функции"""
+    fig, ax = plt.subplots()
+    im = ax.imshow(corr_data, cmap='viridis')
+    plt.title('Корреляционная функция')
+    plt.colorbar(im, ax=ax)
+
+    buf = BytesIO()
+    fig.savefig(buf, format="png", bbox_inches='tight')
+    plt.close(fig)
+
+    # превращаем в QPixmap
+    buf.seek(0)
+    qimg = QImage.fromData(buf.read(), "PNG")
+    return QPixmap.fromImage(qimg)
+
+    # buf = BytesIO()
+    # plt.savefig(buf, format='png', bbox_inches='tight')
+    # plt.close(fig)
+    # buf.seek(0)
+    # img = Image.open(buf)
+    # qimg = QPixmap.fromImage(ImageQt(img))
