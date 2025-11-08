@@ -1,5 +1,7 @@
+"""
+Вспомогательная форма для реализации диалогового окна для работы с амплитудами пикселей
+"""
 from PyQt6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QPushButton
-
 from form.form_utils.popup_form import PopupDialog
 
 

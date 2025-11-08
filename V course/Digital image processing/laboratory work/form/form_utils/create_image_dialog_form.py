@@ -1,5 +1,7 @@
+"""
+Вспомогательная форма для реализации диалогового генерации изображений
+"""
 from PyQt6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QPushButton, QComboBox, QMessageBox
-
 from core.image_random_creator import ImageRandomHandler, ImageSmoothingHandler
 from form.const import CREATE_IMAGE_MODE
 from form.form_utils.popup_form import PopupDialog
