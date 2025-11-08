@@ -39,7 +39,9 @@ STATUS_BAR_MSG = {
     'get_mia_corrected': "✅ Построение изображения с взаимно независимыми амплитудами успешно выполнено! ✅",
     'get_mia_failed': "⚠️ Ошибка при построении изображения с взаимно независимыми амплитудами! ⚠️",
     'get_smoothed_mia_corrected': "✅ Построение изображения методом скользящего суммирования успешно выполнено! ✅",
-    'get_smoothed_mia_failed': "⚠️ Ошибка при построении изображения методом скользящего суммирования ! ⚠️",
+    'get_smoothed_mia_failed': "⚠️ Ошибка при построении изображения методом скользящего суммирования! ⚠️",
+    'get_correlation_corrected': "✅ Оценка корреляционной функции успешно получена! ✅",
+    'get_correlation_failed': "⚠️ Ошибка при получении оценки корреляционной функции! ⚠️",
 }
 
 #
@@ -203,6 +205,12 @@ IMAGE_COMBO_MAP = {
         },
     },
 
+    'Оценка корреляционной функции': {
+        'type': 'btn',
+        'action': lambda self: self.compute_correlation(self.current_array),
+        'menu_params': None,
+    },
+
 }
 
 # Кнопки и их обработчики для вкладки "ROI"
@@ -277,6 +285,12 @@ ROI_COMBO_MAP = {
         },
     },
 
+    'Оценка корреляционной функции': {
+        'type': 'btn',
+        'action': lambda self: self.compute_correlation(self.current_roi_array),
+        'menu_params': None,
+    },
+
     "Отменить ROI": {
         'type': 'btn',
         'action': lambda self: self.clear_roi(),
@@ -292,6 +306,7 @@ FORMAT_DATA_MAP = {
     'contrast': lambda self, contrast: self.format_contrast_img(contrast),
     'smooth': lambda self, smooth: self.format_smooth_img(smooth),
     'piecewise': lambda self, piecewise: self.format_piecewise_img(piecewise),
+    'correlation_random_scene': lambda self, corr: self.format_correlation_img(corr),
 }
 
 # Сообщения для логера
@@ -362,6 +377,11 @@ LOGGER_MSG_MAP = {
         "success": "Построение изображения выполнено.",
         "warning": "Не удалось построить изображение.",
         "error": "Ошибка при построении изображения: "
+    },
+    "compute_correlation": {
+        "success": "Получение оценки корреляционной функции выполнено.",
+        "warning": "Не удалось получить оценку корреляционной функции.",
+        "error": "Ошибка при получении оценки корреляционной функции: "
     },
     "update_display": {
         "error": "Ошибка при обновлении дисплея: "
