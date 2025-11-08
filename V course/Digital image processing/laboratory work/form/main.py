@@ -11,6 +11,7 @@ from PyQt6.QtWidgets import (
 from core.image_correlation import ImageCorrelationHandler
 from core.image_hist_computer import ImageHistogram
 from core.image_linear_contrast import ImageLinearContrast
+from core.image_noise import ImageDenoiseHandler
 from core.image_piecewise_computer import ImagePiecewiseHandler
 from core.image_rotate import ImageRotate
 from core.image_scale import ImageScale
@@ -686,6 +687,31 @@ class MainWindow(QMainWindow):
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_scale_failed'))
             CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
+    def compute_denoise(self, array):
+        """Обертка для уменьшения уровня белого аддитивного шума"""
+        try:
+            if isinstance(array, ndarray):
+                response = ImageDenoiseHandler.apply(array)
+                if response.get("data", None) is not None:
+                    msg, img = self.format_data(response)
+                    popup = PopupDialog(title="Изображение с уменьшенным шумом", message=msg, pixmap=img, parent=self)
+                    CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, extra_msg=f'{response["msg"]}')
+                    popup.exec()
+                if response.get('code'):
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response["code"]}_corrected'))
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+            elif self.current_array is not None and self.current_roi_array is None:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_roi'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+            else:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+        except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_noise_failed'))
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
+
     def compute_amplitude(self, array):
         """Обертка для взаимодействия с амплитудой пикселей"""
         try:
@@ -870,6 +896,16 @@ class MainWindow(QMainWindow):
 
         return text, img
 
+    def format_denoise_img(self, denoise):
+        """
+        Форматирование информации для вывода бесшумного изображения
+        :param denoise:
+        :return:
+        """
+        text = None
+        img = array_to_pixmap(denoise) if denoise is not None else None
+
+        return text, img
 
     def update_display(self):
         """Обновляет QLabel с текущим изображением."""

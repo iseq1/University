@@ -42,6 +42,8 @@ STATUS_BAR_MSG = {
     'get_smoothed_mia_failed': "⚠️ Ошибка при построении изображения методом скользящего суммирования! ⚠️",
     'get_correlation_corrected': "✅ Оценка корреляционной функции успешно получена! ✅",
     'get_correlation_failed': "⚠️ Ошибка при получении оценки корреляционной функции! ⚠️",
+    'get_denoise_corrected': "✅ Уменьшение аддитивного шума выполнено! ✅",
+    'get_denoise_failed': "⚠️ Ошибка при уменьшении аддитивного шума выполнено! ⚠️",
 }
 
 #
@@ -167,6 +169,12 @@ IMAGE_COMBO_MAP = {
         'menu_params': None,
     },
 
+    'Уменьшение шума': {
+        'type': 'btn',
+        'action': lambda self: self.compute_denoise(self.current_array),
+        'menu_params': None,
+    },
+
     'Сглаживание амплитуд': {
         'type': 'menu',
         'action': None,
@@ -247,6 +255,12 @@ ROI_COMBO_MAP = {
         'menu_params': None,
     },
 
+    'Уменьшение шума ROI': {
+        'type': 'btn',
+        'action': lambda self: self.compute_denoise(self.current_roi_array),
+        'menu_params': None,
+    },
+
     'Сглаживание амплитуд': {
         'type': 'menu',
         'action': None,
@@ -307,6 +321,7 @@ FORMAT_DATA_MAP = {
     'smooth': lambda self, smooth: self.format_smooth_img(smooth),
     'piecewise': lambda self, piecewise: self.format_piecewise_img(piecewise),
     'correlation_random_scene': lambda self, corr: self.format_correlation_img(corr),
+    'denoise': lambda self, denoise: self.format_denoise_img(denoise),
 }
 
 # Сообщения для логера
@@ -382,6 +397,11 @@ LOGGER_MSG_MAP = {
         "success": "Получение оценки корреляционной функции выполнено.",
         "warning": "Не удалось получить оценку корреляционной функции.",
         "error": "Ошибка при получении оценки корреляционной функции: "
+    },
+    "compute_denoise": {
+        "success": "Уменьшение аддитивного белого шума выполнено.",
+        "warning": "Не удалось уменьшить аддитивный белый шум.",
+        "error": "Ошибка при уменьшение аддитивного белого шума: "
     },
     "update_display": {
         "error": "Ошибка при обновлении дисплея: "
