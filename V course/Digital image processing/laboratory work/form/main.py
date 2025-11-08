@@ -7,6 +7,8 @@ from PyQt6.QtWidgets import (
     QMainWindow, QVBoxLayout, QFileDialog, QWidget,
     QDialog, QComboBox, QToolBar, QMessageBox, QPushButton, QMenu,
 )
+
+from core.image_correlation import ImageCorrelationHandler
 from core.image_hist_computer import ImageHistogram
 from core.image_linear_contrast import ImageLinearContrast
 from core.image_piecewise_computer import ImagePiecewiseHandler
@@ -17,7 +19,7 @@ from core.image_stat_computer import ImageStats
 from core.image_transfer import LocalImageTransfer
 from core.image_conventor import ByteConverter
 from core.image_filter import Grayscale24Filter
-from core.image_utils import array_to_pixmap, plot_histogram_to_pixmap
+from core.image_utils import array_to_pixmap, plot_histogram_to_pixmap, plot_correlation_estimation
 from numpy import copy, ndarray
 import form.const as c
 from form.form_utils.create_image_dialog_form import CreateImageDialog
@@ -761,6 +763,29 @@ class MainWindow(QMainWindow):
             self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{str(mode)}_failed'))
             CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
 
+    def compute_correlation(self, array):
+        """Обертка для оценки корреляционной функции"""
+        try:
+            if isinstance(array, ndarray):
+                response = ImageCorrelationHandler.apply(array)
+                if response.get('data', None) is not None:
+                    msg, img = self.format_data(response)
+                    popup = PopupDialog(title="Оценка корреляционной функции", message=msg, pixmap=img, parent=self)
+                    CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP)
+                    popup.exec()
+                if response.get('code'):
+                    self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'get_{response["code"]}_corrected'))
+            elif isinstance(self.current_array, (bytes, bytearray)):
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get(f'no_update_display'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+            else:
+                self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('no_image'))
+                CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='warning', level='warning')
+
+        except Exception as e:
+            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('get_correlation_failed'))
+            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
+
     def format_data(self, data: dict):
         """
         Форматирование полученных данных для последующей демонстрации
@@ -833,6 +858,18 @@ class MainWindow(QMainWindow):
         img = array_to_pixmap(piecewise) if piecewise is not None else None
 
         return text, img
+
+    def format_correlation_img(self, correlation):
+        """
+        Форматирование информации для вывода оценки корреляционной функции
+        :param correlation:
+        :return:
+        """
+        text = None
+        img = plot_correlation_estimation(correlation) if correlation is not None else None
+
+        return text, img
+
 
     def update_display(self):
         """Обновляет QLabel с текущим изображением."""
