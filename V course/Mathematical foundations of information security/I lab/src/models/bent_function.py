@@ -1,13 +1,20 @@
-# src/models/bent_function.py
+"""
+Класс для представления bent-функций — максимально нелинейных булевых функций.
+"""
 from src.models.boolean_function import BooleanFunction
+
 
 class BentFunction(BooleanFunction):
     """
-    Представление bent-функции (частный случай BooleanFunction).
-    По дизайну предполагаем, что переданный вектор действительно bent.
-    Можно проверить вне при помощи NonlinearityService.
+    Класс для представления bent-функции.
     """
+
     def __init__(self, n: int, values, description: str = ""):
+        """
+        :param n: число переменных
+        :param values: таблица истинности функции длины 2^n
+        :param description: текстовое описание, например "x1*x2 ⊕ x3*x4"
+        """
         super().__init__(n, values)
         self.description = description
 

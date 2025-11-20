@@ -1,4 +1,15 @@
-# src/services/sbox_generator.py
+"""
+Генератор S-box с высокой нелинейностью.
+
+Алгоритм:
+1. Генерируем случайную перестановку 0..2^n-1.
+2. При необходимости удаляем фиксированные точки (s(x) != x).
+3. Применяем локальную оптимизацию через случайные свапы:
+   - свап двух элементов таблицы,
+   - принимаем только если нелинейность не ухудшилась,
+   - откатываем иначе.
+4. Повторяем несколько попыток, выбираем лучший S-box.
+"""
 import random
 from typing import List, Optional
 from src.models.sbox import SBox
@@ -6,11 +17,9 @@ from src.services.sbox_nonlinearity_service import SBoxNonlinearityService
 
 class SBoxGenerator:
     """
-    Генератор s-box (в частности n=m=5). Стратегия:
-    - случайная перестановка (перестановка 0..2^n-1),
-    - удаление фиксированных точек (если требуется),
-    - локальная оптимизация через случайные свапы (принимаем если NL не ухудшился).
+    Генератор s-box
     """
+
     def __init__(self, n: int = 5, m: Optional[int] = None, seed: Optional[int] = None):
         if m is None:
             m = n
@@ -19,12 +28,22 @@ class SBoxGenerator:
         self.rng = random.Random(seed)
 
     def random_permutation(self) -> List[int]:
+        """
+        Генерация случайной перестановки 0..2^n-1
+        """
+
         size = 2 ** self.n
         perm = list(range(size))
         self.rng.shuffle(perm)
         return perm
 
+
     def fix_fixed_points(self, table: List[int]) -> List[int]:
+        """
+        Убираем фиксированные точки (s(x) != x),
+        меняя местами элементы с другими подходящими позициями.
+        """
+
         size = len(table)
         # простой метод: для каждого фиксированного i, ищем j != i и меняем
         for i in range(size):
@@ -36,10 +55,17 @@ class SBoxGenerator:
                         break
         return table
 
-    def search_best(self,
-                    attempts: int = 10,
-                    steps_per_attempt: int = 1000,
-                    enforce_no_fixed_points: bool = True):
+
+    def search_best(self, attempts: int = 10, steps_per_attempt: int = 1000, enforce_no_fixed_points: bool = True):
+        """
+        Поиск S-box с максимальной нелинейностью.
+
+        :param attempts: число случайных попыток
+        :param steps_per_attempt: количество свапов на попытку
+        :param enforce_no_fixed_points: проверять отсутствие фиксированных точек
+        :return: кортеж (SBox, NL)
+        """
+
         best_tbl = None
         best_nl = None
 
