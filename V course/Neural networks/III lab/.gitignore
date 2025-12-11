@@ -1,0 +1,9 @@
+.idea
+.venv
+venv
+Test
+Training
+archive.zip
+checkpoint.pt
+LICENSE
+**/__pycache__/
