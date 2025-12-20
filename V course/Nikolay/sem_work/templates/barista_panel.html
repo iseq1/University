@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roast&Run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <a href="index.html" class="logo">
+                        <img src="../static/images/logo_all_black_small.svg" alt="" class="logo__img">
+                    </a>
+                    <!--<nav class="menu">
+                        <ul class="menu__list">
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Company
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="coffee-menu.html" class="menu__list-link">
+                                    Coffee
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Something
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Franchise
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Work
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>-->
+                    <a href=/logout class="logo">
+                        <img src="../static/images/door.svg" alt="" class="profile-logo__img">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+
+        <main class="main">
+             <div class="profileBox" style="display:block;">
+                    <div class="row">
+                        <div class="d-flex">
+                            <div class="sidebar">
+                                <div class="wrapper">
+                                    <div class="user">
+                                    {% for key, value in json_data.items() %}
+                                    {% if 'orders_count' in value[0] %}
+                                    <div class="text-wrap mb-2 pb-1">
+                                        <p class="name" style="font-size: 20px;"> {{ value[0]['name'] }} </p>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                    </div>
+                                    {% for key, value in json_data.items() %}
+                                    {% if 'orders_count' in value[0] %}
+                                    <ul class="listInfo">
+                                        <li>
+                                            <p class="text">
+                                                <img class="ic_finished_orders" src="../static/images/coffee-cup.svg" style="width: 30px; height: 30px;" alt="">
+                                                Выполнено заказов за сегодня:
+                                            </p>
+                                            <p class="number">{{ value[0]['orders_count'] }}</p>
+                                        </li>
+                                        <li>
+                                            <p class="text">
+                                                <img class="ic_finished_orders" src="../static/images/star.svg" style="width: 30px; height: 30px;" alt="">
+                                                Количество оценок:
+                                            </p>
+                                            <p class="number">{{ value[0]['stars_count'] }}</p>
+                                        </li>
+                                        <li>
+                                            <p class="text">
+                                                <img class="ic_finished_orders" src="../static/images/like.svg" style="width: 30px; height: 30px;" alt="">
+                                                Среднее значение оценок за сегодня:
+                                            </p>
+                                            <p class="number">{{ value[0]['average_stars'] }} </p>
+                                        </li>
+
+                                    </ul>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="sidebar-order-info">
+                                <div class="wrapper">
+                                    <div class="user">
+                                        <h2  style="font-size: 26px;">Расписание на неделю </h2>
+                                        <div style="padding-top: 30px;" class="order-history__block">
+                                            <ul class="order-history__list">
+                                                <li class="order-history__list-item">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                {% for item in json_data['week'] %}
+                                                                {% for day, date in item.items() %}
+                                                                <td>{{ date }}</td>
+                                                                {% endfor %}
+                                                                {% endfor %}
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                            {% for item_week in json_data['week'] %}
+                                                                {% for day_week, date_week in item_week.items() %}
+                                                                    <td>
+                                                                        {% for item_schedule in json_data['schedule'] %}
+                                                                            {% for date_work, time_work in item_schedule.items() %}
+                                                                                {% set is_workday = false %}
+                                                                                {% if date_week == date_work %}
+                                                                                    {{ time_work['start_time'] }} -
+                                                                                    {{ time_work['finish_time'] }}
+                                                                                    {% set is_workday = true %}
+                                                                                    {% if not is_workday %}
+                                                                                    Выходной
+                                                                                    {% endif %}
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                        {% endfor %}
+                                                                    </td>
+                                                                {% endfor %}
+                                                            {% endfor %}
+
+
+                                                            </tr>
+                                                    </tbody>
+                                                    </table>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div class="user">
+                                        <h2  style="font-size: 26px;">Информация о заказах за {{ json_data[session["username"]][0]['date'][9:] }} </h2>
+                                        <div style="padding-top: 30px;" class="order-history__block">
+                                            <ul class="order-history__list">
+                                                <li class="order-history__list-item">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Напиток</th>
+                                                                <th>Размер</th>
+                                                                <th>Время</th>
+                                                                <th>Оценка</th>
+                                                                <th>Клиент</th>
+                                                                <th>KPI</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <a>
+                                                        <tbody>
+                                                            {% for order in json_data[session["username"]] %}
+                                                            <tr>
+                                                                <td>{{ order['ID'] }}</td>
+                                                                <td>
+                                                                    {% for name in order['names'].split(',') %}
+                                                                    <p class="order-table__item" >{{ name.strip().capitalize() }}</p><hr class="order-table__item-line">
+                                                                    {% endfor %}
+                                                                </td>
+                                                                <td style="">
+                                                                    <div class="order-table__container">
+                                                                        {% for size in order['sizes'].split(',') %}
+                                                                        <p class="order-table__item-size">{{ size.strip().capitalize() }}</p>
+                                                                        {% endfor %}
+                                                                    </div>
+                                                                </td>
+                                                                <td>{{ order['date'][:5] }}</td>
+                                                                <td>{{ order['stars'] }}</td>
+                                                                <td>{{ order['client'] }}</td>
+                                                                <td>{{ order['kpi'] }}</td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                        </a>
+                                                    </table>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+             </div>
+
+
+
+
+
+
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <!--<nav class="footer__menu">
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Products
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="coffee-menu.html" class="footer__menu-link">
+                                Coffee
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Specials
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Merch
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Resources
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                FAQ
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="" class="footer__menu-link">
+                                Contact us
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Work with US
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Franchise
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Bartenders
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                About
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                About us
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Team
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Careers
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="app">
+                    <li class="app__item">
+                        <a href="#" class="app__item-link">
+                            <img class="app_item-img" src="images/appstore.svg" alt="">
+                        </a>
+                    </li>
+                    <li class="app__item">
+                        <a href="#" class="app__item-link">
+                            <img class="app_item-img" src="images/googleplay.svg" alt="">
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer__copy">
+                    <p class="footer__copy-text">
+                        For questions about the Roast&Run Coffee Buying Service please call 1-888-878-3227, Certified Baristas are contractually obligated by Roast&Run to meet certain customer service requirements and complete the Roast&Run Barista Certification Program.
+                    </p>
+                    <p class="footer__copy-text">
+                        Roast&Run does not broker, sell, or lease coffee beans. Unless otherwise noted, all beverages shown on this website are offered for sale by licensed coffee shops. All drinks are subject to prior sale. By accessing this website, you agree to the Roast&Run Terms of Service and Privacy Policy
+                    </p>
+                </div>
+                <nav class="copy__nav">
+                    <ul class="copy__nav-list">
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Terms of Service
+                            </a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Do Not Sell My Personal Information
+                            </a>
+                        </li>
+                    </ul>
+                </nav>-->
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Находим все строки таблицы
+        var rows = document.querySelectorAll('.order-history__list-item tbody tr');
+
+        // Добавляем обработчик клика для каждой строки
+        rows.forEach(function(row) {
+            row.addEventListener('click', function() {
+                // Удаляем класс selected-row у всех строк таблицы
+                rows.forEach(function(r) {
+                    r.classList.remove('selected-row');
+                });
+                // Добавляем класс selected-row к выбранной строке
+                row.classList.add('selected-row');
+            });
+        });
+    </script>
+    <script src="../static/js/profile-level-info.js"></script>
+</body>
+</html>

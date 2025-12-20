@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roast&Run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <a href="index.html" class="logo">
+                        <img src="images/logo_all_black_small.svg" alt="" class="logo__img">
+                    </a>
+                    <nav class="menu">
+                        <ul class="menu__list">
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Company
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="coffee-menu.html" class="menu__list-link">
+                                    Coffee
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Something
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Franchise
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Work
+                                </a>
+                            </li>   
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+
+        <main class="main">
+            
+            <!-- 
+           <section class="frachise">
+                <div class="container">
+                    <section class="section leaders-block format-block" id="format-block">
+                        <div class="container-upgrade">
+                            <div class="section__title">Выберите свой формат</div>
+                            <div class="format-block__tegs" role="toolbar"><ul class="tegs tegs_line" style="display: flex;" role="tablist"><li class="slick-active" aria-hidden="false" role="presentation" aria-selected="true" aria-controls="navigation10" id="slick-slide10"><div class="teg">Барная стойка</div> </li><li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation11" id="slick-slide11"><div class="teg">Павильон без зоны ожидания</div> </li><li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation12" id="slick-slide12"><div class="teg">Павильон с зоной ожидания</div> </li><li aria-hidden="true" class="" role="presentation" aria-selected="false" aria-controls="navigation13" id="slick-slide13"><div class="teg">Встроенное помещение с зоной ожидания</div> </li><li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation14" id="slick-slide14" class=""><div class="teg">Фудтрак</div> </li><li aria-hidden="true" role="presentation" aria-selected="false" aria-controls="navigation15" id="slick-slide15" class=""><div class="teg">Авто-кофейня</div> </li></ul></div>
+                            <div class="content-slider format slick-initialized slick-slider slick-dotted"><button class="slick-prev slick-arrow" type="button" style="display: block;"></button>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            <div aria-live="polite" class="slick-list draggable" style="padding: 0px 150px;"><div class="slick-track" style="opacity: 1; width: 5880px; transform: translate3d(-1260px, 0px, 0px);" role="listbox"><div class="slick-slide slick-cloned" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide12" data-slick-index="-4" aria-hidden="true">
+                                    <div class="content-slider__slide format-card" data-name="Павильон с зоной ожидания">
+                                        <div class="format-card__image qwerty"> <img src="../img/franchise-upgrade/format03.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Комфорт для гостя в любую погоду</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Выручка выше на 30% за счет зоны ожидания</div>
+                                                    <div class="list__item">Размещается на земельных участках от 10 кв.м.</div>
+                                                    <div class="list__item">Средний чек выше на 20%</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="-1"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide slick-cloned" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide13" data-slick-index="-3" aria-hidden="true">
+                                    <div class="content-slider__slide format-card" data-name="Встроенное помещение с зоной ожидания">
+                                        <div class="format-card__image qwerty"> <img src="../img/franchise-upgrade/format05.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Интеграция в архитектуру города</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Позволяет организовать мини-кофейню на площади от 9 кв.м.</div>
+                                                    <div class="list__item">Большее количество чеков</div>
+                                                    <div class="list__item">Средний чек выше на 20%</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="-1"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide slick-cloned" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide14" data-slick-index="-2" aria-hidden="true">
+                                    <div class="content-slider__slide format-card" data-name="Фудтрак">
+                                        <div class="format-card__image qwerty"> <img src="../img/franchise-upgrade/format07.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Мобильный формат</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Для обслуживания массовых мероприятий в городе и за его пределами</div>
+                                                    <div class="list__item">Позволяет получить дополнительный доход и увеличить узнаваемость бренда</div>
+                                                    <div class="list__item">Может быть использован для сезонных продаж и предварительной оценки места</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="-1"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide slick-cloned slick-active" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide15" data-slick-index="-1" aria-hidden="false">
+                                    <div class="content-slider__slide format-card" data-name="Авто-кофейня">
+                                        <div class="format-card__image qwerty"> <img src="../img/franchise-upgrade/format08.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Растущий формат потребления</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Размещение в местах с высоким автотрафиком</div>
+                                                    <div class="list__item">Более высокий средний чек</div>
+                                                    <div class="list__item">Стабильные продажи вне зависимости от погоды и эпидемий</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="0"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide slick-current slick-active slick-center" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide10" data-slick-index="0" aria-hidden="false">
+                                    <div class="content-slider__slide format-card" data-name="Барная стойка">
+                                        <div class="format-card__image qwerty"><img src="../img/franchise-upgrade/format01.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Формат для быстрого старта</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Размещается внутри торговых и бизнес центров </div>
+                                                    <div class="list__item">Требует минимальных инвестиций на открытие</div>
+                                                    <div class="list__item">Cамый короткий срок изготовления - от 14 дней</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="0"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide slick-active" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide11" data-slick-index="1" aria-hidden="false">
+                                    <div class="content-slider__slide format-card" data-name="Павильон без зоны ожидания">
+                                        <div class="format-card__image qwerty"><img src="../img/franchise-upgrade/format02.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Хороший импульс к покупке</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Размещается на земельных участках от 7 кв.м.</div>
+                                                    <div class="list__item">Требует меньших инвестиций на открытие</div>
+                                                    <div class="list__item">Располагается максимально близко к пешеходному трафику</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="0"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide12" data-slick-index="2" aria-hidden="true">
+                                    <div class="content-slider__slide format-card" data-name="Павильон с зоной ожидания">
+                                        <div class="format-card__image qwerty"> <img src="../img/franchise-upgrade/format03.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Комфорт для гостя в любую погоду</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Выручка выше на 30% за счет зоны ожидания</div>
+                                                    <div class="list__item">Размещается на земельных участках от 10 кв.м.</div>
+                                                    <div class="list__item">Средний чек выше на 20%</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="-1"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide13" data-slick-index="3" aria-hidden="true">
+                                    <div class="content-slider__slide format-card" data-name="Встроенное помещение с зоной ожидания">
+                                        <div class="format-card__image qwerty"> <img src="../img/franchise-upgrade/format05.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Интеграция в архитектуру города</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Позволяет организовать мини-кофейню на площади от 9 кв.м.</div>
+                                                    <div class="list__item">Большее количество чеков</div>
+                                                    <div class="list__item">Средний чек выше на 20%</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="-1"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide14" data-slick-index="4" aria-hidden="true">
+                                    <div class="content-slider__slide format-card" data-name="Фудтрак">
+                                        <div class="format-card__image qwerty"> <img src="../img/franchise-upgrade/format07.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Мобильный формат</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Для обслуживания массовых мероприятий в городе и за его пределами</div>
+                                                    <div class="list__item">Позволяет получить дополнительный доход и увеличить узнаваемость бренда</div>
+                                                    <div class="list__item">Может быть использован для сезонных продаж и предварительной оценки места</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="-1"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide15" data-slick-index="5" aria-hidden="true">
+                                    <div class="content-slider__slide format-card" data-name="Авто-кофейня">
+                                        <div class="format-card__image qwerty"> <img src="../img/franchise-upgrade/format08.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Растущий формат потребления</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Размещение в местах с высоким автотрафиком</div>
+                                                    <div class="list__item">Более высокий средний чек</div>
+                                                    <div class="list__item">Стабильные продажи вне зависимости от погоды и эпидемий</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="-1"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide slick-cloned slick-center" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide10" data-slick-index="6" aria-hidden="true">
+                                    <div class="content-slider__slide format-card" data-name="Барная стойка">
+                                        <div class="format-card__image qwerty"><img src="../img/franchise-upgrade/format01.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Формат для быстрого старта</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Размещается внутри торговых и бизнес центров </div>
+                                                    <div class="list__item">Требует минимальных инвестиций на открытие</div>
+                                                    <div class="list__item">Cамый короткий срок изготовления - от 14 дней</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="-1"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide slick-cloned" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide11" data-slick-index="7" aria-hidden="true">
+                                    <div class="content-slider__slide format-card" data-name="Павильон без зоны ожидания">
+                                        <div class="format-card__image qwerty"><img src="../img/franchise-upgrade/format02.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Хороший импульс к покупке</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Размещается на земельных участках от 7 кв.м.</div>
+                                                    <div class="list__item">Требует меньших инвестиций на открытие</div>
+                                                    <div class="list__item">Располагается максимально близко к пешеходному трафику</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="-1"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide slick-cloned" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide12" data-slick-index="8" aria-hidden="true">
+                                    <div class="content-slider__slide format-card" data-name="Павильон с зоной ожидания">
+                                        <div class="format-card__image qwerty"> <img src="../img/franchise-upgrade/format03.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Комфорт для гостя в любую погоду</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Выручка выше на 30% за счет зоны ожидания</div>
+                                                    <div class="list__item">Размещается на земельных участках от 10 кв.м.</div>
+                                                    <div class="list__item">Средний чек выше на 20%</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="-1"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><div class="slick-slide slick-cloned" style="width: 420px;" tabindex="-1" role="option" aria-describedby="slick-slide13" data-slick-index="9" aria-hidden="true">
+                                    <div class="content-slider__slide format-card" data-name="Встроенное помещение с зоной ожидания">
+                                        <div class="format-card__image qwerty"> <img src="../img/franchise-upgrade/format05.png" alt="image"></div>
+                                        <div class="format-card__content">
+                                            <div class="format-card__top">
+                                                <div class="format-card__title">Интеграция в архитектуру города</div>
+                                                <div class="list list_circle">
+                                                    <div class="list__item">Позволяет организовать мини-кофейню на площади от 9 кв.м.</div>
+                                                    <div class="list__item">Большее количество чеков</div>
+                                                    <div class="list__item">Средний чек выше на 20%</div>
+                                                </div>
+                                            </div>
+                                            <div class="format-card__bottom">
+                                                <button class="button button__violet js-show-form-upgrade" tabindex="-1"><span class="button__inner">Получить бизнес-модель</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div></div></div><button class="slick-next slick-arrow" type="button" style="display: block;"></button></div>
+                        </div>
+                    </section>
+                </div>
+           </section>
+           -->
+           
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <nav class="footer__menu">
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Products
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="coffee-menu.html" class="footer__menu-link">
+                                Coffee
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Specials
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Merch
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Resources
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                FAQ
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="" class="footer__menu-link">
+                                Contact us
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Work with US
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Franchise
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Bartenders
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                About
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                About us
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Team
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Careers
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="app">
+                    <li class="app__item">
+                        <a href="#" class="app__item-link">
+                            <img class="app_item-img" src="images/appstore.svg" alt="">
+                        </a>
+                    </li>
+                    <li class="app__item">
+                        <a href="#" class="app__item-link">
+                            <img class="app_item-img" src="images/googleplay.svg" alt="">
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer__copy">
+                    <p class="footer__copy-text">
+                        For questions about the Roast&Run Coffee Buying Service please call 1-888-878-3227, Certified Baristas are contractually obligated by Roast&Run to meet certain customer service requirements and complete the Roast&Run Barista Certification Program.
+                    </p>
+                    <p class="footer__copy-text">
+                        Roast&Run does not broker, sell, or lease coffee beans. Unless otherwise noted, all beverages shown on this website are offered for sale by licensed coffee shops. All drinks are subject to prior sale. By accessing this website, you agree to the Roast&Run Terms of Service and Privacy Policy
+                    </p>
+                </div>
+                <nav class="copy__nav">
+                    <ul class="copy__nav-list">
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Terms of Service
+                            </a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Do Not Sell My Personal Information
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>  
+    </div>
+</body>
+</html>
