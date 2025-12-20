@@ -1,8 +1,10 @@
-from src.service.elliptic_сurve import EllipticCurveTest
+from src.service.elliptic_сurve import  StrongEllipticCurveTest
 from src.service.miller_rabin import MillerRabinTest
 from src.service.pierre_de_fermat import FermatTest
 from datetime import datetime
 import time
+
+from src.service.hypothesis_checker import HypothesisChecker
 
 
 class PrimeChecker:
@@ -21,7 +23,7 @@ class PrimeChecker:
     @staticmethod
     def elliptic_curve_test(x):
         """Проверка простоты тестом эллиптических кривых"""
-        return EllipticCurveTest().apply(x)
+        return StrongEllipticCurveTest.apply(x, rounds=100)
 
 
 class PrimeCounter:
@@ -84,3 +86,22 @@ class PrimeCounter:
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(full_output)
             print(f"\n💾 Результаты сохранены в файл: {filename}")
+
+
+    @staticmethod
+    def check_gipoteza(limit):
+        output_lines = []
+        fermat_psp, ec_fail = HypothesisChecker(PrimeChecker).check(limit)
+
+        output_lines.append("\nПроверка гипотезы (составные → Fermat → EC)")
+        output_lines.append("-" * 60)
+        output_lines.append(f"Составных, прошедших Fermat: {len(fermat_psp)}")
+        output_lines.append(f"Найденные примеры: {fermat_psp[:10]}")
+
+
+        if not ec_fail:
+            output_lines.append("❌ Составных, прошедших и Fermat и EC: 0")
+        else:
+            output_lines.append(f"⚠️ Найдены контрпримеры: {ec_fail[:10]}")
+
+        [print(item) for item in output_lines]

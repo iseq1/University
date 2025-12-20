@@ -9,7 +9,7 @@ class FermatTest(MathBase):
 
     random.seed()
 
-    def apply(self, x: int, steps: int = 100):
+    def apply(self, x: int, steps: int = 5):
         """Применяет тест простоты Ферма к числу x на steps шагах"""
         if x in (2, 3):
             return True

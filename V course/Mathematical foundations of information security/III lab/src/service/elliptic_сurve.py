@@ -3,6 +3,17 @@
 """
 from src.service.math_base import MathBase
 
+class StrongEllipticCurveTest:
+    """Усиленный эллиптический тест (повторение базового)"""
+
+    @staticmethod
+    def apply(n: int, rounds: int) -> bool:
+        for _ in range(rounds):
+            if not EllipticCurveTest().apply(n):
+                return False
+        return True
+
+
 
 class EllipticCurveTest(MathBase):
     """Тест простоты эллиптических кривых"""
@@ -22,11 +33,11 @@ class EllipticCurveTest(MathBase):
         if n % 3 != 2:
             return False
 
-        # Ищем точку P(x,y) на кривой y^2 = x^3 + 1 (mod n)
+        # Ищем точку P(x,y) на кривой y^2 = x^3 + 2 (mod n)
         P = None
         # небольшой диапазон
         for x in range(1, 200):
-            rhs = (x ** 3 + 1) % n
+            rhs = (x ** 3 + 2) % n
 
             # ищем y такое, что y^2 == rhs mod n
             for y in range(1, 200):

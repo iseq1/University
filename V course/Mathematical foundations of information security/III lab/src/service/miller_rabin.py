@@ -8,7 +8,7 @@ class MillerRabinTest(MathBase):
     """Класс-обработчик реализующий тест простоты Миллера-Рабина"""
     random.seed()
 
-    def apply(self, n: int, k: int = 5):
+    def apply(self, n: int, k: int = 1):
         """Применяет тест простоты Миллера-Рабина к числу n на k повторах"""
         if n <= 1:
             return False
