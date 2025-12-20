@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roast&Run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <a href="index.html" class="logo">
+                        <img src="../static/images/logo_all_black_small.svg" alt="" class="logo__img">
+                    </a>
+                    <a href=/logout class="logo">
+                        <img src="../static/images/door.svg" alt="" class="profile-logo__img">
+                    </a>
+                </div>
+            </div>
+        </header>
+
+
+        <main class="main">
+            <div class="content grey" style="min-height: calc(-656.8px + 100vh);">
+                <div class="row">
+                    <div class="title-wrap flex" style="padding-bottom:30px;">
+                        <h2 style="padding-bottom: 10px;" class="indent">Панель управления Администрации</h2>
+                    </div>
+
+                     <div class="menuLink-wrap verticalScroll pb-0">
+
+                        <ul class="menuLink mb-0">
+                            <li class="tab_profile"><a href="#menuLink-wrap" onclick="openbox('tabProf', this); return false" rel="nofollow">Статистика</a></li>
+                            <li class="tab_profile active"><a href="#menuLink-wrap" onclick="openbox('tabInfo', this); return false" rel="nofollow">График</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div id="tabProf" class="profileBox tabs-content__profile" style="display: none;">
+                    <div class="row">
+                        <div class="d-flex">
+                            <div class="sidebar">
+                                <div class="wrapper">
+                                    <div class="user">
+                                    <div class="text-wrap mb-2 pb-1">
+                                        <p class="name" style="font-size: 20px;"> {{json_data['admin_name'][0]['name']}} </p>
+                                    </div>
+
+                                    </div>
+                                    {% for item in json_data['casual-orders-info'] %}
+                                    <ul class="listInfo">
+                                        <li>
+                                            <p class="text">
+                                                <img class="ic_finished_orders" src="../static/images/coffee-cup.svg" style="width: 30px; height: 30px;" alt="">
+                                                Оформлено заказов за {{item['date'][:5]}}:
+                                            </p>
+                                            <p class="number">{{item['total_orders_per_day']}}</p>
+                                        </li>
+                                        <li>
+                                            <p class="text">
+                                                <img class="ic_finished_orders" src="../static/images/coffee-cup.svg" style="width: 30px; height: 30px;" alt="">
+                                                Оформлено заказов за {{item['month']}}:
+                                            </p>
+                                            <p class="number">{{item['total_orders_per_month']}}</p>
+                                        </li>
+                                        <li>
+                                            <p class="text">
+                                                <img class="ic_finished_orders" src="../static/images/coin.svg" style="width: 30px; height: 30px;" alt="">
+                                                Выручка за {{item['date'][:5]}}:
+                                            </p>
+                                            <p class="number">{{item['total_revenue_per_day']}} </p>
+                                        </li>
+                                        <li>
+                                            <p class="text">
+                                                <img class="ic_finished_orders" src="../static/images/coin.svg" style="width: 30px; height: 30px;" alt="">
+                                                Выручка за {{item['month']}}:
+                                            </p>
+                                            <p class="number">{{item['total_revenue_per_month']}}</p>
+                                        </li>
+                                        <li>
+                                            <p class="text">
+                                                <img class="ic_finished_orders" src="../static/images/star.svg" style="width: 30px; height: 30px;" alt="">
+                                                Средняя оценка кофе за {{item['date'][:5]}}:
+                                            </p>
+                                            <p class="number">{{item['average_stars_per_day']}}</p>
+                                        </li>
+                                        <li>
+                                            <p class="text">
+                                                <img class="ic_finished_orders" src="../static/images/star.svg" style="width: 30px; height: 30px;" alt="">
+                                                Средняя оценка кофе за {{item['month']}}:
+                                            </p>
+                                            <p class="number">{{item['average_stars_per_month']}} </p>
+                                        </li>
+                                    </ul>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="sidebar">
+                                <div class="wrapper">
+                                    <div class="user">
+                                       <h2 style="font-size: 26px; padding-bottom: 20px;">История заказов</h2>
+                                        <div class="oredrs-filter">
+                                             <form action="/admin-panel" method="post" style="margin: auto auto;">
+                                                 <ul class="oredrs-filter__list">
+                                                     <li class="oredrs-filter__list-item">
+                                                         <div class="custom-select" style="width:200px;">
+                                                             <select name="timeframe">
+                                                                 <option value="0">Временной промежуток:</option>
+                                                                 {% for item in json_data['casual-orders-info'] %}
+                                                                 <option value="datetime.now().strftime('%d/%m/%Y')">Сегодня - {{item['date']}}</option>
+                                                                 <option value="datetime.now().strftime('%m/%Y')">Месяц - {{item['month']}}</option>
+                                                                 {% endfor %}
+                                                             </select>
+                                                         </div>
+                                                     </li>
+                                                    <li class="oredrs-filter__list-item">
+                                                        <div class="custom-select" style="width:200px;">
+                                                            <select name="barista">
+                                                                <option value="0">Бариста:</option>
+                                                                {% for key, value in json_data.items() %}
+                                                                    {% if 'barista-list' in key %}
+                                                                        {% for barista in value %}
+                                                                            <option value="{{ barista['id'] }}">{{ barista['name'] }}</option>
+                                                                        {% endfor %}
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </li>
+                                                    <li class="oredrs-filter__list-item">
+                                                        <div class="container-login100-form-btn">
+                                                            <button type="submit" class="login100-form-btn" style="cursor: pointer;">
+                                                                Показать
+                                                            </button>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                             </form>
+                                        </div>
+
+                                        <div style="padding-top: 30px;" class="order-history__block-admin">
+                                            {% for item in json_data['selected-barista-info'] %}
+                                            <div class="selected-barista-info">
+                                                <ul class="selected-barista-info__list" style="padding-bottom: 30px;">
+                                                    <li class="selected-barista-info__list-item">
+                                                        <p class="selected-barista-info__list-item__text" style="padding-right: 15px;">Имя:</p> <p class="selected-barista-info__list-item__text">{{ item['name'] }}</p>
+                                                    </li>
+                                                    <li class="selected-barista-info__list-item">
+                                                        <p class="selected-barista-info__list-item__text" style="padding-right: 15px">Проработанные часы:</p>
+                                                        <p class="selected-barista-info__list-item__text">{{ item['work_time'] }}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            {% endfor %}
+
+                                            <ul class="order-history__list">
+                                                <li class="order-history__list-item">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>Напиток</th>
+                                                                <th>Размер</th>
+                                                                <th>Дата</th>
+                                                                <th>Время</th>
+                                                                <th>Оценка</th>
+                                                                <th>Клиент</th>
+                                                                <th>KPI</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for order in json_data['barista-order-info'] %}
+                                                            <tr>
+                                                                <td>{{ order['ID'] }}</td>
+                                                                <td>
+                                                                    {% for name in order['names'].split(',') %}
+                                                                    <p class="order-table__item" >{{ name.strip().capitalize() }}</p><hr class="order-table__item-line">
+                                                                    {% endfor %}
+                                                                </td>
+                                                                <td style="">
+                                                                    <div class="order-table__container">
+                                                                        {% for size in order['sizes'].split(',') %}
+                                                                        <p class="order-table__item-size">{{ size.strip().capitalize() }}</p>
+                                                                        {% endfor %}
+                                                                    </div>
+                                                                </td>
+                                                                <td>{{ order['date'][8:] }}</td>
+                                                                <td>{{ order['date'][:5] }}</td>
+                                                                <td>{{ order['stars'] }}</td>
+                                                                <td>{{ order['client'] }}</td>
+                                                                <td>{{ order['kpi'] }}</td>
+                                                            </tr>
+                                                            {% endfor %}
+                                                    </tbody>
+                                                    </table>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tabInfo" class="profileBox tabs-content__profile" style="display: block;">
+                    <div id="current-week" style="display: block;" class="row shedule-week__box">
+                        <div class="shedule">
+                            <h2 class="section-title" style="font-size: 20px; padding-top:20px; margin-bottom: 5px;">График работы на неделю</h2>
+                            <div class="shedule-table">
+                                <div style="padding-top: 30px;" class="order-history__block">
+                                    <ul class="order-history__list">
+                                        <li class="order-history__list-item">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th> </th>
+                                                        {% for key, value in json_data.items() %}
+                                                        {% if 'dates_of_week' in key %}
+                                                        {% for date in value %}
+                                                        <th>{{date['Monday']}}</th>
+                                                        <th>{{date['Tuesday']}}</th>
+                                                        <th>{{date['Wednesday']}}</th>
+                                                        <th>{{date['Thursday']}}</th>
+                                                        <th>{{date['Friday']}}</th>
+                                                        <th>{{date['Saturday']}}</th>
+                                                        <th>{{date['Sunday']}}</th>
+                                                        {% endfor %}
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for key, value in json_data.items() %}
+                                                    {% if 'barista-list' in key %}
+                                                        {% for barista in value %}
+                                                    <tr>
+                                                        <td>{{ barista['name'] }}</td>
+                                                        {% for day, times in barista.current_week.items() %}
+                                                        {% if times.start_time != '00:00' %}
+                                                        <td class="not-inactive">
+                                                            <form action="/admin-panel" method="post" style="margin: auto auto;">
+                                                                <input readonly value="{{ times.start_time }}" class="input100 shedule-control" type="time" id="start_{{ barista['id'] }}_{{day}}_done" name="TimeStart_Done" aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;">
+                                                                <input type="hidden" name="start_id_done" value="start_{{ barista['id'] }}_current_{{day}}_done">
+                                                                <hr style="margin-top: 10px; margin-bottom: 10px;">
+
+                                                                <input readonly value="{{ times.finish_time }}" class="input100 shedule-control" type="time" id="end_{{ barista['id'] }}_{{day}}" name="TimeEnd_Done" aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;">
+                                                                <input type="hidden" name="end_id" value="end_{{ barista['id'] }}_current_{{day}}_done">
+                                                                <hr style="width: 150px; margin-top: 10px; margin-bottom: 10px;">
+
+                                                                <button disabled class="shedule-buttons__ok" style="background: url('../static/images/okey.svg') no-repeat center;"></button>
+                                                                <button type="submit"  class="shedule-buttons__delete" style="background: url('../static/images/cross.svg') no-repeat center;"></button>
+                                                            </form>
+
+                                                        </td>
+                                                        {% else %}
+                                                        <td class="inactive">
+                                                             <form action="/admin-panel" method="post" style="margin: auto auto;">
+                                                                <input class="input100 shedule-control" type="time" id="start_{{ barista['id'] }}_{{day}}" name="timeStart_Monday" aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;">
+                                                                <input type="hidden" name="start_id" value="start_{{ barista['id'] }}_current_{{day}}">
+                                                                <hr style="margin-top: 10px; margin-bottom: 10px;">
+
+                                                                <input class="input100 shedule-control" type="time" id="end_{{ barista['id'] }}_{{day}}_done" name="timeEnd_Monday" aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;">
+                                                                <input type="hidden" name="end_id" value="end_{{ barista['id'] }}_current_{{day}}">
+                                                                <hr style="width: 150px; margin-top: 10px; margin-bottom: 10px;">
+
+                                                                <button type="submit" class="shedule-buttons__ok" style="background: url('../static/images/okey.svg') no-repeat center;"></button>
+                                                                <button disabled class="shedule-buttons__delete" style="background: url('../static/images/cross.svg') no-repeat center;"></button>
+                                                            </form>
+                                                        </td>
+                                                        {% endif %}
+
+                                                        {% endfor %}
+                                                    </tr>
+                                                    {% endfor %}
+                                                    {% endif %}
+                                                    {% endfor %}
+                                            </tbody>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="last-week" style="display: none;" class="row shedule-week__box">
+                        <div class="shedule">
+                            <h2 class="section-title" style="font-size: 20px; padding-top:20px; margin-bottom: 5px;">График работы за прошедшую неделю</h2>
+                            <div class="shedule-table">
+                                <div style="padding-top: 30px;" class="order-history__block">
+                                    <ul class="order-history__list">
+                                        <li class="order-history__list-item">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th> </th>
+                                                        {% for key, value in json_data.items() %}
+                                                        {% if 'dates_of_previous_week' in key %}
+                                                        {% for date in value %}
+                                                        <th>{{date['Monday']}}</th>
+                                                        <th>{{date['Tuesday']}}</th>
+                                                        <th>{{date['Wednesday']}}</th>
+                                                        <th>{{date['Thursday']}}</th>
+                                                        <th>{{date['Friday']}}</th>
+                                                        <th>{{date['Saturday']}}</th>
+                                                        <th>{{date['Sunday']}}</th>
+                                                        {% endfor %}
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for key, value in json_data.items() %}
+                                                    {% if 'barista-list' in key %}
+                                                        {% for barista in value %}
+                                                    <tr>
+                                                        <td>{{ barista['name'] }}</td>
+                                                        {% for day, times in barista.last_week.items() %}
+                                                        {% if times.start_time != '00:00' %}
+                                                        <td class="not-inactive">
+                                                                <input class="input100 shedule-control" type="time" id="last-MondayFrom_{{ barista['id'] }}" name="timeStart_Monday"  aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;" value="{{ times.start_time }}" readonly>
+                                                                <hr style="margin-top: 10px; margin-bottom: 10px;">
+                                                                <input class="input100 shedule-control" type="time" id="last-MondayTo_{{ barista['id'] }}" name="timeEnd_Monday"  aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;" value="{{ times.finish_time }}" readonly>
+                                                                <hr style="margin-top: 10px; margin-bottom: 10px;">
+                                                        </td>
+                                                        {% else %}
+                                                        <td class="inactive">
+                                                                <input class="input100 shedule-control" type="time" id="last-MondayFrom__{{ barista['id'] }}" name="timeStart_Monday"  aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;" value="{{ times.start_time }}" readonly>
+                                                                <hr style="margin-top: 10px; margin-bottom: 10px;">
+                                                                <input class="input100 shedule-control" type="time" id="last-MondayTo__{{ barista['id'] }}" name="timeEnd_Monday"  aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;" value="{{ times.finish_time }}" readonly>
+                                                                <hr style="margin-top: 10px; margin-bottom: 10px;">
+                                                        </td>
+                                                        {% endif %}
+
+                                                        {% endfor %}
+                                                    </tr>
+                                                    {% endfor %}
+                                                    {% endif %}
+                                                    {% endfor %}
+                                            </tbody>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="next-week" style="display: none;" class="row shedule-week__box">
+                        <div class="shedule">
+                            <h2 class="section-title" style="font-size: 20px; padding-top:20px; margin-bottom: 5px;">График работы на неделю</h2>
+                            <div class="shedule-table">
+                                <div style="padding-top: 30px;" class="order-history__block">
+                                    <ul class="order-history__list">
+                                        <li class="order-history__list-item">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th> </th>
+                                                        {% for key, value in json_data.items() %}
+                                                        {% if 'dates_of_next_week' in key %}
+                                                        {% for date in value %}
+                                                        <th>{{date['Monday']}}</th>
+                                                        <th>{{date['Tuesday']}}</th>
+                                                        <th>{{date['Wednesday']}}</th>
+                                                        <th>{{date['Thursday']}}</th>
+                                                        <th>{{date['Friday']}}</th>
+                                                        <th>{{date['Saturday']}}</th>
+                                                        <th>{{date['Sunday']}}</th>
+                                                        {% endfor %}
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for key, value in json_data.items() %}
+                                                    {% if 'barista-list' in key %}
+                                                        {% for barista in value %}
+                                                    <tr>
+                                                        <td>{{ barista['name'] }}</td>
+                                                        {% for day, times in barista.next_week.items() %}
+                                                        {% if times.start_time != '00:00' %}
+                                                        <td class="not-inactive">
+                                                            <form action="/admin-panel" method="post" style="margin: auto auto;">
+                                                                <input readonly value="{{ times.start_time }}" class="input100 shedule-control" type="time" id="start_{{ barista['id'] }}_{{day}}_done_next" name="TimeStartNextWeek_Done" aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;">
+                                                                <input type="hidden" name="start_id_done_nextweek" value="start_{{ barista['id'] }}_current_{{day}}_done_next">
+                                                                <hr style="margin-top: 10px; margin-bottom: 10px;">
+
+                                                                <input readonly value="{{ times.finish_time }}" class="input100 shedule-control" type="time" id="end_{{ barista['id'] }}_{{day}}_next" name="TimeEndNextWeek_Done" aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;">
+                                                                <input type="hidden" name="end_id" value="end_{{ barista['id'] }}_current_{{day}}_done_next">
+                                                                <hr style="width: 150px; margin-top: 10px; margin-bottom: 10px;">
+
+                                                                <button disabled class="shedule-buttons__ok" style="background: url('../static/images/okey.svg') no-repeat center;"></button>
+                                                                <button type="submit"  class="shedule-buttons__delete" style="background: url('../static/images/cross.svg') no-repeat center;"></button>
+                                                            </form>
+
+                                                        </td>
+                                                        {% else %}
+                                                        <td class="inactive">
+                                                             <form action="/admin-panel" method="post" style="margin: auto auto;">
+                                                                <input class="input100 shedule-control" type="time" id="start_{{ barista['id'] }}_{{day}}_next" name="timeStartNextWeek_Monday" aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;">
+                                                                <input type="hidden" name="start_id_nextweek" value="start_{{ barista['id'] }}_current_{{day}}_next">
+                                                                <hr style="margin-top: 10px; margin-bottom: 10px;">
+
+                                                                <input class="input100 shedule-control" type="time" id="end_{{ barista['id'] }}_{{day}}_done_next" name="timeEndNextWeek_Monday" aria-describedby="usernameHelp" style="padding: 0px 15px 0px 15px;">
+                                                                <input type="hidden" name="end_id" value="end_{{ barista['id'] }}_current_{{day}}_next">
+                                                                <hr style="width: 150px; margin-top: 10px; margin-bottom: 10px;">
+
+                                                                <button type="submit" class="shedule-buttons__ok" style="background: url('../static/images/okey.svg') no-repeat center;"></button>
+                                                                <button disabled class="shedule-buttons__delete" style="background: url('../static/images/cross.svg') no-repeat center;"></button>
+                                                            </form>
+                                                        </td>
+                                                        {% endif %}
+
+                                                        {% endfor %}
+                                                    </tr>
+                                                    {% endfor %}
+                                                    {% endif %}
+                                                    {% endfor %}
+                                            </tbody>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content grey"  style="width: auto; padding: 0px 20px 20px;">
+                        <div class="row">
+                             <div class="menuLink-wrap verticalScroll pb-0">
+                                <ul class="menuLink-bot mb-0">
+                                    <li class="tab_profile-bot"><a href="#menuLink-wrap" onclick="openshedulebox('last-week', this); return false" rel="nofollow">Прошлая неделя</a></li>
+                                    <li class="tab_profile-bot active"><a href="#menuLink-wrap" onclick="openshedulebox('current-week', this); return false" rel="nofollow">Эта неделя</a></li>
+                                    <li class="tab_profile-bot"><a href="#menuLink-wrap" onclick="openshedulebox('next-week', this); return false" rel="nofollow">Следующая неделя</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <nav class="footer__menu">
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Products
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="coffee-menu.html" class="footer__menu-link">
+                                Coffee
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Specials
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Merch
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Resources
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                FAQ
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="" class="footer__menu-link">
+                                Contact us
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                Work with US
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Franchise
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Bartenders
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer__menu-list">
+                        <li class="footer__menu-item">
+                            <p class="footer__menu-title">
+                                About
+                            </p>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                About us
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Team
+                            </a>
+                        </li>
+                        <li class="footer__menu-item">
+                            <a href="#" class="footer__menu-link">
+                                Careers
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <ul class="app">
+                    <li class="app__item">
+                        <a href="#" class="app__item-link">
+                            <img class="app_item-img" src="../static/images/appstore.svg" alt="">
+                        </a>
+                    </li>
+                    <li class="app__item">
+                        <a href="#" class="app__item-link">
+                            <img class="app_item-img" src="../static/images/googleplay.svg" alt="">
+                        </a>
+                    </li>
+                </ul>
+                <div class="footer__copy">
+                    <p class="footer__copy-text">
+                        For questions about the Roast&Run Coffee Buying Service please call 1-888-878-3227, Certified Baristas are contractually obligated by Roast&Run to meet certain customer service requirements and complete the Roast&Run Barista Certification Program.
+                    </p>
+                    <p class="footer__copy-text">
+                        Roast&Run does not broker, sell, or lease coffee beans. Unless otherwise noted, all beverages shown on this website are offered for sale by licensed coffee shops. All drinks are subject to prior sale. By accessing this website, you agree to the Roast&Run Terms of Service and Privacy Policy
+                    </p>
+                </div>
+                <nav class="copy__nav">
+                    <ul class="copy__nav-list">
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Terms of Service
+                            </a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li class="copy__nav-item">
+                            <a href="#" class="copy__nav-link">
+                                Do Not Sell My Personal Information
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </footer>
+    </div>
+    <script src="../static/js/profile-item-info-switcher.js"></script>
+
+</body>
+</html>

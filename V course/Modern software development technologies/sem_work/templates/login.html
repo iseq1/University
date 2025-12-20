@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roast&Run</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <a href=/ class="logo">
+                        <img src="../static/images/logo_all_black_small.svg" alt="" class="logo__img">
+                    </a>
+                     <nav class="menu">
+                        <ul class="menu__list">
+                            <li class="menu__list-item">
+                                <a href=/aboutus class="menu__list-link">
+                                    Компания
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href=/coffee-menu class="menu__list-link">
+                                    Меню
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href=/specials class="menu__list-link">
+                                    Акции
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href="#" class="menu__list-link">
+                                    Франшиза
+                                </a>
+                            </li>
+                            <li class="menu__list-item">
+                                <a href=/bartenders class="menu__list-link">
+                                    Работа
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                    <a href=/login class="menu__list-link" style="filter: invert(0%);">
+                        <img src="../static/images/profile-img.svg" alt="" class="profile-logo__img" >
+                    </a>
+                </div>
+            </div>
+        </header>
+
+
+        <main class="main">
+            <section class="login-section">
+                <div class="container">
+                    <div class="wrap-login100">
+                        <form class="login100-form validate-form" method="post">
+                            <h2 class="section-title">
+                                Добро пожаловать Roast&Run
+                            </h2>
+
+
+
+
+                            <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                                <input class="input100 form-control" type="text" id="username" name="username" placeholder="Логин" aria-describedby="usernameHelp">
+                                    <span class="focus-input100"></span>
+                                    <span class="symbol-input100"><img src="../static/images/e-mail.svg" alt="" class="fa fa-envelope"></span>
+                            </div>
+                            <div class="wrap-input100 validate-input" data-validate="Password is required">
+                                <input class="input100 form-control" type="password" id="password" name="password" placeholder="Пароль">
+                                <span class="focus-input100"></span>
+                                <span class="symbol-input100"><img src="../static/images/padlock.svg" alt="" class="fa fa-envelope"></span>
+                            </div>
+                            <div class="container-login100-form-btn">
+                                <button class="login100-form-btn" style="cursor: pointer;">
+                                    Войти
+                                </button>
+                            </div>
+                            <div >
+                            <div class="hellpfull-links">
+                                <span class="txt1">Забыли</span>
+                                <a class="txt2" href="#"> Логин / Пароль? </a>
+                            </div>
+                            <div class="hellpfull-links">
+                                <a class="txt2" href=/registration>Создать аккаунт<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i></a>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+         
+    </div>
+</body>
+</html>
