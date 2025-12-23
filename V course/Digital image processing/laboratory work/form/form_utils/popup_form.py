@@ -2,7 +2,7 @@
 Вспомогательна форма для реализации универсального PopUp инструмента
 """
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton, QTextEdit, QFileDialog, QScrollArea, QLineEdit, \
-    QHBoxLayout
+    QHBoxLayout, QWidget
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
 
@@ -10,7 +10,7 @@ from PyQt6.QtCore import Qt
 class PopupDialog(QDialog):
     """Универсальный попап для текста, картинок и статистики."""
 
-    def __init__(self, title: str, message: str = "", pixmap: QPixmap = None, parent=None, editable: bool=False):
+    def __init__(self, title: str, message: str = "", pixmap: QPixmap or QWidget = None, parent=None, editable: bool=False):
         super().__init__(parent)
         self.setWindowTitle(title)
         self.pixmap = pixmap
@@ -33,11 +33,17 @@ class PopupDialog(QDialog):
                 layout.addWidget(self.text_widget)
 
         # Картинка
-        if pixmap:
-            self.setMinimumSize(800, 450)
+        if pixmap and isinstance(pixmap, QWidget):
+            layout.addWidget(pixmap)
+            btn_save = QPushButton("Сохранить")
+            btn_save.clicked.connect(self.save_img)
+            layout.addWidget(btn_save)
+        elif pixmap and isinstance(pixmap, QPixmap):
+            # self.setMinimumSize(800, 450)
             img_label = QLabel()
-            img_label.setPixmap(pixmap.scaledToWidth(800, Qt.TransformationMode.SmoothTransformation))
+            img_label.setPixmap(pixmap)
             img_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            img_label.adjustSize()
 
             scroll_area = QScrollArea()
             scroll_area.setWidgetResizable(True)

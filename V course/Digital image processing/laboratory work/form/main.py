@@ -5,7 +5,7 @@ from PyQt6.QtCore import Qt, pyqtSignal, QRect
 from PyQt6.QtGui import QPainter, QPen
 from PyQt6.QtWidgets import (
     QMainWindow, QVBoxLayout, QFileDialog, QWidget,
-    QDialog, QComboBox, QToolBar, QMessageBox, QPushButton, QMenu,
+    QDialog, QComboBox, QToolBar, QMessageBox, QPushButton, QMenu, QScrollArea,
 )
 
 from core.image_correlation import ImageCorrelationHandler
@@ -28,6 +28,7 @@ from form.form_utils.popup_form import PopupDialog, PixelAmplitudeDialog
 from form.form_utils.roi_dialog_form import ROISelectionDialog
 from form.form_utils.roi_selecting import ROISelector
 from form.form_utils.statusbar_form import CustomStatusBar
+from form.form_utils.interactive_hist_form import HistogramCanvas
 from core.logger import CustomLogger
 
 logger = CustomLogger.get_logger()
@@ -155,8 +156,8 @@ class MainWindow(QMainWindow):
         """ UI: Лейбл под изображение """
         self.label = ROISelector("Здесь будет ваше изображение")
         self.label.setScaledContents(False)  # пусть скейлим сами
-        self.label.setMinimumSize(200, 200)  # чтобы не схлопывалась
-        self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label.setMinimumSize(1, 1)  # чтобы не схлопывалась
+        self.label.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignTop)
         self.label.mouse_moved.connect(self.on_mouse_move)  # координаты пикселей
         self.label.roi_selected.connect(self.handle_roi_selection)  # выделение ROI
 
@@ -166,8 +167,12 @@ class MainWindow(QMainWindow):
         self.init_statusbar()
         self.init_label()
 
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(False)
+        self.scroll_area.setWidget(self.label)
+
         layout = QVBoxLayout()
-        layout.addWidget(self.label, stretch=5)
+        layout.addWidget(self.scroll_area, stretch=5)
 
         container = QWidget()
         container.setLayout(layout)
@@ -849,7 +854,7 @@ class MainWindow(QMainWindow):
         :return: Текст сообщения и сопроводительное изображение
         """
         text = None
-        img = plot_histogram_to_pixmap(hist)
+        img = HistogramCanvas(hist)
         return text, img
 
     def format_contrast_img(self, contrast):
@@ -908,44 +913,67 @@ class MainWindow(QMainWindow):
         return text, img
 
     def update_display(self):
-        """Обновляет QLabel с текущим изображением."""
-
+        """Обновляет QLabel с текущим изображением (1:1 + scroll)."""
         try:
             if isinstance(self.current_array, ndarray):
-                # Bitmap
                 pixmap = array_to_pixmap(self.current_array)
-                # масштабируем под размеры QLabel
-                label_w = self.label.width()
-                label_h = self.label.height()
-                if label_w > 0 and label_h > 0:
-                    scaled_pixmap = pixmap.scaled(
-                        label_w, label_h,
-                        Qt.AspectRatioMode.KeepAspectRatio,
-                        Qt.TransformationMode.SmoothTransformation
-                    )
 
-                    if self.current_roi_rect:
-                        img_h, img_w, _ = self.current_array.shape
-                        x_img, y_img, w_img, h_img = self.current_roi_rect
+                # если есть ROI — рисуем поверх копии
+                if self.current_roi_rect:
+                    pixmap = pixmap.copy()
+                    painter = QPainter(pixmap)
+                    painter.setPen(QPen(Qt.GlobalColor.green, 2, Qt.PenStyle.DashLine))
 
-                        # переводим ROI из координат изображения → в координаты scaled_pixmap
-                        roi_rect = QRect(
-                            int(x_img * scaled_pixmap.width() / img_w),
-                            int(y_img * scaled_pixmap.height() / img_h),
-                            int(w_img * scaled_pixmap.width() / img_w),
-                            int(h_img * scaled_pixmap.height() / img_h),
-                        )
+                    x, y, w, h = self.current_roi_rect
+                    painter.drawRect(QRect(x, y, w, h))
 
-                        painter = QPainter(scaled_pixmap)
-                        painter.setPen(QPen(Qt.GlobalColor.green, 2, Qt.PenStyle.DashLine))
-                        painter.drawRect(roi_rect)
-                        painter.end()
+                    painter.end()
 
-                    self.label.setPixmap(scaled_pixmap)
-
-            elif isinstance(self.current_array, (bytes, bytearray)):
-                self.statusbar.status_left.setText(c.STATUS_BAR_MSG.get('no_update_display'))
+                self.label.setPixmap(pixmap)
+                self.label.resize(pixmap.size())  # ← КЛЮЧЕВО для scroll
 
         except Exception as e:
-            self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('update_display_failed'))
-            CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
+            print(e)
+
+    # def update_display(self):
+    #     """Обновляет QLabel с текущим изображением."""
+    #
+    #     try:
+    #         if isinstance(self.current_array, ndarray):
+    #             # Bitmap
+    #             pixmap = array_to_pixmap(self.current_array)
+    #             # масштабируем под размеры QLabel
+    #             label_w = self.label.width()
+    #             label_h = self.label.height()
+    #             if label_w > 0 and label_h > 0:
+    #                 scaled_pixmap = pixmap.scaled(
+    #                     label_w, label_h,
+    #                     Qt.AspectRatioMode.KeepAspectRatio,
+    #                     Qt.TransformationMode.SmoothTransformation
+    #                 )
+    #
+    #                 if self.current_roi_rect:
+    #                     img_h, img_w, _ = self.current_array.shape
+    #                     x_img, y_img, w_img, h_img = self.current_roi_rect
+    #
+    #                     # переводим ROI из координат изображения → в координаты scaled_pixmap
+    #                     roi_rect = QRect(
+    #                         int(x_img * scaled_pixmap.width() / img_w),
+    #                         int(y_img * scaled_pixmap.height() / img_h),
+    #                         int(w_img * scaled_pixmap.width() / img_w),
+    #                         int(h_img * scaled_pixmap.height() / img_h),
+    #                     )
+    #
+    #                     painter = QPainter(scaled_pixmap)
+    #                     painter.setPen(QPen(Qt.GlobalColor.green, 2, Qt.PenStyle.DashLine))
+    #                     painter.drawRect(roi_rect)
+    #                     painter.end()
+    #
+    #                 self.label.setPixmap(scaled_pixmap)
+    #
+    #         elif isinstance(self.current_array, (bytes, bytearray)):
+    #             self.statusbar.status_left.setText(c.STATUS_BAR_MSG.get('no_update_display'))
+    #
+    #     except Exception as e:
+    #         self.statusbar.status_right.setText(c.STATUS_BAR_MSG.get('update_display_failed'))
+    #         CustomLogger.auto(logger=logger, msg_map=c.LOGGER_MSG_MAP, status='error', level='error', extra_msg=str(e))
