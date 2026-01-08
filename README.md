@@ -12,7 +12,7 @@
   2) [Построение таблицы линейнонй аппроксимации S-бокса]()
   3) [Проверка простоты числа различными методами.](https://github.com/iseq1/University/tree/main/V%20course/Mathematical%20foundations%20of%20information%20security/III%20lab)
 ### Современные технологии разработки ПО (Python)
-  1) []()
+  1) [Roast&Run updt](https://github.com/iseq1/University/tree/main/V%20course/Modern%20software%20development%20technologies)
 ### Иностранный язык в профессиональной коммуникации (-)
   1) [Рецензия статьи с профильного сайта №1](https://github.com/iseq1/University/tree/main/V%20course/Foreign%20language%20in%20professional%20communication/Article%20review%201)
   2) [Рецензия статьи с профильного сайта №2](https://github.com/iseq1/University/tree/main/V%20course/Foreign%20language%20in%20professional%20communication/Article%20review%202)
