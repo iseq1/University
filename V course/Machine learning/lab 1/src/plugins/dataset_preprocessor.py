@@ -5,7 +5,7 @@ import numpy as np
 class DatasetPreprocessor:
 
     @staticmethod
-    def get_labels(dataset):
+    def get_labels(dataset, size):
 
         scores  = dataset["review_score"].tolist()
         review_votes  = dataset["review_votes"].tolist()
@@ -29,7 +29,7 @@ class DatasetPreprocessor:
             "positive_useful": 3
         }
 
-        y = np.array([label2id[label] for label in labels[:50000]])
+        y = np.array([label2id[label] for label in labels[:size]])
 
         return y
 

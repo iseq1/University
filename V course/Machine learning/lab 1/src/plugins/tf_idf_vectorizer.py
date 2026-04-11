@@ -1,56 +1,67 @@
-import numpy as np
-from collections import Counter
+import math
+from collections import Counter, defaultdict
 
-class TFIDFVectorizer:
-    def __init__(self, max_vocab_size=5000):
-        self.max_vocab_size = max_vocab_size
-        self.word2idx = {}
-        self.idf = None
-        self.vocab_size = 0
+class TfidfVectorizerCustom:
+    def __init__(self, max_features=50000):
+        self.max_features = max_features
+        self.vocab = {}
+        self.idf = {}
 
     def fit(self, corpus):
         """
-        Построение словаря и IDF на корпусе
-        corpus: список списков токенов
+        corpus: список документов, где каждый документ — список токенов
         """
-        # 1. Считаем все слова
-        word_counts = Counter()
-        for tokens in corpus:
-            word_counts.update(tokens)
+        doc_freq = defaultdict(int)
+        total_docs = len(corpus)
 
-        # 2. Ограничиваем словарь
-        most_common_words = word_counts.most_common(self.max_vocab_size)
-        self.word2idx = {word: idx for idx, (word, _) in enumerate(most_common_words)}
-        self.vocab_size = len(self.word2idx)
+        # считаем document frequency
+        for doc in corpus:
+            unique_words = set(doc)
+            for word in unique_words:
+                doc_freq[word] += 1
 
-        # 3. DF и IDF
-        N = len(corpus)
-        df = np.zeros(self.vocab_size)
-        for tokens in corpus:
-            unique_tokens = set(tokens)
-            for token in unique_tokens:
-                if token in self.word2idx:
-                    df[self.word2idx[token]] += 1
-        self.idf = np.log(N / (1 + df))  # +1 чтобы не делить на 0
+        # ограничиваем словарь по частоте
+        most_common = sorted(doc_freq.items(), key=lambda x: x[1], reverse=True)
+        most_common = most_common[:self.max_features]
+
+        # создаём vocab
+        self.vocab = {word: idx for idx, (word, _) in enumerate(most_common)}
+
+        # считаем IDF
+        for word, df in most_common:
+            self.idf[word] = math.log((total_docs + 1) / (df + 1)) + 1
 
     def transform(self, corpus):
         """
-        Преобразование документов в TF-IDF вектора
+        возвращает список векторов (list of list)
         """
-        X = np.zeros((len(corpus), self.vocab_size))
-        for i, tokens in enumerate(corpus):
-            tf = np.zeros(self.vocab_size)
-            for token in tokens:
-                if token in self.word2idx:
-                    tf[self.word2idx[token]] += 1
-            if len(tokens) > 0:
-                tf = tf / len(tokens)  # нормировка TF
-            X[i] = tf * self.idf  # TF-IDF
-        return X
+        vectors = []
+
+        for doc in corpus:
+            tf = Counter(doc)
+            doc_len = len(doc)
+
+            vector = {}
+
+            for word, count in tf.items():
+                if word in self.vocab:
+                    idx = self.vocab[word]
+
+                    tf_value = count / doc_len
+                    tfidf = tf_value * self.idf[word]
+
+                    vector[idx] = tfidf
+
+            norm = math.sqrt(sum(v * v for v in vector.values()))
+
+            if norm > 0:
+                for k in vector:
+                    vector[k] /= norm
+
+            vectors.append(vector)
+
+        return vectors
 
     def fit_transform(self, corpus):
-        """
-        Удобный метод: сначала fit, потом transform
-        """
         self.fit(corpus)
         return self.transform(corpus)

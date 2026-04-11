@@ -111,13 +111,13 @@
 
 ### 4.1 Похожие слова
 
-| Слово | Похожие слова |
-|-------|---------------|
-| good  | rocks, fantastic, cool, similar, innovative |
-| game  | gamei, idea, games, multiplayers, untill |
+| Слово | Похожие слова                                    |
+|-------|--------------------------------------------------|
+| good  | rocks, fantastic, cool, similar, innovative      |
+| game  | gaming, idea, games, multiplayers, untill        |
 | fun   | enjoyable, popular, amazing, stressful, exciting |
-| easy  | copy, lower, paved, favorite, flashbang |
-| like  | want, cough, younger, recomand, missed |
+| easy  | copy, lower, paved, favorite, flashbang          |
+| like  | want, cough, younger, recomand, missed           |
 
 ---
 
