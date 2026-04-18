@@ -21,10 +21,8 @@ class CBOW:
         self._generate_pairs()
         self._init_weights()
 
-    # =========================
-    # 1. СОЗДАНИЕ СЛОВАРЯ
-    # =========================
     def _build_vocab(self):
+        """создание словаря"""
         all_tokens = [word for doc in self.corpus for word in doc]
         counter = Counter(all_tokens)
 
@@ -35,43 +33,32 @@ class CBOW:
         self.vocab_size = len(self.vocab)
         print("Vocab size:", self.vocab_size)
 
-    # =========================
-    # 2. СОЗДАНИЕ CBOW ПАР
-    # =========================
     def _generate_pairs(self):
+        """создание пар"""
         for doc in self.corpus:
             ids = [self.vocab[w] for w in doc if w in self.vocab]
 
             for i, target in enumerate(ids):
                 context = [
-                    ids[j] for j in range(max(0, i - self.window_size),
-                                           min(len(ids), i + self.window_size + 1))
-                    if j != i
+                    ids[j] for j in range(max(0, i - self.window_size), min(len(ids), i + self.window_size + 1)) if j != i
                 ]
                 if context:
                     self.pairs.append((context, target))
 
         print("Pairs:", len(self.pairs))
 
-    # =========================
-    # 3. ИНИЦИАЛИЗАЦИЯ ВЕСОВ
-    # =========================
     def _init_weights(self):
+        """инитим веса"""
         self.W1 = np.random.randn(self.vocab_size, self.embedding_dim) * 0.01
         self.W2 = np.random.randn(self.embedding_dim, self.vocab_size) * 0.01
 
-    # =========================
-    # 4. SOFTMAX
-    # =========================
     @staticmethod
     def softmax(x):
+        """функция софтмакс"""
         x = x - np.max(x)
         exp = np.exp(x)
         return exp / np.sum(exp)
 
-    # =========================
-    # 5. ОБУЧЕНИЕ
-    # =========================
     def train(self, epochs=10, lr=0.05, limit_pairs=None):
         for epoch in range(epochs):
             loss = 0
@@ -100,16 +87,11 @@ class CBOW:
 
             print(f"Epoch {epoch + 1}, Loss: {loss}")
 
-    # =========================
-    # 6. КОСИНУСНАЯ СХОЖЕСТЬ
-    # =========================
     @staticmethod
     def cosine_sim(a, b):
+        """считаем схожесть"""
         return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
-    # =========================
-    # 7. ПОИСК ПОХОЖИХ СЛОВ
-    # =========================
     def most_similar(self, word, top_n=5):
         if word not in self.vocab:
             return []
@@ -119,9 +101,6 @@ class CBOW:
         sims = sorted(sims, key=lambda x: x[1], reverse=True)
         return sims[1:top_n + 1]
 
-    # =========================
-    # 8. АНАЛОГИИ
-    # =========================
     def analogy(self, a, b, c, top_n=5):
         if a not in self.vocab or b not in self.vocab or c not in self.vocab:
             return []
@@ -132,9 +111,6 @@ class CBOW:
         return sims[:top_n]
 
 
-# =========================
-# 9. ПРИМЕР ИСПОЛЬЗОВАНИЯ
-# =========================
 if __name__ == "__main__":
     # Подготовка корпуса
     ds = TextPreprocessor.get_dataset()

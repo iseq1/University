@@ -54,6 +54,7 @@ class TfidfVectorizerCustom:
 
             norm = math.sqrt(sum(v * v for v in vector.values()))
 
+            # нормализуем, чтобы длинные тексты не имели больший вес
             if norm > 0:
                 for k in vector:
                     vector[k] /= norm

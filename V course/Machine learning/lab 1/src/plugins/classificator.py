@@ -84,9 +84,11 @@ class LogisticRegressionBinary:
 
                 weight = sample_weights[i] if sample_weights else 1.0
 
+                # обновляем веса
                 for j, v in xi.items():
                     self.w[j] -= self.lr * error * v * weight
 
+                # обновляем сдвиг
                 self.b -= self.lr * error * weight
 
     def predict_proba(self, X):
@@ -185,7 +187,7 @@ class TextClassifier:
         self.clf = None
 
     def prepare_data(self, corpus, labels, sample_size=50000, test_size=0.2):
-        """Преобразует текст в векторы TF-IDF и уменьшает размерность"""
+        """Преобразует текст в векторы TF-IDF"""
         X = self.vectorizer.fit_transform(corpus[:sample_size])
         Y = labels[:sample_size]
         print(Counter(Y))
