@@ -14,19 +14,3 @@
    - Алгоритм CBOW реализован с нуля с помощью `numpy`  
    - Цель: построить эмбеддинги слов и проверить семантические аналогии (например, `good - bad + terrible ≈ fantastic`)  
 
----
-
-## Структура проекта
-```commandline
-project/
-│
-├─ src/
-│ ├─ main.py # Основной скрипт для TF-IDF + LR
-│ ├─ cbow.py # Реализация CBOW
-│ ├─ text_preprocessor.py # Предобработка и токенизация текстов
-│ └─ tf_idf_vectorizer.py # Обёртка для TF-IDF
-│
-├─ steam_tokenized.json # Сохранённый токенизированный корпус
-├─ README.md # Этот файл
-└─ report.md # Мини-отчет с результатами
-```
