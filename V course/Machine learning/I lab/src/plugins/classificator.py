@@ -1,8 +1,8 @@
 from sklearn.metrics import classification_report, accuracy_score
 
-from tf_idf_vectorizer import TfidfVectorizerCustom
-from text_preprocessor import TextPreprocessor
-from dataset_preprocessor import DatasetPreprocessor
+from src.plugins.tf_idf_vectorizer import TfidfVectorizerCustom
+from src.plugins.text_preprocessor import TextPreprocessor
+from src.plugins.dataset_preprocessor import DatasetPreprocessor
 
 from collections import Counter, defaultdict
 import matplotlib.pyplot as plt

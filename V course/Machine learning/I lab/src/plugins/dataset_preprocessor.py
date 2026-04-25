@@ -34,7 +34,7 @@ class DatasetPreprocessor:
         return y
 
     @staticmethod
-    def get_tokens(dataset):
+    def get_tokens(dataset, corpus_len=50000):
 
         texts = dataset["review_text"].astype(str).tolist()
         preprocessor = TextPreprocessor()
@@ -46,7 +46,7 @@ class DatasetPreprocessor:
         except Exception as e:
             print(e)
             # Если нечего загружать - создаем заготовку
-            tokenized_texts = preprocessor.preprocess_corpus(texts[:50000])
+            tokenized_texts = preprocessor.preprocess_corpus(texts[:corpus_len])
             preprocessor.save_tokenized(tokenized_texts, "steam_tokenized.json")
         finally:
             return tokenized_texts

@@ -1,18 +1,14 @@
-from src.plugins.cbow import CBOW
-from src.plugins.classificator import TextClassifier
-from src.plugins.dataset_preprocessor import DatasetPreprocessor
-from src.plugins.text_preprocessor import TextPreprocessor
+from plugins import TextClassifier, TextPreprocessor, DatasetPreprocessor, CBOW
 
 if __name__ == '__name__':
 
-    # ======== 1 ==========
-    weights = {0: 1, 1: 4, 2: 1, 3: 4}
+    # 1
 
-    classifier = TextClassifier.from_dataset(class_weights=weights)
+    classifier = TextClassifier.from_dataset()
     classifier.train()
     classifier.evaluate()
 
-    # ======== 2 ==========
+    # 2
     ds = TextPreprocessor.get_dataset()
     tokenized_texts = DatasetPreprocessor.get_tokens(dataset=ds)
     corpus = tokenized_texts[:10000]
