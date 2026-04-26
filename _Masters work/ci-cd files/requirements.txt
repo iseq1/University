@@ -1,0 +1,9 @@
+# ocr
+pytesseract
+easyocr
+paddlepaddle==2.5.2
+paddleocr==2.7.0.3
+
+# preprocessing
+cv2
+
