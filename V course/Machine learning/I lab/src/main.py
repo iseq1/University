@@ -1,6 +1,6 @@
 from plugins import TextClassifier, TextPreprocessor, DatasetPreprocessor, CBOW
 
-if __name__ == '__name__':
+if __name__ == "__main__":
 
     # 1
 

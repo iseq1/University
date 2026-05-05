@@ -83,7 +83,7 @@ class TextPreprocessor:
         return tokenized_texts
 
     @staticmethod
-    def get_dataset(dataset_path=None):
+    def get_dataset(dataset_path=None, nrows=5000):
         ds_path = dataset_path if dataset_path else TextPreprocessor.DS_PATH
-        df = pd.read_csv(ds_path)
+        df = pd.read_csv(ds_path, nrows=nrows)
         return df

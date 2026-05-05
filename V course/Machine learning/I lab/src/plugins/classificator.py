@@ -217,12 +217,7 @@ class TextClassifier:
         print("Accuracy:", accuracy_score(self.y_test, y_pred))
         print(classification_report(self.y_test, y_pred))
 
-        plot_top_words(
-            model=classifier.clf,
-            vectorizer=classifier.vectorizer,
-            class_id=2,
-            top_n=15
-        )
+
 
     @staticmethod
     def undersample(X, y):
@@ -262,7 +257,7 @@ class TextClassifier:
     @staticmethod
     def from_dataset(sample_size=5000):
         """Удобный метод для создания и подготовки модели из датасета"""
-        ds = TextPreprocessor.get_dataset()
+        ds = TextPreprocessor.get_dataset(nrows=sample_size)
         labels = DatasetPreprocessor.get_labels(dataset=ds, size=sample_size)
         tokenized_texts = DatasetPreprocessor.get_tokens(dataset=ds)
         weights = compute_class_weights(labels)
@@ -278,3 +273,10 @@ if __name__ == "__main__":
     classifier = TextClassifier.from_dataset()
     classifier.train()
     classifier.evaluate()
+
+    plot_top_words(
+        model=classifier.clf,
+        vectorizer=classifier.vectorizer,
+        class_id=2,
+        top_n=15
+    )
