@@ -13,7 +13,6 @@
   1) [Многоклассовая классификация + CBOW.](https://github.com/iseq1/University/tree/main/V%20course/Machine%20learning/I%20lab)
   2) [Модель seq2seq.](https://github.com/iseq1/University/tree/main/V%20course/Machine%20learning/II%20lab)
   3) [RAG-метод на decpder-only сети.]()
-###  (Python)
 ### Цифровая обработка изображений (Python)
   1) [Desktop-приложение для различного взаимодействия с изображением.](https://github.com/iseq1/University/tree/main/V%20course/Digital%20image%20processing/laboratory%20work)
 ### Нейронные сети (Python)
