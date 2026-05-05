@@ -11,7 +11,7 @@ import csv
 
 # Настройки
 DATA_ROOT = "../dataset"        # путь к папке dataset (от src/)
-MODEL_PATH = "unet_pets.pth"    # где сохранена модель после обучения
+MODEL_PATH = "../dataset/unet_pets.pth"  # где сохранена модель после обучения
 OUT_DIR = "deliverable/results"
 NUM_SAVE = 20                   # сколько примеров сохранить (всего)
 BATCH = 4
