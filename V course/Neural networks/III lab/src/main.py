@@ -1,5 +1,6 @@
 from src.utils.discriminator import Discriminator
 from src.utils.generator import Generator
+from src.utils.plot_losses import plot_losses
 
 from torchvision import datasets, transforms
 from torchvision.utils import save_image
@@ -192,6 +193,9 @@ def train_gan(
 
 
 if __name__ == '__main__':
+
+    plot_losses("D:\\project under development\\University\\V course\\Neural networks\\III lab\\src\\generated\\loss_log.csv")
+
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     batch_size = 64

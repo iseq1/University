@@ -15,4 +15,3 @@ def plot_losses(csv_path):
     plt.show()
 
 
-plot_losses("/src/generated\\loss_log.csv")

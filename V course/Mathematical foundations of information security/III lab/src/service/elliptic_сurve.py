@@ -41,7 +41,7 @@ class EllipticCurveTest(MathBase):
 
             # ищем y такое, что y^2 == rhs mod n
             for y in range(1, 200):
-                if (y * y) % n == rhs:
+                if (y * y) % n == rhs and 3*x**3 != 4*y**2 % n:
                     P = (x, y)
                     break
             if P:

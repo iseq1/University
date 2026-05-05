@@ -80,12 +80,12 @@ class PrimeCounter:
         print(full_output)
 
         # Записываем в файл
-        if save_to_file:
-            if filename is None:
-                filename = f"logs\prime_results_{limit}.log"
-            with open(filename, "w", encoding="utf-8") as f:
-                f.write(full_output)
-            print(f"\n💾 Результаты сохранены в файл: {filename}")
+        # if save_to_file:
+        #     if filename is None:
+        #         filename = f"logs\prime_results_{limit}.log"
+        #     with open(filename, "w", encoding="utf-8") as f:
+        #         f.write(full_output)
+        #     print(f"\n💾 Результаты сохранены в файл: {filename}")
 
 
     @staticmethod
