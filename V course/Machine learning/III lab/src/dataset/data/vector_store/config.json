@@ -1,0 +1,5 @@
+{
+  "model_name": "sentence-transformers/paraphrase-MiniLM-L3-v2",
+  "num_chunks": 9285,
+  "embedding_dim": 384
+}
