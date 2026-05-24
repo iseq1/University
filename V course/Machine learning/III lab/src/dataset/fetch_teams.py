@@ -18,7 +18,7 @@ def fetch_teams(limit=50):
 
     teams = response.json()
 
-    # сортируем по rating (важно для tier-1 приближения)
+    # сортируем по rating
     teams = sorted(teams, key=lambda x: x.get("rating", 0), reverse=True)
 
     return teams[:limit]

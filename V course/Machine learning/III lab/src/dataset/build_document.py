@@ -29,7 +29,7 @@ def build_documents(dataset):
                 f"{team['name']} has rating {team.get('rating')}. "
                 f"Wins: {team.get('wins')} Losses: {team.get('losses')}."
             ),
-            "current_roster": f"{[p.get('name') for p in team.get("players", []) if p.get('is_current_team_member')]}",
+            "current_roster": f"{[p.get('name') for p in team.get('players', []) if p.get('is_current_team_member')]}",
             "category": "team",
             "source": "OpenDota",
             "scraped_at": team["scraped_at"]

@@ -5,9 +5,6 @@ import faiss
 from sentence_transformers import SentenceTransformer
 
 
-# =========================
-# CONFIG
-# =========================
 
 VECTOR_DIR = "dataset/data/vector_store"
 
@@ -17,9 +14,6 @@ META_PATH = os.path.join(VECTOR_DIR, "faiss_meta.pkl")
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 
 
-# =========================
-# RETRIEVAL ENGINE
-# =========================
 
 class RAGRetriever:
     def __init__(self):
@@ -27,9 +21,6 @@ class RAGRetriever:
         self.chunks = None
         self.model = None
 
-    # -------------------------
-    # LOAD EVERYTHING
-    # -------------------------
 
     def load(self):
         print("[INFO] Loading FAISS index...")
@@ -47,9 +38,6 @@ class RAGRetriever:
 
         self.model = SentenceTransformer(EMBEDDING_MODEL)
 
-    # -------------------------
-    # QUERY EMBEDDING
-    # -------------------------
 
     def embed_query(self, query: str):
         return self.model.encode(
@@ -58,9 +46,6 @@ class RAGRetriever:
             convert_to_numpy=True
         )
 
-    # -------------------------
-    # SEARCH FUNCTION
-    # -------------------------
 
     def search(self, query: str, top_k: int = 5):
         query_vec = self.embed_query(query)
@@ -96,9 +81,6 @@ class RAGRetriever:
 
         return results
 
-    # -------------------------
-    # FILTERED SEARCH (optional upgrade)
-    # -------------------------
 
     def search_filtered(self, query: str, category: str = None, top_k: int = 5):
         results = self.search(query, top_k=top_k * 3)
@@ -109,9 +91,6 @@ class RAGRetriever:
         return results[:top_k]
 
 
-# =========================
-# MAIN TEST
-# =========================
 
 def main():
     retriever = RAGRetriever()

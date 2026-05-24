@@ -1,15 +1,9 @@
 import requests
-from openai import OpenAI
-
 from retrieve import RAGRetriever
 
 
-# =========================
-# MODELS CONFIG
-# =========================
-
 MODELS = {
-    "strong": "meta-llama/llama-3-8b-instruct",
+    "strong": "meta-llama/llama-3-8b-instruct", # март 2023
     "fast": "mistralai/mistral-7b-instruct",
     "baseline": "qwen/qwen-2.5-7b-instruct"
 }
@@ -17,15 +11,10 @@ MODELS = {
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
 
-# =========================
-# PROMPT
-# =========================
-
 def build_prompt(query, contexts):
     context_text = "\n\n".join([c["text"] for c in contexts])
 
     return f"""
-Answer using ONLY context.
 
 CONTEXT:
 {context_text}
@@ -37,9 +26,6 @@ ANSWER:
 """
 
 
-# =========================
-# LLM CALL
-# =========================
 
 import requests
 
@@ -47,7 +33,7 @@ def call_llm(prompt: str, model: str = "meta-llama/llama-3-8b-instruct"):
     response = requests.post(
         "https://openrouter.ai/api/v1/chat/completions",
         headers={
-            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "Authorization": f"Bearer {API_KEY}",
             "Content-Type": "application/json"
         },
         json={
@@ -72,9 +58,6 @@ def call_llm(prompt: str, model: str = "meta-llama/llama-3-8b-instruct"):
     return response.json()["choices"][0]["message"]["content"]
 
 
-# =========================
-# PIPELINE
-# =========================
 
 class RAGPipeline:
     def __init__(self):
@@ -104,9 +87,6 @@ class RAGPipeline:
         return answer
 
 
-# =========================
-# CLI
-# =========================
 
 def main():
     pipeline = RAGPipeline()
@@ -119,10 +99,10 @@ def main():
         if query == "exit":
             break
 
-        print("\nSelect model: strong | fast | baseline")
-        model = input("Model: ")
+        # print("\nSelect model: strong | fast | baseline")
+        # model = input("Model: ")
 
-        pipeline.run(query, model)
+        pipeline.run(query)
 
 
 if __name__ == "__main__":

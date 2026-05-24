@@ -7,9 +7,6 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 
 
-# =========================
-# CONFIG
-# =========================
 
 CHUNKS_PATH = "dataset/data/processed/chunks.json"
 OUTPUT_DIR = "dataset/data/vector_store"
@@ -17,9 +14,6 @@ OUTPUT_DIR = "dataset/data/vector_store"
 EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
 
 
-# =========================
-# EMBEDDING PIPELINE CLASS
-# =========================
 
 class EmbeddingPipeline:
     def __init__(self,
@@ -35,17 +29,11 @@ class EmbeddingPipeline:
         self.chunks = []
         self.embeddings = None
 
-    # -------------------------
-    # LOAD MODEL
-    # -------------------------
 
     def load_model(self):
         print(f"[INFO] Loading embedding model: {self.model_name}")
         self.model = SentenceTransformer(self.model_name)
 
-    # -------------------------
-    # LOAD DATA
-    # -------------------------
 
     def load_chunks(self):
         print(f"[INFO] Loading chunks from: {self.chunks_path}")
@@ -55,9 +43,6 @@ class EmbeddingPipeline:
 
         print(f"[INFO] Loaded {len(self.chunks)} chunks")
 
-    # -------------------------
-    # EMBEDDING GENERATION
-    # -------------------------
 
     def generate_embeddings(self, batch_size: int = 32):
         if self.model is None:
@@ -77,9 +62,6 @@ class EmbeddingPipeline:
 
         print(f"[INFO] Embeddings shape: {self.embeddings.shape}")
 
-    # -------------------------
-    # SAVE ARTIFACTS
-    # -------------------------
 
     def save(self):
         os.makedirs(self.output_dir, exist_ok=True)
@@ -105,9 +87,6 @@ class EmbeddingPipeline:
         print(f"[INFO] Saved embeddings to {embeddings_path}")
         print(f"[INFO] Saved metadata to {chunks_path}")
 
-    # -------------------------
-    # FULL PIPELINE
-    # -------------------------
 
     def run(self):
         self.load_model()
@@ -116,9 +95,6 @@ class EmbeddingPipeline:
         self.save()
 
 
-# =========================
-# MAIN
-# =========================
 
 def main():
     pipeline = EmbeddingPipeline()

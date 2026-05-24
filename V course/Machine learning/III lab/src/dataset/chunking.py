@@ -6,18 +6,12 @@ INPUT_FILE = "data/processed/documents.json"
 OUTPUT_FILE = "data/processed/chunks.json"
 
 
-# =========================
-# LOAD
-# =========================
 
 def load_documents() -> List[Dict]:
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-# =========================
-# TEAM CHUNKING
-# =========================
 
 def chunk_team(doc: Dict, chunk_id_start: int):
     chunks = []
@@ -62,9 +56,6 @@ def chunk_team(doc: Dict, chunk_id_start: int):
     return chunks, chunk_id
 
 
-# =========================
-# MATCH CHUNKING
-# =========================
 
 def chunk_match(doc: Dict, chunk_id_start: int):
     chunks = []
@@ -106,9 +97,6 @@ def chunk_match(doc: Dict, chunk_id_start: int):
     return chunks, chunk_id
 
 
-# =========================
-# PLAYER CHUNKING
-# =========================
 
 def chunk_player(doc: Dict, chunk_id_start: int):
     chunks = []
@@ -127,9 +115,6 @@ def chunk_player(doc: Dict, chunk_id_start: int):
     return chunks, chunk_id
 
 
-# =========================
-# ROUTER
-# =========================
 
 def build_chunks(doc: Dict, chunk_id_start: int):
     category = doc.get("category")
@@ -155,9 +140,6 @@ def build_chunks(doc: Dict, chunk_id_start: int):
         }], chunk_id_start + 1
 
 
-# =========================
-# MAIN
-# =========================
 
 def main():
     print("[INFO] Loading documents...")
