@@ -2,8 +2,16 @@
 
 #### University - это хранилище, в котором содержится большинство решенных мной задач, поставленных в университете. Репозиторий разделен на 5 папок, отражающие собой курсы обучения (бакалавриат + магистратура), которые в свою очередь поделены на изучаемые дисциплины. Дипломной, курсовой, научно-исследовательской, практике и прочим весьма отличительным работам отведены собственныe репозитории.  
 
-## V курс
+---
 
+## VI курс
+### Обучение с подкреплением (Python)
+  1) [Задача о многоруком бандите]()
+
+
+---
+
+## V курс
 ### Методология и технология проектирования ПО (-)
   1) [Доклад: "Проблема выбора характеристик качества ПО."](https://github.com/iseq1/University/tree/main/V%20course/Methodology%20and%20technology%20of%20software%20design)
 ### НИР (-)
@@ -44,6 +52,9 @@
   5) [Рецензия профильной научной статьи №1](https://github.com/iseq1/University/tree/main/V%20course/Foreign%20language%20in%20professional%20communication/Review%20of%20a%20scientific%20professional%20article%201)
   6) [Рецензия профильной научной статьи №2](https://github.com/iseq1/University/tree/main/V%20course/Foreign%20language%20in%20professional%20communication/Review%20of%20a%20scientific%20professional%20article%202)
 ### Теория квантовых вычислений и алгоритмов (-)
+
+---
+
 ## IV курс
 ### Информационная безопасность (Python)
   1) [Приложение для шифрования, расшифрования и дешифрования текста при помощи шифра Цезаря.](https://github.com/iseq1/University/tree/main/IV%20course/Information%20Security/I%20labwork)
@@ -76,6 +87,7 @@
   3) [Спецификация на курсовую работу «Web-сайт для кофейни» по стандарту IEEE 830.](https://github.com/iseq1/University/blob/main/IV%20course/Software%20development%20technologies%20and%20standards/IEEE_830.pdf)
   4) [Метрики кода курсовой работы «Web-сайт для кофейни».](https://github.com/iseq1/University/blob/main/IV%20course/Software%20development%20technologies%20and%20standards/%D0%9C%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B8_%D0%BA%D0%BE%D0%B4%D0%B0.pdf)
 
+---
 
 ## III курс
 ### Компьютерная графика (Python)
@@ -112,6 +124,8 @@
 ### Web-технологии (JavaScript)
   1) [Реализовать браузерную игру "Space Invanders".](https://github.com/iseq1/University/tree/main/III%20course/Web-technologies/Semestre%20work)
 
+---
+
 ## II курс
 ### Алгоритмы и анализ сложности (С#)
   1) [Экспериментальный анализ различных методов сортировки.](https://github.com/iseq1/University/tree/main/II%20course/Algorithms%20and%20complexity%20analysis/Experimental%20analysis%20of%20various%20sorting%20methods)
@@ -131,6 +145,8 @@
   3) [Реализовать десктпоное приложение-игру.](https://github.com/iseq1/University/tree/main/II%20course/Object-oriented%20programming/III%20work/third%20SW%20vol%202.0)
 ### Лабораторное программирование (C#)
   1) [Реализовать лесктопное приложение для работы с геометрическими фигурами.](https://github.com/iseq1/University/tree/main/II%20course/Programming%20Lab/Semestre%20work%20p.2/SWpart2/SWpart2)
+
+---
 
 ## I курс
 ### Алгоритмы и алгоритмические языки (C++)
