@@ -6,7 +6,7 @@
 
 ## VI курс
 ### Обучение с подкреплением (Python)
-  1) [Задача о многоруком бандите]()
+  1) [Задача о многоруком бандите](https://github.com/iseq1/University/tree/main/VI%20course/Reinforcement%20learning/I%20lab)
 
 
 ---
