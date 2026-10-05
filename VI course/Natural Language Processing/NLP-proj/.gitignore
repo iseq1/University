@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Local databases / runtime data
+*.db
+*.sqlite
+*.sqlite3
+
+# ML / model caches
+.cache/
+.huggingface/
+transformers_cache/
+models/
+
+# Project data generated locally
+data/generated/
+data/runtime/
+
+# Docker
+*.pid
