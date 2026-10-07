@@ -129,3 +129,14 @@ GET http://127.0.0.1:8000/healthz
 {"status": "ok"}
 ```
 
+## Этап 3 — база данных
+
+Реализованы:
+
+- асинхронный SQLAlchemy engine и `AsyncSession`;
+- автоматическое создание таблиц при запуске FastAPI;
+- модели `users`, `knowledge_base`, `glossary`, `uncertain_examples`, `cache`, `evaluation_results`, `model_comparisons`;
+- таблицы `reasoning_logs` и `llm_calls` для трассировки агентов и LLM-вызовов;
+- SQLite для локальной разработки;
+- PostgreSQL через `ci-cd files/docker-compose.yml`;
+- тесты схемы базы данных.
