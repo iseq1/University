@@ -1,4 +1,4 @@
-"""Database initialization tests."""
+"""БД тесты"""
 
 from sqlalchemy import inspect, text
 from sqlalchemy.ext.asyncio import create_async_engine
