@@ -15,9 +15,9 @@ class User(Base):
 
     __tablename__ = "users"
 
-    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.now(), nullable=False)
-    load_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False) # Аналог created_at
-    update_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False)
+    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.current_date(), nullable=False)
+    load_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False) # Аналог created_at
+    update_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
     source_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     email: Mapped[str] = mapped_column(String(255), unique=True, index=True, nullable=False)
     username: Mapped[str] = mapped_column(String(100), unique=True, index=True, nullable=False)

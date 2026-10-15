@@ -1,4 +1,4 @@
-"""Application logging configuration."""
+"""Утилиты для логирования"""
 
 import logging
 from logging.handlers import RotatingFileHandler
@@ -11,7 +11,8 @@ LOG_FORMAT = "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
 
 
 def setup_logging(settings: Settings) -> None:
-    """Configure console and rotating file logging."""
+    """Настройка ведения логов"""
+
     log_level = getattr(logging, settings.log_level.upper(), logging.INFO)
     log_path = Path(settings.log_file)
     log_path.parent.mkdir(parents=True, exist_ok=True)
