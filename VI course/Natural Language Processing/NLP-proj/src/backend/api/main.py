@@ -6,9 +6,10 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.backend.api.routes import AuthRouter
 from src.backend.core import get_settings, HEALTHCHECK_PATH
 from src.backend.utils import setup_logging
-from src.backend.db import init_db, close_db
+from src.backend.db import Session
 
 
 settings = get_settings()
@@ -19,12 +20,13 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     """Инициализация и закрытие БД-ресурсов приложения"""
+    session = Session()
     logger.info("Initializing database")
-    await init_db()
+    await session.init_db()
     logger.info("Database initialized")
     yield
     logger.info("Closing database connection")
-    await close_db()
+    await session.close_db()
 
 
 app = FastAPI(
@@ -41,6 +43,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(AuthRouter().router)
 
 
 @app.get(HEALTHCHECK_PATH, tags=["system"])
