@@ -1,39 +1,56 @@
 """Управление асинхронным движком и сессиями SQLAlchemy"""
 
 from collections.abc import AsyncGenerator
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from functools import lru_cache
+
+from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker, create_async_engine
 
 from src.backend.core import get_settings
 
-settings = get_settings()
 
-engine = create_async_engine(
-    settings.database_url,
-    echo=settings.debug,
-    pool_pre_ping=True,
-)
+class Session:
+    """Класс, описывающий взаимодействие с сессией"""
 
-AsyncSessionLocal = async_sessionmaker(
-    bind=engine,
-    class_=AsyncSession,
-    expire_on_commit=False,
-)
+    def __init__(self):
+        self.settings = get_settings()
 
 
-async def get_session() -> AsyncGenerator[AsyncSession, None]:
-    """Генератор открытой БД-сессии"""
-    async with AsyncSessionLocal() as session:
-        yield session
+    @lru_cache(maxsize=1)
+    def get_engine(self) -> AsyncEngine:
+        """Создание и кэширование асинхронного движка SQLAlchemy"""
+        return create_async_engine(
+            self.settings.database_url,
+            echo=self.settings.debug,
+            pool_pre_ping=True,
+        )
+
+    @lru_cache(maxsize=1)
+    def get_session_factory(self) -> async_sessionmaker[AsyncSession]:
+        """Создание и кэширование асинхронной фабрики сессий"""
+        return async_sessionmaker(
+            bind=self.get_engine(),
+            class_=AsyncSession,
+            expire_on_commit=False,
+        )
 
 
-async def init_db() -> None:
-    """Создание всех таблиц при условии их отсутствия"""
-    from src.backend.db.models import Base
-
-    async with engine.begin() as connection:
-        await connection.run_sync(Base.metadata.create_all)
+    async def get_session(self) -> AsyncGenerator[AsyncSession, None]:
+        """Генератор открытой БД-сессии"""
+        async with self.get_session_factory()() as session:
+            yield session
 
 
-async def close_db() -> None:
-    """Закрытие БД-сессии"""
-    await engine.dispose()
+    async def init_db(self) -> None:
+        """Создание всех таблиц при условии их отсутствия"""
+        from src.backend.db.models import Base
+
+        async with self.get_engine().begin() as connection:
+            await connection.run_sync(Base.metadata.create_all)
+
+
+    async def close_db(self) -> None:
+        """Закрытие БД-сессии"""
+        if self.get_engine.cache_info().currsize:
+            await self.get_engine().dispose()
+            self.get_session_factory.cache_clear()
+            self.get_engine.cache_clear()
