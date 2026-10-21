@@ -1,0 +1,9 @@
+map,is_slippery,algorithm,states,iterations,evaluation_sweeps,time_seconds,success_rate,average_steps
+4x4,True,Value Iteration,16,78,,0.007070099999964441,0.72,40.666
+4x4,True,Policy Iteration,16,6,226.0,0.0056111000003511435,0.72,40.666
+4x4,False,Value Iteration,16,7,,0.00040200000012191595,1.0,6.0
+4x4,False,Policy Iteration,16,7,14.0,0.0007785000002513698,1.0,6.0
+8x8,True,Value Iteration,64,86,,0.026523900000029244,0.589,65.997
+8x8,True,Policy Iteration,64,10,359.0,0.03646779999962746,0.589,65.997
+8x8,False,Value Iteration,64,15,,0.0029951000001346983,1.0,14.0
+8x8,False,Policy Iteration,64,15,29.0,0.00682840000035867,1.0,14.0
