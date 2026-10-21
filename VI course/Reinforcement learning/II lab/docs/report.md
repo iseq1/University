@@ -86,6 +86,7 @@ V_{op}(s) = \max_{a} \mathbb{E} \left[ R_{t+1} + \gamma V_{op}(S_{t+1}) \mid S_t
 $$
 
 Или в развёрнутом виде:
+
 $$
 V_{op}(s) = \max_{a} \sum_{s' \in S} P(s'|s,a) \left[ R(s,a) + \gamma V_{op}(s') \right]
 $$
@@ -97,6 +98,7 @@ Q_{op}(s,a) = \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} Q_{op}(S_{t+1}, a') \
 $$
 
 Или в развёрнутом виде:
+
 $$
 Q_{op}(s,a) = \sum_{s' \in S} P(s'|s,a) \left[ R(s,a) + \gamma \max_{a'} Q_{op}(s', a') \right]
 $$
