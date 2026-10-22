@@ -3,8 +3,10 @@ from typing import Any
 
 import numpy as np
 
+from base import Base
 
-class ValueIteration:
+
+class ValueIteration(Base):
     """Алгоритм итерации по ценности для среды FrozenLake"""
 
     def __init__(
@@ -12,7 +14,7 @@ class ValueIteration:
         env: Any,
         gamma: float = 0.9,
         theta: float = 1e-6,
-        max_iterations: int = 100_000,
+        max_iterations: int = 100_000
     ):
         """
         Инициализация алгоритма
@@ -21,52 +23,7 @@ class ValueIteration:
         :param theta: Порог сходимости
         :param max_iterations: Максимальное число итераций
         """
-
-        if not 0 <= gamma < 1:
-            raise ValueError("gamma должен находиться в диапазоне [0, 1).")
-
-        if theta <= 0:
-            raise ValueError("theta должен быть больше нуля.")
-
-        if max_iterations <= 0:
-            raise ValueError("max_iterations должен быть больше нуля.")
-
-        self.env = env
-        self.gamma = gamma
-        self.theta = theta
-        self.max_iterations = max_iterations
-
-        self.n_states = env.observation_space.n
-        self.n_actions = env.action_space.n
-
-        # Состояния, соответствующие прорубям и цели.
-        description = env.unwrapped.desc.flatten()
-        self.terminal_states = {
-            state
-            for state, cell in enumerate(description)
-            if cell in (b"H", b"G")
-        }
-
-
-    def calculate_action_value(self, state, action, values) -> float:
-        """Вычисляет ожидаемую ценность действия."""
-        action_value = 0.0
-
-        transitions = self.env.unwrapped.P[state][action]
-
-        # Суммирование по всем возможным исходам перехода (вероятность * ценность исхода)
-        for probability, next_state, reward, terminated in transitions:
-
-            # Если эпизод завершен, будущая ценность равна 0, иначе берем текущую оценку V(s')
-            future_value = 0.0
-            if not terminated:
-                future_value = self.gamma * values[next_state]
-
-            action_value += probability * (
-                reward + future_value
-            )
-
-        return action_value
+        super().__init__(env, gamma, theta, max_iterations)
 
 
     def run(self) -> tuple:
@@ -84,7 +41,7 @@ class ValueIteration:
                     new_values[state] = 0.0
                     continue
 
-                # Перебор всех действий для поиска оптимального (принцип максимизации Беллмана)
+                # Перебор всех действий из A для поиска оптимального
                 action_values = [
                     self.calculate_action_value(
                         state=state,
@@ -94,16 +51,16 @@ class ValueIteration:
                     for action in range(self.n_actions)
                 ]
 
-                # Обновляем ценность состояния максимумом среди всех действий (оптимальная стратегия)
+                # Берем действие с максимальной ценностью (оптимальная стратегия)
                 new_values[state] = max(action_values)
 
-            # Вычисляем меру сходимости (максимальное изменение за итерацию)
+            # Вычисляем меру сходимости (максимальное изменение за итерацию) и фиксируем историю
             delta = np.max(np.abs(new_values - values))
             history.append(delta)
 
             values = new_values
 
-            # Критерий остановки: если изменения стали пренебрежимо малы, решение сошлось
+            # Критерий остановки: если изменения стали очень малы, решение сошлось
             if delta < self.theta:
                 break
 
@@ -113,7 +70,7 @@ class ValueIteration:
                 f"{self.max_iterations} итераций."
             )
 
-        # Извлекаем стратегию из итоговой функции ценности.
+        # Извлекаем стратегию из итоговой функции ценности
         policy = np.full(self.n_states, -1, dtype=int)
 
         for state in range(self.n_states):
@@ -132,3 +89,16 @@ class ValueIteration:
             policy[state] = int(np.argmax(action_values))
 
         return values, policy, history
+
+
+if __name__ == "__main__":
+    import gymnasium as gym
+
+
+    ValueIteration(
+        env=gym.make(
+            "FrozenLake-v1",
+            map_name="4x4",
+            is_slippery=True,
+        )
+    ).run()

@@ -3,8 +3,10 @@ from typing import Any
 
 import numpy as np
 
+from base import Base
 
-class PolicyIteration:
+
+class PolicyIteration(Base):
     """Алгоритм итерации по стратегиям для FrozenLake"""
 
     def __init__(
@@ -21,56 +23,14 @@ class PolicyIteration:
         :param theta: Порог сходимости оценки стратегии
         :param max_iterations: Максимальное число итераций
         """
+        super().__init__(env, gamma, theta, max_iterations)
 
-        if not 0 <= gamma < 1:
-            raise ValueError("gamma должен находиться в диапазоне [0, 1).")
-
-        if theta <= 0:
-            raise ValueError("theta должен быть больше нуля.")
-
-        if max_iterations <= 0:
-            raise ValueError("max_iterations должен быть больше нуля.")
-
-        self.env = env
-        self.gamma = gamma
-        self.theta = theta
-        self.max_iterations = max_iterations
-
-        self.n_states = env.observation_space.n
-        self.n_actions = env.action_space.n
-
-        description = env.unwrapped.desc.flatten()
-        self.terminal_states = {
-            state
-            for state, cell in enumerate(description)
-            if cell in (b"H", b"G")
-        }
-
-        # Счётчики для анализа алгоритма.
-        self.policy_iterations = 0
-        self.evaluation_sweeps = 0
+        # Счётчики для анализа алгоритма
+        self.policy_iterations = 0 # количество внешних итераций, в которых выполняются оценка и улучшение стратегии
+        self.evaluation_sweeps = 0 # общее количество проходов по всем состояниям при оценке стратегии
 
 
-    def calculate_action_value(self, state, action, values) -> float:
-        """Вычисляет ожидаемую ценность действия"""
-        action_value = 0.0
-
-        transitions = self.env.unwrapped.P[state][action]
-
-        for probability, next_state, reward, terminated in transitions:
-            future_value = 0.0
-
-            if not terminated:
-                future_value = self.gamma * values[next_state]
-
-            action_value += probability * (
-                reward + future_value
-            )
-
-        return action_value
-
-
-    def evaluate_policy(self, policy, values, history):
+    def evaluate_policy(self, policy, values, history: list):
         """Оценивает текущую стратегию итерационным методом"""
 
         for _ in range(self.max_iterations):
@@ -81,8 +41,8 @@ class PolicyIteration:
                     new_values[state] = 0.0
                     continue
 
+                # Получаем оценку действия, предписанного стратегией
                 action = policy[state]
-
                 new_values[state] = self.calculate_action_value(
                     state=state,
                     action=action,
@@ -146,14 +106,14 @@ class PolicyIteration:
         history = []
 
         for iteration in range(1, self.max_iterations + 1):
-            # Шаг 1. Оцениваем текущую стратегию.
+            # Оцениваем текущую стратегию
             values = self.evaluate_policy(
                 policy=policy,
                 values=values,
                 history=history,
             )
 
-            # Шаг 2. Улучшаем стратегию.
+            # Улучшаем стратегию
             policy_stable = self.improve_policy(
                 policy=policy,
                 values=values,
@@ -167,3 +127,15 @@ class PolicyIteration:
         raise RuntimeError(
             f"Policy Iteration не завершился за {self.max_iterations} итераций."
         )
+
+
+if __name__ == "__main__":
+    import gymnasium as gym
+
+    PolicyIteration(
+        env=gym.make(
+            "FrozenLake-v1",
+            map_name="4x4",
+            is_slippery=True,
+        )
+    ).run()
