@@ -7,6 +7,16 @@
 ## VI курс
 ### Обучение с подкреплением (Python)
   1) [Задача о многоруком бандите](https://github.com/iseq1/University/tree/main/VI%20course/Reinforcement%20learning/I%20lab)
+  2) [Обучение на марковских процессах](https://github.com/iseq1/University/tree/main/VI%20course/Reinforcement%20learning/II%20lab)
+### Обработка естественного языка (Python)
+  1) [Геймерский паспорт](https://github.com/iseq1/University/tree/main/VI%20course/Natural%20Language%20Processing/NLP-proj)
+### Компьютерное зрение (Python)
+  1) [Этап 1 - выбор темы](https://github.com/iseq1/University/tree/main/VI%20course/Computer%20Vision/I%20stage)
+  2) [Этап 2 - анализ предметной области]()
+  3) [Этап 3 - программная реализация]()
+  4) [Этап 4 - исследование]()
+
+
 
 
 ---
