@@ -2,8 +2,12 @@
 
 from functools import lru_cache
 
+from pathlib import Path
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+BASE_DIR = Path(__file__).resolve().parents[2]
 
 
 class Settings(BaseSettings):
@@ -24,7 +28,7 @@ class Settings(BaseSettings):
     port: int = Field(default=8000, validation_alias="PORT")
 
     database_url: str = Field(
-        default="sqlite+aiosqlite:///./gamer_passport.db",
+        default=f"sqlite+aiosqlite:///{BASE_DIR / 'gamer_passport.db'}",
         validation_alias="DATABASE_URL",
     )
 
