@@ -31,9 +31,9 @@ class KnowledgeBase(Base):
 
     __tablename__ = "knowledge_base"
 
-    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.now(), nullable=False)
-    load_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False) # Аналог created_at
-    update_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False)
+    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.current_date(), nullable=False)
+    load_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False) # Аналог created_at
+    update_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
     internal_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     source_text: Mapped[str] = mapped_column(Text, nullable=False)
     target_text: Mapped[str] = mapped_column(Text, nullable=False)
@@ -45,9 +45,9 @@ class Glossary(Base):
 
     __tablename__ = "glossary"
 
-    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.now(), nullable=False)
-    load_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False) # Аналог created_at
-    update_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False)
+    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.current_date(), nullable=False)
+    load_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False) # Аналог created_at
+    update_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
     internal_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     term: Mapped[str] = mapped_column(String(500), nullable=False, index=True)
     definition: Mapped[str] = mapped_column(Text, nullable=False)
@@ -59,9 +59,9 @@ class UncertainExample(Base):
 
     __tablename__ = "uncertain_examples"
 
-    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.now(), nullable=False)
-    load_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False) # Аналог created_at
-    update_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False)
+    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.current_date(), nullable=False)
+    load_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False) # Аналог created_at
+    update_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
     internal_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     input_text: Mapped[str] = mapped_column(Text, nullable=False)
     model_output: Mapped[str] = mapped_column(Text, nullable=False)
@@ -74,9 +74,9 @@ class Cache(Base):
 
     __tablename__ = "cache"
 
-    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.now(), nullable=False)
-    load_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False) # Аналог created_at
-    update_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False)
+    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.current_date(), nullable=False)
+    load_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False) # Аналог created_at
+    update_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
     internal_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     input_key: Mapped[str] = mapped_column(String(255), unique=True, index=True, nullable=False)
     output: Mapped[str] = mapped_column(Text, nullable=False)
@@ -88,9 +88,9 @@ class EvaluationResult(Base):
 
     __tablename__ = "evaluation_results"
 
-    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.now(), nullable=False)
-    load_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False) # Аналог created_at
-    update_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False)
+    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.current_date(), nullable=False)
+    load_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False) # Аналог created_at
+    update_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
     internal_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     model_name: Mapped[str] = mapped_column(String(255), nullable=False, index=True)
     mode: Mapped[str] = mapped_column(String(100), nullable=False)
@@ -104,9 +104,9 @@ class ModelComparison(Base):
 
     __tablename__ = "model_comparisons"
 
-    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.now(), nullable=False)
-    load_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False) # Аналог created_at
-    update_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False)
+    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.current_date(), nullable=False)
+    load_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False) # Аналог created_at
+    update_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
     internal_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     models_compared: Mapped[list] = mapped_column(JSON, nullable=False)
     sample_size: Mapped[int] = mapped_column(Integer, nullable=False)
@@ -119,9 +119,9 @@ class ReasoningLog(Base):
 
     __tablename__ = "reasoning_logs"
 
-    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.now(), nullable=False)
-    load_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False) # Аналог created_at
-    update_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False)
+    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.current_date(), nullable=False)
+    load_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False) # Аналог created_at
+    update_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
     internal_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     request_id: Mapped[str] = mapped_column(String(100), index=True, nullable=False)
     agent_name: Mapped[str] = mapped_column(String(100), nullable=False)
@@ -139,9 +139,9 @@ class LLMCall(Base):
 
     __tablename__ = "llm_calls"
 
-    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.now(), nullable=False)
-    load_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False) # Аналог created_at
-    update_date: Mapped[datetime] = mapped_column(Date, server_default=func.now(), nullable=False)
+    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.current_date(), nullable=False)
+    load_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False) # Аналог created_at
+    update_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
     internal_id: Mapped[int] = mapped_column(Integer, primary_key=True)
     request_id: Mapped[str] = mapped_column(String(100), index=True, nullable=False)
     agent_name: Mapped[str] = mapped_column(String(100), nullable=False)
