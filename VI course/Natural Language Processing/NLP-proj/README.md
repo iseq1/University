@@ -217,3 +217,57 @@ poetry run python scripts/import_data.py
 ```
 
 Повторный запуск генерации создаёт те же данные с теми же параметрами. Повторный запуск импорта не должен добавлять уже имеющиеся записи. Для другого размера выборки используйте `--train-count` и `--test-count`; для другого каталога — `--output-dir`, а при импорте — `--data-dir`.
+
+## Этап 10 — RAG и гибридный поиск
+
+Реализованы компоненты retrieval-контура в `src/retrieval/`:
+
+- `documents.py` — единая структура `RetrievedDocument`;
+- `embeddings.py` — лениво загружаемый singleton-обёртка Sentence Transformers; модель по умолчанию `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`;
+- `bm25.py` — лексический поиск BM25 по тексту профиля;
+- `qdrant_store.py` — асинхронное создание коллекции, пакетная загрузка векторов и семантический поиск в Qdrant;
+- `hybrid.py` — объединение ранжированных списков BM25 и Qdrant методом Reciprocal Rank Fusion (RRF);
+- `service.py` — загрузка примеров из SQLAlchemy `knowledge_base` и создание retriever.
+
+Векторизация и подключение к Qdrant выполняются лениво: импорт модулей и unit-тесты не требуют запущенного Qdrant или скачивания модели. В обычном окружении проекта используются зависимости `sentence-transformers`, `qdrant-client` и `rank-bm25`. Для минимального окружения в `BM25Retriever` предусмотрен совместимый fallback BM25, если `rank-bm25` ещё не установлен.
+
+### Запуск индексации
+
+1. Запустите PostgreSQL/SQLite и импортируйте данные этапа 9:
+
+```bash
+poetry run python scripts/import_data.py
+```
+
+2. Запустите Qdrant (например, через Docker):
+
+```bash
+docker run -p 6333:6333 -p 6334:6334 qdrant/qdrant
+```
+
+3. При необходимости задайте в `.env` `QDRANT_URL`, `QDRANT_COLLECTION` и `EMBEDDING_MODEL`, затем постройте индекс:
+
+```bash
+poetry run python scripts/index_knowledge_base.py --batch-size 64
+```
+
+4. Пример использования гибридного поиска из асинхронного кода:
+
+```python
+from src.retrieval.service import build_retriever
+
+retriever = await build_retriever(session)
+results = await retriever.search(profile_text, limit=5)
+for document, score in results:
+    print(document.target_text, score)
+```
+
+RRF использует вклад `1 / (k + rank)` для каждого списка результатов, поэтому не смешивает напрямую несопоставимые BM25- и cosine-оценки. Индексация использует стабильные UUID от ID записи БД: повторный запуск обновляет те же точки, а не создаёт дубликаты.
+
+### Проверка
+
+```bash
+poetry run pytest tests/unit/test_retrieval.py
+```
+
+Unit-тесты используют подменные embedder и vector store, поэтому не требуют загрузки нейросети и работающего Qdrant. Реальная индексация и семантический поиск требуют установленных зависимостей, доступного Qdrant и скачанной модели Sentence Transformers.
