@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from argparse import ArgumentParser
 from pathlib import Path
 from typing import Any
 import csv
 import json
 
+from src.scripts import BaseScript
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -173,12 +173,12 @@ GLOSSARY_TERMS = [
 ]
 
 
-class DataGenerator:
+class DataGenerator(BaseScript):
     """Класс, описывающий логику генерации синтетических данных"""
 
 
     def __init__(self):
-        self.parser = ArgumentParser(description=__doc__)
+        super().__init__()
 
 
     @staticmethod

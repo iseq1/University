@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from argparse import ArgumentParser
 from pathlib import Path
 from typing import Any
 import logging
@@ -14,7 +13,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.backend.db import Glossary, KnowledgeBase, Session
-
+from src.scripts import BaseScript
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -24,12 +23,12 @@ DATA_DIR = ROOT / "data" / "generated"
 LOGGER = logging.getLogger(__name__)
 
 
-class DataImporter:
+class DataImporter(BaseScript):
     """Класс, описывающий логику импорта данных в БД"""
 
 
     def __init__(self):
-        self.parser = ArgumentParser(description=__doc__)
+        super().__init__()
         self.session = Session()
 
 
@@ -212,7 +211,7 @@ class DataImporter:
             print(f"{name}: {count}")
 
 
-    def main(self):
+    def main(self) -> None:
         """Основной метод класса"""
         self.parser.add_argument("--data-dir", type=Path, default=DATA_DIR)
         args = self.parser.parse_args()
