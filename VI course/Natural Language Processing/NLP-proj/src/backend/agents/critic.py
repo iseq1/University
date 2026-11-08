@@ -43,10 +43,13 @@ class CriticAgent(Agent):
             )
 
         self.pass_threshold = pass_threshold
+        self.request_id = None
 
 
     async def process(self, state: dict[str, Any]) -> dict[str, Any]:
         """Оценка текущего результата"""
+
+        self.request_id = str(state.get("request_id", ""))
 
         payload = {
             "profile": state.get("profile", {}),
@@ -90,9 +93,14 @@ class CriticAgent(Agent):
 
 
     async def _call_llm(self, prompt: str) -> str:
-        """Заглушка для реального клиента LLM"""
-        logger.info("LLM call placeholder invoked for CriticAgent (prompt_length=%s)", len(prompt))
-        raise NotImplementedError("LLM integration is scheduled for next stage")
+        """Формирование оценки с помощью настроенного LLM-провайдера"""
+        from src.backend.gateways.llm import get_llm_gateway
+
+        return await get_llm_gateway().generate(
+            prompt=prompt,
+            agent_name=self.name,
+            request_id=str(getattr(self, "request_id", "")),
+        )
 
 
     @staticmethod
@@ -102,7 +110,7 @@ class CriticAgent(Agent):
         data = response if isinstance(response, dict) else json.loads(response)
         if not isinstance(data, dict):
             raise ValueError(
-                "Critic response must be a JSON object"
+                "Ответ агента-критика должен быть JSON-объектом"
             )
 
         scores: dict[str, float] = {}
@@ -111,12 +119,12 @@ class CriticAgent(Agent):
 
             if isinstance(value, bool) or not isinstance(value, (int, float)):
                 raise ValueError(
-                    f"'{key}' must be a number between 1 and 10"
+                    f"'{key}' должен принимать значения от 1 до 10"
                 )
 
             if not math.isfinite(value) or not 1 <= value <= 10:
                 raise ValueError(
-                    f"'{key}' must be a number between 1 and 10"
+                    f"'{key}' должен принимать значения от 1 до 10"
                 )
 
             scores[key] = float(value)
@@ -127,17 +135,17 @@ class CriticAgent(Agent):
 
         if not isinstance(reasoning, str):
             raise ValueError(
-                "'reasoning' must be a string"
+                "Объект 'reasoning' должен быть строкой"
             )
 
         if not isinstance(suggestions, list) or not all(isinstance(item, str) for item in suggestions):
             raise ValueError(
-                "'suggestions' must be a list of strings"
+                "Объект 'suggestions' должен быть списком из строк"
             )
 
         if not isinstance(passed, bool):
             raise ValueError(
-                "'passed' must be a boolean"
+                "Объект 'passed' должен принимать bool-значение"
             )
 
         return {

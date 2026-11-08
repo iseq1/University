@@ -64,13 +64,12 @@ class ValidatorAgent(Agent):
             dictionary=self.dictionary
         )
 
+        llm_warnings = await self.validate_by_llm(state=state) if self.enable_llm_check else []
+
         warnings.extend([
             *unknown_term_warnings,
+            *llm_warnings,
         ])
-
-        if self.enable_llm_check:
-            logger.info("LLM validation check is a placeholder; no external model was called.")
-            warnings.append("LLM validation is not configured yet.")
 
         validation_passed = not errors
         logger.info(
@@ -85,6 +84,52 @@ class ValidatorAgent(Agent):
             "warnings": warnings,
             "validation_passed": validation_passed,
         }
+
+
+    async def _call_llm(self, state: dict[str, Any]) -> dict[str, Any]:
+        """Формирование оценки с помощью настроенного LLM-провайдера"""
+        from src.backend.gateways.llm import get_llm_gateway
+        import json
+
+        prompt = (
+            "Check whether this Steam profile summary contains unsupported claims or obvious contradictions. "
+            "Return only JSON: {\"warnings\": [strings]}.\n"
+            + json.dumps(
+            {"profile": state.get("profile", {}), "summary": state.get("summary", "")},
+                ensure_ascii=False,
+                default=str
+            )
+        )
+
+        raw = await get_llm_gateway().generate(
+            prompt=prompt,
+            agent_name=self.name,
+            request_id=str(getattr(self, "request_id", "")),
+        )
+
+        return json.loads(raw)
+
+
+    async def validate_by_llm(self, state: dict[str, Any]) -> list[str]:
+        """Валидация посредством LLM-модели"""
+        llm_warnings = []
+
+        try:
+            llm_result = await self._call_llm(state=state)
+
+            warnings = llm_result.get("warnings", []) if isinstance(llm_result, dict) else []
+
+            if isinstance(warnings, list):
+                llm_warnings.extend(str(item) for item in warnings if item)
+            else:
+                llm_warnings.append("LLM-валидатор вернул неожиданный ответ")
+
+        except Exception as exc:
+            logger.warning("Optional LLM validation failed: %s", exc)
+            llm_warnings.append("LLM-валидатор был недоступен")
+
+        finally:
+            return llm_warnings
 
 
     @staticmethod

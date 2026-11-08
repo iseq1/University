@@ -7,7 +7,9 @@ from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-BASE_DIR = Path(__file__).resolve().parents[2]
+DIR = Path(__file__).resolve()
+BASE_DIR = DIR.parents[2]
+CERT_PATH = DIR.parents[3] / "certs"
 
 
 class Settings(BaseSettings):
@@ -32,10 +34,38 @@ class Settings(BaseSettings):
         validation_alias="DATABASE_URL",
     )
 
-    llm_provider: str = Field(default="ollama", validation_alias="LLM_PROVIDER")
-    ollama_base_url: str = Field(default="http://localhost:11434", validation_alias="OLLAMA_BASE_URL")
-    ollama_model: str = Field(default="qwen2.5:1.5b", validation_alias="OLLAMA_MODEL")
-    hf_model: str = Field(default="google/flan-t5-small", validation_alias="HF_MODEL")
+    rus_certs: str = Field(default=f"{CERT_PATH / 'russian_trusted_root_ca_pem.crt'}", validation_alias="RUS_CERTS")
+
+    # LLM-провайдер (API-only)
+    llm_provider_base: str = Field(default="sber", validation_alias="LLM_PROVIDER_BASE")
+    llm_provider_spare: str = Field(default="share_llm", validation_alias="LLM_PROVIDER_SPARE")
+    llm_provider_test: str = Field(default="atria", validation_alias="LLM_PROVIDER_TEST")
+    llm_timeout: float = Field(default=120.0, validation_alias="LLM_TIMEOUT")
+
+    # ATRIA LLM-client
+    atria_api_key: SecretStr | None = Field(default=None, validation_alias="ATRIA_API_KEY")
+    atria_base_url: str = Field(default="https://api.atria-asi.ai/v1", validation_alias="ATRIA_BASE_URL")
+    atria_model: str = Field(default="Atria-Dawn", validation_alias="ATRIA_MODEL")
+
+    # ShareLLM LLM-client
+    sharellm_api_key: SecretStr | None = Field(default=None, validation_alias="SHARELLM_API_KEY")
+    sharellm_base_url: str = Field(default="https://sharellm.net/v1", validation_alias="SHARELLM_BASE_URL")
+    sharellm_model_kimi: str = Field(default="kimi-k3", validation_alias="SHARELLM_MODEL_KIMI")
+    sharellm_model_deepseek: str = Field(default="deepseek-v4.1-flash-1017", validation_alias="SHARELLM_MODEL_DEEPSEEK")
+    sharellm_model_gpt: str = Field(default="gpt-6-astra", validation_alias="SHARELLM_MODEL_GPT")
+    sharellm_model_qwen: str = Field(default="qwen3.8-flash", validation_alias="SHARELLM_MODEL_QWEN")
+    sharellm_model_gemini: str = Field(default="gemini-4-argon", validation_alias="SHARELLM_MODEL_GEMINI")
+    sharellm_model_spark: str = Field(default="spark-x2.6", validation_alias="SHARELLM_MODEL_SPARK")
+
+    # SberTech LLM-client
+    sber_auth_key: SecretStr | None = Field(default=None, validation_alias="SBER_AUTH_KEY")
+    sber_base_url: str = Field(default="https://api.giga.chat/v1", validation_alias="SBER_BASE_URL")
+    sber_model_base: str = Field(default="GigaChat-2", validation_alias="SBER_MODEL_BASE")
+    sber_model_max: str = Field(default="GigaChat-2-Max", validation_alias="SBER_MODEL_MAX")
+    sber_model_pro: str = Field(default="GigaChat-2-Pro", validation_alias="SBER_MODEL_PRO")
+    sber_model_light: str = Field(default="GigaChat-3-Lightning", validation_alias="SBER_MODEL_LIGHT")
+    sber_model_pro_plus: str = Field(default="GigaChat-3-Pro", validation_alias="SBER_MODEL_PRO_PLUS")
+    sber_model_ultra: str = Field(default="GigaChat-3-Ultra", validation_alias="SBER_MODEL_ULTRA")
 
     qdrant_url: str = Field(default="http://localhost:6333", validation_alias="QDRANT_URL")
     qdrant_api_key: SecretStr | None = Field(default=None, validation_alias="QDRANT_API_KEY")
@@ -52,11 +82,6 @@ class Settings(BaseSettings):
         default=60,
         validation_alias="ACCESS_TOKEN_EXPIRE_MINUTES",
     )
-
-    openai_api_key: SecretStr | None = Field(default=None, validation_alias="OPENAI_API_KEY")
-    anthropic_api_key: SecretStr | None = Field(default=None, validation_alias="ANTHROPIC_API_KEY")
-    google_api_key: SecretStr | None = Field(default=None, validation_alias="GOOGLE_API_KEY")
-    openrouter_api_key: SecretStr | None = Field(default=None, validation_alias="OPENROUTER_API_KEY")
 
     log_level: str = Field(default="INFO", validation_alias="LOG_LEVEL")
     log_file: str = Field(default="logs/app.log", validation_alias="LOG_FILE")
