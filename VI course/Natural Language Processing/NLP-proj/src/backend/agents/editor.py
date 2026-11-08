@@ -34,8 +34,13 @@ class EditorAgent(Agent):
     name = "editor"
 
 
+    def __init__(self):
+        self.request_id = None
+
+
     async def process(self, state: dict[str, Any]) -> dict[str, Any]:
         """Внесите правки в текущее резюме, если имеются конструктивные замечания"""
+        self.request_id = str(state.get("request_id", ""))
 
         errors = state.get("errors", [])
         suggestions = state.get("critic_suggestions", [])
@@ -74,9 +79,14 @@ class EditorAgent(Agent):
 
 
     async def _call_llm(self, prompt: str) -> str:
-        """Заглушка для реального LLM-клиента"""
-        logger.info("LLM call placeholder invoked for EditorAgent (prompt_length=%s)", len(prompt))
-        raise NotImplementedError("LLM integration is scheduled for stage 11")
+        """Формирование оценки с помощью настроенного LLM-провайдера"""
+        from src.backend.gateways.llm import get_llm_gateway
+
+        return await get_llm_gateway().generate(
+            prompt=prompt,
+            agent_name=self.name,
+            request_id=str(getattr(self, "request_id", "")),
+        )
 
 
     @staticmethod
@@ -86,12 +96,12 @@ class EditorAgent(Agent):
         data = response if isinstance(response, dict) else json.loads(response)
 
         if not isinstance(data, dict):
-            raise ValueError("Editor response must be a JSON object")
+            raise ValueError("Ответ агента-редактора должен быть JSON-объектом")
 
         summary = data.get("summary")
 
         if not isinstance(summary, str) or not summary.strip():
-            raise ValueError("Editor response must contain a non-empty 'summary' string")
+            raise ValueError("Ответ агента-редактора должен содержать НЕ пустую строку 'summary'")
 
         return summary.strip()
 
