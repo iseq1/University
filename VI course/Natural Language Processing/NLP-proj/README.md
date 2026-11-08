@@ -271,3 +271,31 @@ poetry run pytest tests/unit/test_retrieval.py
 ```
 
 Unit-тесты используют подменные embedder и vector store, поэтому не требуют загрузки нейросети и работающего Qdrant. Реальная индексация и семантический поиск требуют установленных зависимостей, доступного Qdrant и скачанной модели Sentence Transformers.
+
+## Этап 11 — интеграция облачных LLM API и трассировка вызовов
+
+Генерация текста выполняется **только через API**. Локальная загрузка/запуск LLM не используется: Ollama, Hugging Face Transformers, OpenAI API, OpenRouter, Anthropic и Google Generative AI исключены из списка рабочих LLM-провайдеров этого проекта.
+
+Поддерживаются три OpenAI-compatible шлюза:
+
+- **Atria** — `https://api.atria-asi.ai/v1`, модель по умолчанию `Atria-Dawn`;
+- **ShareLLM** — `https://sharellm.net/v1`, модель задаётся по точному ID из каталога аккаунта.
+- **GigaChat** — `https://api.giga.chat/v1`, модель задаётся по точному ID из каталога аккаунта.
+
+`src/llm/clients.py` содержит общий асинхронный HTTP-клиент Chat Completions и адаптеры `AtriaClient` / `ShareLLMClient` / `SberClient`. `src/llm/gateway.py` выбирает один шлюз через `LLM_PROVIDER`, получает секреты из `.env` и выполняет генерацию. Critic и Editor используют этот менеджер; Validator может выполнять дополнительную проверку при `enable_llm_check=True`.
+
+Метаданные вызовов сохраняются в `llm_calls`: имя агента, провайдер/модель, SHA-256 хеши промпта и ответа, задержка и статус. Содержимое промптов и ответов в БД не сохраняется. Ошибка записи лога не должна ломать основной вызов модели.
+
+### Быстрый запуск
+
+1. Скопируйте `.env.example` в `.env`.
+2. Получите API-ключ выбранного шлюза и проверьте доступность бесплатной квоты.
+3. Заполните конфиг:
+   * Для Atria заполните `ATRIA_API_KEY`, `ATRIA_MODEL`; 
+   * Для ShareLLM — `SHARELLM_API_KEY`, `SHARELLM_MODEL`;
+   * Для GigaChat — `SBER_AUTH_KEY`, `SBER_MODEL`.
+4. Установите `LLM_PROVIDER`.
+5. Запустите приложение после настройки БД.
+
+Полная пошаговая инструкция получения ключей, проверки модели через curl, настройки `.env`, ограничений бесплатных тарифов и диагностики ошибок находится в [`docs/llm-providers.md`](docs/llm-providers.md).
+
