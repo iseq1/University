@@ -11,10 +11,8 @@
 ### Обработка естественного языка (Python)
   1) [Геймерский паспорт](https://github.com/iseq1/University/tree/main/VI%20course/Natural%20Language%20Processing/NLP-proj)
 ### Компьютерное зрение (Python)
-  1) [Этап 1 - выбор темы](https://github.com/iseq1/University/tree/main/VI%20course/Computer%20Vision/I%20stage)
-  2) [Этап 2 - анализ предметной области]()
-  3) [Этап 3 - программная реализация]()
-  4) [Этап 4 - исследование]()
+  1) [Автоматическое распознавание и сбор статистики с диаграмм](https://github.com/iseq1/University/tree/main/VI%20course/Computer%20Vision)
+
 
 
 
