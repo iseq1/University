@@ -13,6 +13,9 @@ from src.backend.utils.security import Security
 from src.backend.core import AuthDetails
 
 
+async_session = Session().get_session
+
+
 class AuthRouter:
     """API-класс, описывающий endpoint-ы аутентификации"""
 
@@ -52,7 +55,7 @@ class AuthRouter:
     async def register(
         self,
         data: RegisterRequest,
-        session: AsyncSession = Depends(Session().get_session),
+        session: AsyncSession = Depends(async_session),
     ) -> User:
         """Регистрация нового пользователя с ролью по умолчанию"""
 
@@ -97,7 +100,7 @@ class AuthRouter:
     async def login(
         self,
         data: LoginRequest,
-        session: AsyncSession = Depends(Session().get_session),
+        session: AsyncSession = Depends(async_session),
     ) -> TokenResponse:
         """Аутентификация пользователя"""
 

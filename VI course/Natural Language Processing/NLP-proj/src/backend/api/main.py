@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.backend.api.routes import AuthRouter, SteamRouter
+from src.backend.api.routes import AuthRouter, SteamRouter, AdminRouter
 from src.backend.core import get_settings, HEALTHCHECK_PATH
 from src.backend.utils import setup_logging
 from src.backend.db import Session
@@ -46,6 +46,7 @@ app.add_middleware(
 
 app.include_router(AuthRouter().router)
 app.include_router(SteamRouter().router)
+app.include_router(AdminRouter().router)
 
 
 @app.get(HEALTHCHECK_PATH, tags=["system"])
