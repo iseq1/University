@@ -11,3 +11,11 @@ class ConfigurationError(GamerPassportError):
 
 class ExternalServiceError(GamerPassportError):
     """Возникает, когда внешний сервис недоступен или не может быть использован"""
+
+
+class SteamAPIError(RuntimeError):
+    """Steam API вернул ошибку или непригодный для использования ответ"""
+
+
+class SteamIdentifierError(ValueError):
+    """Возникает, если предоставленный идентификатор профиля Steam является недействительным."""
