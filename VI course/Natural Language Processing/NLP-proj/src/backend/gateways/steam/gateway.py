@@ -23,8 +23,8 @@ class SteamGateway:
         """Получение SteamId по ссылке на Steam-профиль"""
 
         payload = await self.client.call(
-            interface="ISteamUser",
-            method="ResolveVanityURL",
+            interface=self.settings.steam_user_interface,
+            method=self.settings.steam_resolve_vanity_method,
             vanityurl=vanity_url
         )
 
@@ -41,8 +41,8 @@ class SteamGateway:
         """Получение summary по профилю Steam"""
 
         payload = await self.client.call(
-            interface="ISteamUser",
-            method="GetPlayerSummaries",
+            interface=self.settings.steam_user_interface,
+            method=self.settings.steam_player_summaries_method,
             version="v0002",
             steamids=steam_id
         )
@@ -60,8 +60,8 @@ class SteamGateway:
         """Получение библиотеки пользователя"""
 
         payload = await self.client.call(
-            interface="IPlayerService",
-            method="GetOwnedGames",
+            interface=self.settings.steam_player_service_interface,
+            method=self.settings.steam_owned_games_method,
             steamid=steam_id,
             include_appinfo=1,
             include_played_free_games=1,
@@ -78,8 +78,8 @@ class SteamGateway:
         """Получение последней игровой активности пользователя"""
 
         payload = await self.client.call(
-            interface="IPlayerService",
-            method="GetRecentlyPlayedGames",
+            interface=self.settings.steam_player_service_interface,
+            method=self.settings.steam_recently_played_games_method,
             steamid=steam_id,
             count=10
         )

@@ -8,15 +8,17 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 DIR = Path(__file__).resolve()
-BASE_DIR = DIR.parents[2]
-CERT_PATH = DIR.parents[3] / "certs"
+BASE_DIR = DIR.parents[3]
+CERT_PATH = BASE_DIR / "certs"
+ENV_PATH = BASE_DIR / ".env"
+
 
 
 class Settings(BaseSettings):
     """Настройки приложения для внутренних и внешних сервисов"""
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=ENV_PATH,
         env_file_encoding="utf-8",
         env_prefix="",
         extra="ignore",
@@ -30,7 +32,7 @@ class Settings(BaseSettings):
     port: int = Field(default=8000, validation_alias="PORT")
 
     database_url: str = Field(
-        default=f"sqlite+aiosqlite:///{BASE_DIR / 'gamer_passport.db'}",
+        default=f"sqlite+aiosqlite:///{BASE_DIR / 'src' / 'gamer_passport.db'}",
         validation_alias="DATABASE_URL",
     )
 
@@ -66,6 +68,22 @@ class Settings(BaseSettings):
     sber_model_light: str = Field(default="GigaChat-3-Lightning", validation_alias="SBER_MODEL_LIGHT")
     sber_model_pro_plus: str = Field(default="GigaChat-3-Pro", validation_alias="SBER_MODEL_PRO_PLUS")
     sber_model_ultra: str = Field(default="GigaChat-3-Ultra", validation_alias="SBER_MODEL_ULTRA")
+
+    # SteamAPI
+    steam_api_key: SecretStr | None = Field(default=None, validation_alias="STEAM_API_KEY")
+    steam_api_timeout: float = Field(default=15.0, validation_alias="STEAM_API_TIMEOUT")
+    steam_api_base_url: str = Field(default="https://api.steampowered.com", validation_alias="STEAM_BASE_URL")
+    steam_cache_ttl_hours: int = Field(default=12, validation_alias="STEAM_CACHE_TTL_HOURS")
+
+    # SteamAPI Interface
+    steam_user_interface: str = Field(default="ISteamUser", validation_alias="STEAM_USER_INTERFACE")
+    steam_player_service_interface: str = Field(default="IPlayerService", validation_alias="STEAM_PLAYER_SERVICE_INTERFACE")
+
+    # SteamAPI Method
+    steam_resolve_vanity_method: str = Field(default="ResolveVanityURL", validation_alias="STEAM_RESOLVE_VANITY_URL")
+    steam_player_summaries_method: str = Field(default="GetPlayerSummaries", validation_alias="STEAM_PLAYER_SUMMARIES")
+    steam_owned_games_method: str = Field(default="GetOwnedGames", validation_alias="STEAM_OWNED_GAMES")
+    steam_recently_played_games_method: str = Field(default="GetRecentlyPlayedGames", validation_alias="STEAM_RECENTLY_PLAYED_GAMES")
 
     qdrant_url: str = Field(default="http://localhost:6333", validation_alias="QDRANT_URL")
     qdrant_api_key: SecretStr | None = Field(default=None, validation_alias="QDRANT_API_KEY")
