@@ -152,3 +152,21 @@ class LLMCall(Base):
     tokens_used: Mapped[int | None] = mapped_column(Integer, nullable=True)
     latency_ms: Mapped[float | None] = mapped_column(Float, nullable=True)
     status: Mapped[str] = mapped_column(String(50), nullable=False)
+
+
+class SteamProfile(Base):
+    """Кэшированные данные Steam-профиля"""
+
+    __tablename__ = "steam_profiles"
+
+    npart_year_month: Mapped[date] =  mapped_column(Date, server_default=func.current_date(), nullable=False)
+    load_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False) # Аналог created_at
+    update_date: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), nullable=False)
+    expires_data: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False, index=True)
+    internal_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    steam_id: Mapped[str] = mapped_column(String(32), unique=True, index=True, nullable=False)
+    vanity_url: Mapped[str | None] = mapped_column(String(64), unique=True, index=True, nullable=True)
+    persona_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    profile_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    profile_data: Mapped[dict] = mapped_column(JSON, nullable=False)
+    cache_hits: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
