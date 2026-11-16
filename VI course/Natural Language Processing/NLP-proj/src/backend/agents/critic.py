@@ -35,13 +35,14 @@ class CriticAgent(Agent):
     name = "critic"
 
 
-    def __init__(self, pass_threshold: float = 6.0) -> None:
+    def __init__(self, pass_threshold: float = 6.0, llm_gateway: Any | None = None) -> None:
 
         if not 1.0 <= pass_threshold <= 10.0:
             raise ValueError(
                 "pass_threshold must be between 1 and 10"
             )
 
+        self.llm_gateway = llm_gateway
         self.pass_threshold = pass_threshold
         self.request_id = None
 
@@ -96,7 +97,8 @@ class CriticAgent(Agent):
         """Формирование оценки с помощью настроенного LLM-провайдера"""
         from src.backend.gateways.llm import get_llm_gateway
 
-        return await get_llm_gateway().generate(
+        gateway = self.llm_gateway or get_llm_gateway()
+        return await gateway.generate(
             prompt=prompt,
             agent_name=self.name,
             request_id=str(getattr(self, "request_id", "")),

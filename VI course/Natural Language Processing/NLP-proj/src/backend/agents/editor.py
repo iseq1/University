@@ -34,8 +34,9 @@ class EditorAgent(Agent):
     name = "editor"
 
 
-    def __init__(self):
+    def __init__(self, llm_gateway: Any | None = None):
         self.request_id = None
+        self.llm_gateway = llm_gateway
 
 
     async def process(self, state: dict[str, Any]) -> dict[str, Any]:
@@ -82,7 +83,8 @@ class EditorAgent(Agent):
         """Формирование оценки с помощью настроенного LLM-провайдера"""
         from src.backend.gateways.llm import get_llm_gateway
 
-        return await get_llm_gateway().generate(
+        gateway = self.llm_gateway or get_llm_gateway()
+        return await gateway.generate(
             prompt=prompt,
             agent_name=self.name,
             request_id=str(getattr(self, "request_id", "")),

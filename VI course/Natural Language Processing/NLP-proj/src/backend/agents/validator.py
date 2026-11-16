@@ -22,6 +22,7 @@ class ValidatorAgent(Agent):
         min_text_length: int = 10,
         dictionary: Iterable[str] | None = None,
         enable_llm_check: bool = False,
+        llm_gateway: Any | None = None
     ) -> None:
 
         if min_text_length < 0:
@@ -31,6 +32,7 @@ class ValidatorAgent(Agent):
         self.min_text_length = min_text_length
         self.dictionary = {term.casefold() for term in dictionary} if dictionary is not None else None
         self.enable_llm_check = enable_llm_check
+        self.llm_gateway = llm_gateway
 
 
     async def process(self, state: dict[str, Any]) -> dict[str, Any]:
@@ -101,7 +103,8 @@ class ValidatorAgent(Agent):
             )
         )
 
-        raw = await get_llm_gateway().generate(
+        manager = self.llm_gateway or get_llm_gateway()
+        raw = await manager.generate(
             prompt=prompt,
             agent_name=self.name,
             request_id=str(getattr(self, "request_id", "")),
