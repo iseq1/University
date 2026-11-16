@@ -7,10 +7,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.backend.api.deps import get_current_user
 from src.backend.api.schemas.auth import LoginRequest, RegisterRequest, TokenResponse, UserResponse
-from src.backend.db.models import User
-from src.backend.db.session import Session
+from src.backend.db import Session, User
 from src.backend.utils.security import Security
 from src.backend.core import AuthDetails
+
+
+async_session = Session().get_session
 
 
 class AuthRouter:
@@ -52,7 +54,7 @@ class AuthRouter:
     async def register(
         self,
         data: RegisterRequest,
-        session: AsyncSession = Depends(Session().get_session),
+        session: AsyncSession = Depends(async_session),
     ) -> User:
         """Регистрация нового пользователя с ролью по умолчанию"""
 
@@ -97,7 +99,7 @@ class AuthRouter:
     async def login(
         self,
         data: LoginRequest,
-        session: AsyncSession = Depends(Session().get_session),
+        session: AsyncSession = Depends(async_session),
     ) -> TokenResponse:
         """Аутентификация пользователя"""
 
