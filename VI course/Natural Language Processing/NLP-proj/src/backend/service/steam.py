@@ -117,8 +117,8 @@ class SteamProfileService:
                 {
                     "app_id": game.get("appid"),
                     "name": game.get("name"),
-                    "playtime_forever": game.get("playtime_forever", 0),
-                    "playtime_2weeks": game.get("playtime_2weeks", 0),
+                    "playtime_forever": float(game.get("playtime_forever")) / 60 if game.get("playtime_forever") else 0,
+                    "playtime_2weeks": float(game.get("playtime_2weeks")) / 60 if game.get("playtime_2weeks") else 0,
                     "img_icon_url": game.get("img_icon_url"),
                 }
                 for game in games
@@ -127,8 +127,8 @@ class SteamProfileService:
                 {
                     "app_id": game.get("appid"),
                     "name": game.get("name"),
-                    "playtime_2weeks": game.get("playtime_2weeks", 0),
-                    "playtime_forever": game.get("playtime_forever", 0),
+                    "playtime_2weeks": float(game.get("playtime_2weeks")) / 60 if game.get("playtime_2weeks") else 0,
+                    "playtime_forever": float(game.get("playtime_forever")) / 60 if game.get("playtime_forever") else 0,    
                 }
                 for game in recent_games
             ],
