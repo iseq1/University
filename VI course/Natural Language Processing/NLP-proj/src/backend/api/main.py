@@ -14,6 +14,7 @@ from src.backend.api.routes import (
     SteamRouter,
     AdminRouter,
     EvaluationRouter,
+    GenerationRouter,
 )
 
 settings = get_settings()
@@ -52,6 +53,7 @@ app.include_router(AuthRouter().router)
 app.include_router(SteamRouter().router)
 app.include_router(AdminRouter().router)
 app.include_router(EvaluationRouter().router)
+app.include_router(GenerationRouter().router)
 
 
 @app.get(HEALTHCHECK_PATH, tags=["system"])
