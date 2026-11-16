@@ -88,6 +88,10 @@ class Settings(BaseSettings):
     qdrant_url: str = Field(default="http://localhost:6333", validation_alias="QDRANT_URL")
     qdrant_api_key: SecretStr | None = Field(default=None, validation_alias="QDRANT_API_KEY")
     qdrant_collection: str = Field(default="gamer_passport", validation_alias="QDRANT_COLLECTION")
+    embedding_model: str = Field(
+        default="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+        validation_alias="EMBEDDING_MODEL",
+    )
 
     redis_url: str = Field(default="redis://localhost:6379/0", validation_alias="REDIS_URL")
 

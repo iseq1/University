@@ -22,26 +22,34 @@ async def log_llm_call(
 ) -> None:
     """Лог записи о LLM-вызове"""
 
-    try:
-        from src.backend.db import LLMCall, Session
+    from src.backend.db import LLMCall, Session
 
-        async with Session().get_session() as session:
-            session.add(
-                LLMCall(
-                    request_id=request_id or str(uuid.uuid4()),
-                    agent_name=agent_name,
-                    model_name=model_name,
-                    provider=provider,
-                    prompt_hash=custom_hash(prompt) or "",
-                    response_hash=custom_hash(response),
-                    tokens_used=tokens_used,
-                    latency_ms=latency_ms,
-                    status=status,
-                )
+    session_generator = Session().get_session()
+    session = await anext(session_generator)
+
+    try:
+
+        session.add(
+            LLMCall(
+                request_id=request_id or str(uuid.uuid4()),
+                agent_name=agent_name,
+                model_name=model_name,
+                provider=provider,
+                prompt_hash=custom_hash(prompt) or "",
+                response_hash=custom_hash(response),
+                tokens_used=tokens_used,
+                latency_ms=latency_ms,
+                status=status,
             )
-            await session.commit()
+        )
+
+        await session.commit()
 
     except Exception as e:
         logger.exception(
             "Не удалось сохранить метаданные вызова LLM"
         )
+        await session.rollback()
+
+    finally:
+        await session_generator.aclose()

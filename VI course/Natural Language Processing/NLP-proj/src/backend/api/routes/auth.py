@@ -7,8 +7,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.backend.api.deps import get_current_user
 from src.backend.api.schemas.auth import LoginRequest, RegisterRequest, TokenResponse, UserResponse
-from src.backend.db.models import User
-from src.backend.db.session import Session
+from src.backend.db import Session, User
 from src.backend.utils.security import Security
 from src.backend.core import AuthDetails
 
