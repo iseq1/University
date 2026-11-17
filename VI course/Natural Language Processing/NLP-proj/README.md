@@ -299,3 +299,149 @@ Unit-тесты используют подменные embedder и vector store
 
 Полная пошаговая инструкция получения ключей, проверки модели через curl, настройки `.env`, ограничений бесплатных тарифов и диагностики ошибок находится в [`docs/llm-providers.md`](docs/llm-providers.md).
 
+## Этап 12 — основные API эндпоинты и начало метрик
+
+Реализованы следующие возможности:
+
+- `POST /api/v1/generate` — генерация саммари в режимах `baseline` и `full`; `full` использует гибридный Retrieval, затем Validator, Critic и Editor;
+- `POST /api/v1/generate/batch` — последовательная пакетная обработка до 20 профилей с отдельным результатом/ошибкой для каждого;
+- `POST /api/v1/generate/variants?count=3` — генерация нескольких вариантов и выбор по оценке Critic;
+- `POST /api/v1/generate/ensemble` — запуск доступных настроенных провайдеров Atria и ShareLLM и выбор кандидата с наибольшей оценкой Critic;
+- `POST /api/v1/evaluate` — расчёт метрик для эталонного и сгенерированного текста;
+- `GET /api/v1/evaluate/history` — история оценок;
+- `GET /api/v1/requests/{request_id}/reasoning_log` — журнал шагов агентов и трассировка вызовов LLM;
+- `/api/v1/admin/knowledge-base` и `/api/v1/admin/glossary` — чтение, создание, изменение и удаление записей с проверкой ролей;
+- `POST /api/v1/admin/knowledge-base/import` — импорт JSON-записей;
+- `POST /api/v1/admin/knowledge-base/import-csv` — импорт CSV-текста с колонками `source_text,target_text` и необязательной `category`.
+
+Метрики включают Exact Match, BLEU, ROUGE-L, METEOR и chrF. BERTScore доступен по флагу `include_bertscore=true`, но вынесен в необязательную группу зависимостей: `poetry install --with bert-score`. Для него требуется загрузка отдельной модели и дополнительные ресурсы. Метрики лексического совпадения не заменяют экспертную оценку фактической корректности саммари.
+
+### Подготовка базы знаний для режима full
+
+1. Запустите приложение и импортируйте подготовленные данные в SQL-базу:
+
+```bash
+poetry run python scripts/import_data.py
+```
+
+2. Запустите PostgreSQL и Qdrant через Compose: `docker compose -f "ci-cd files/docker-compose.yml" up -d`. Для локального SQLite PostgreSQL можно не запускать; Qdrant нужен для семантической части Retrieval.
+3. Постройте/обновите векторный индекс:
+
+```bash
+poetry run python scripts/index_knowledge_base.py
+```
+
+4. Запустите API:
+
+```bash
+poetry run python run.py
+```
+
+После изменений записей базы знаний повторно запускайте индексацию: скрипт пересоздаёт коллекцию Qdrant по актуальному содержимому SQL-базы. Если база знаний или Qdrant не подготовлены, `full` возвращает предупреждение и продолжает генерацию на исходных данных профиля. Это позволяет не подменять отсутствие RAG-контекста выдуманными материалами; для полноценного RAG-сценария индекс должен быть подготовлен заранее.
+
+### Примеры запросов
+
+После регистрации и входа используйте `Authorization: Bearer <access_token>`.
+
+```http
+POST /api/v1/generate
+Content-Type: application/json
+Authorization: Bearer <access_token>
+
+{
+  "steam_id": "76561198000000000",
+  "profile": {"games": [{"name": "Portal 2", "playtime_hours": 42}]},
+  "mode": "full",
+  "use_cache": true
+}
+```
+
+```http
+POST /api/v1/evaluate
+Content-Type: application/json
+Authorization: Bearer <access_token>
+
+{
+  "reference": "Игрок предпочитает головоломки и сюжетные игры.",
+  "prediction": "Профиль указывает на интерес к сюжетным головоломкам.",
+  "model_name": "Atria-Dawn",
+  "mode": "full"
+}
+```
+
+```http
+GET /api/v1/requests/<request_id>/reasoning_log
+Authorization: Bearer <access_token>
+```
+
+### Ограничения этапа 12
+
+- Пакетная обработка выполняется последовательно в HTTP-запросе; Celery/background jobs относятся к следующим этапам.
+- Варианты одного провайдера — это несколько независимых генераций, а `/generate/ensemble` сравнивает доступные шлюзы Atria и ShareLLM. Состав кандидатов зависит от настроенных ключей.
+- BERTScore выключен по умолчанию; его вычисление может скачать модель для оценки. Это не локальный запуск генеративной LLM.
+- При отсутствии/недоступности Qdrant RAG-контекст не подставляется, а в ответ добавляется предупреждение.
+- Доступность бесплатного тарифа и API из конкретной сети не гарантируется кодом и зависит от актуальных условий провайдера.
+
+
+## Steam Web API (этап 12.2)
+
+Для импорта публичного Steam-профиля добавьте `STEAM_API_KEY` в `.env` (получить ключ: https://steamcommunity.com/dev). Авторизация Steam не используется: принимается ссылка на профиль или SteamID64. Подробности, ограничения приватности, TTL и примеры запросов описаны в [`docs/stage-12-api.md`](docs/stage-12-api.md).
+
+## Этап 13 — оценка качества и сравнение моделей
+
+Реализован экспериментальный контур оценки на отдельном тестовом наборе `data/generated/knowledge_base_test.json` (200 синтетических профилей). Скрипт поддерживает выборки 20, 50 и 100 примеров, фиксированный seed и следующие режимы:
+
+- `baseline` — генерация без дополнительного словаря, RAG и мультиагентной доработки;
+- `+dict` — генерация с релевантными терминами из глоссария;
+- `+rag` — генерация с контекстом гибридного поиска BM25 + Qdrant;
+- `+agents` — генерация с последующей обработкой Validator, Critic и Editor через Supervisor;
+- `+ensemble` — генерация несколькими настроенными API-провайдерами и выбор кандидата по оценке Critic.
+
+Сравниваются облачные провайдеры `atria` и `sharellm` (если соответствующие ключи настроены). Локальные Ollama/HuggingFace генеративные модели не добавляются: проект сохраняет согласованное API-only решение этапа 11. Для режима `+rag` необходимо предварительно импортировать базу знаний и проиндексировать её в запущенном Qdrant.
+
+Запуск:
+
+```bash
+poetry run python scripts/run_eval.py \
+  --providers atria,sharellm \
+  --modes baseline,+dict,+rag,+agents,+ensemble \
+  --sample-sizes 20,50,100
+```
+
+Для одного провайдера и более короткого прогона:
+
+```bash
+poetry run python scripts/run_eval.py --providers atria --modes baseline,+dict,+rag,+agents --sample-sizes 20
+```
+
+Каждый запуск создаёт отдельный каталог `reports/evaluation/<UTC timestamp>/` с JSON по размерам выборок, `results.csv` и `summary.md`. Результаты также сохраняются в таблицах `evaluation_results` и `model_comparisons`. Метрики включают Exact Match, BLEU, ROUGE-L, METEOR и chrF; BERTScore можно включить опцией `--bertscore` (потребуется установка `poetry install --with bert-score`, загрузка модели может занять время).
+
+### API сравнения
+
+- `GET /api/v1/evaluate/compare?models=atria,sharellm&sample_size=20&modes=baseline,%2Bdict,%2Brag,%2Bagents,%2Bensemble` — запускает сравнение и возвращает агрегированные и покомпонентные результаты.
+- `POST /api/v1/evaluate/batch` — ставит сравнение в очередь Celery и возвращает `task_id`.
+- `GET /api/v1/evaluate/tasks/{task_id}` — возвращает статус и результат фоновой задачи.
+
+Пример тела `POST /api/v1/evaluate/batch`:
+
+```json
+{
+  "models": ["atria", "sharellm"],
+  "modes": ["baseline", "+dict", "+rag", "+agents", "+ensemble"],
+  "sample_size": 20,
+  "seed": 42
+}
+```
+
+### Celery
+
+Redis добавлен в `ci-cd files/docker-compose.yml`. Запуск инфраструктуры и worker:
+
+```bash
+docker compose -f "ci-cd files/docker-compose.yml" up -d redis postgres qdrant
+poetry run celery -A src.worker.celery_app.celery_app worker --loglevel=info
+```
+
+Созданы задачи `evaluate_model_task` и `compare_models_task`. Для фонового запуска API должен быть доступен Redis по `REDIS_URL`, а Celery worker должен быть запущен отдельно.
+
+**Ограничения экспериментальных данных:** тестовая выборка состоит из синтетических профилей и синтетических эталонных саммари. Полученные метрики характеризуют сходство генерации с этими эталонами, но сами по себе не доказывают фактическую точность описания реальных Steam-профилей. Статистические тесты и доверительные интервалы из бонусной части ТЗ в этом этапе не реализованы.

@@ -9,9 +9,6 @@ import json
 
 from src.scripts import BaseScript
 
-ROOT = Path(__file__).resolve().parents[2]
-
-OUTPUT_DIR = ROOT / "data" / "generated"
 
 GAMES = [
     "Dota 2",
@@ -249,8 +246,11 @@ class DataGenerator(BaseScript):
         return rows
 
 
-    def generate_datasets(self, output_dir: Path = OUTPUT_DIR, train_count: int = 1000, test_count: int = 200) -> dict[str, int]:
+    def generate_datasets(self, output_dir: Path = None, train_count: int = 1000, test_count: int = 200) -> dict[str, int]:
         """Создание обучающих данных, глоссария и отдельной выборки для оценки"""
+
+        if output_dir is None:
+            output_dir = self._get_output_dir()
 
         if train_count < 1 or test_count < 1:
             raise ValueError(
@@ -331,7 +331,7 @@ class DataGenerator(BaseScript):
 
     def main(self) -> None:
         """Основной метод обработчика"""
-        self.parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
+        self.parser.add_argument("--output-dir", type=Path, default=None)
         self.parser.add_argument("--train-count", type=int, default=1000)
         self.parser.add_argument("--test-count", type=int, default=200)
 

@@ -15,11 +15,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.backend.db import Glossary, KnowledgeBase, Session
 from src.scripts import BaseScript
 
-ROOT = Path(__file__).resolve().parents[2]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-
-DATA_DIR = ROOT / "data" / "generated"
 LOGGER = logging.getLogger(__name__)
 
 
@@ -178,8 +173,11 @@ class DataImporter(BaseScript):
         return len(new_records)
 
 
-    async def run_import(self, data_dir: Path = DATA_DIR) -> dict[str, int]:
+    async def run_import(self, data_dir: Path = None) -> dict[str, int]:
         """Инициализация таблиц и импорт обучающей базы знаний и глоссария"""
+
+        if data_dir is None:
+            data_dir = self._get_output_dir()
 
         await self.session.init_db()
         factory = self.session.get_session_factory()
@@ -213,7 +211,7 @@ class DataImporter(BaseScript):
 
     def main(self) -> None:
         """Основной метод класса"""
-        self.parser.add_argument("--data-dir", type=Path, default=DATA_DIR)
+        self.parser.add_argument("--data-dir", type=Path, default=None)
         args = self.parser.parse_args()
 
         logging.basicConfig(

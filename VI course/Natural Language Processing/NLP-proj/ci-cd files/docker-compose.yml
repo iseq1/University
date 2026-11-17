@@ -9,6 +9,15 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
 
+  redis:
+    image: redis:7-alpine
+    container_name: gamer-passport-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
   postgres:
     image: postgres:16-alpine
     container_name: gamer-passport-postgres
@@ -30,3 +39,4 @@ services:
 volumes:
   postgres_data:
   qdrant_data:
+  redis_data:

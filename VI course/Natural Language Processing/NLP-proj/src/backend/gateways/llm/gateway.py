@@ -80,7 +80,7 @@ class LLMGateway:
 
             self._client = ShareLLMClient(
                 api_key=key,
-                model=settings.sharellm_model,
+                model=settings.sharellm_model_gpt,
                 base_url=settings.sharellm_base_url,
                 timeout=settings.llm_timeout,
             )

@@ -44,8 +44,8 @@ transformers_cache/
 models/
 
 # Project data generated locally
-data/generated/
-data/runtime/
+src/backend/data/*
+!src/backend/data/.gitkeep
 
 # Docker
 *.pid

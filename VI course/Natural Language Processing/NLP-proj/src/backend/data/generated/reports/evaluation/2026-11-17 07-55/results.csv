@@ -1,0 +1,16 @@
+﻿provider,model_name,mode,sample_size,evaluation_time,bleu,chrf,exact_match,rouge_l
+sber,GigaChat-2,baseline,20,21.583,0.01062,0.398001,0.0,0.091003
+sber,GigaChat-2,+dict,20,14.974,0.010562,0.391779,0.0,0.090584
+sber,GigaChat-2,+rag,20,95.934,0.313128,0.633446,0.0,0.507538
+sber,GigaChat-2,+agents,20,71.601,0.010319,0.318303,0.0,0.095497
+ensemble,ensemble(sber),+ensemble,20,32.753,0.010611,0.399094,0.0,0.095413
+sber,GigaChat-2,baseline,50,41.743,0.010646,0.394918,0.0,0.091828
+sber,GigaChat-2,+dict,50,39.594,0.010499,0.388975,0.0,0.091445
+sber,GigaChat-2,+rag,50,356.475,0.272573,0.610525,0.0,0.490878
+sber,GigaChat-2,+agents,50,141.134,0.010353,0.336151,0.0,0.091565
+ensemble,ensemble(sber),+ensemble,50,77.586,0.010496,0.391073,0.0,0.092423
+sber,GigaChat-2,baseline,100,75.485,0.010426,0.394547,0.0,0.092885
+sber,GigaChat-2,+dict,100,80.804,0.01042,0.392762,0.0,0.089835
+sber,GigaChat-2,+rag,100,457.804,0.299611,0.628718,0.0,0.502523
+sber,GigaChat-2,+agents,100,276.51,0.0104,0.329772,0.0,0.093978
+ensemble,ensemble(sber),+ensemble,100,154.956,0.0104,0.395602,0.0,0.094845
