@@ -5,13 +5,13 @@ from __future__ import annotations
 import time
 from typing import Any
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.backend.db import Session, EvaluationResult, LLMCall, ReasoningLog, User
-from src.backend.evaluation import calculate_metrics
-from src.backend.api.schemas.evaluation import EvaluateRequest
+from src.backend.evaluation import calculate_metrics, EvaluationRunner, SUPPORTED_MODES
+from src.backend.api.schemas.evaluation import EvaluateRequest, EvaluationBatchRequest
 from src.backend.api.deps import get_current_user
 
 
@@ -57,6 +57,25 @@ class EvaluationRouter:
         self.router.add_api_route(
             "/history/{request_id}",
             endpoint=self.get_reasoning_log,
+            methods=["GET"],
+        )
+
+        self.router.add_api_route(
+            "/evaluate/compare",
+            endpoint=self.compare_models,
+            methods=["GET"],
+        )
+
+        self.router.add_api_route(
+            "/evaluate/batch",
+            endpoint=self.evaluate_batch,
+            methods=["POST"],
+            status_code=status.HTTP_202_ACCEPTED,
+        )
+
+        self.router.add_api_route(
+            "/evaluate/tasks/{task_id}",
+            endpoint=self.evaluation_task_status,
             methods=["GET"],
         )
 
@@ -187,3 +206,124 @@ class EvaluationRouter:
                 for row in calls
             ],
         }
+
+
+    @staticmethod
+    async def compare_models(
+        models: str = Query("sber", description="Настроенные провайдеры, разделённые запятыми: sber, atria, sharellm"),
+        sample_size: int = Query(20, description="Один из [20, 50, 100]"),
+        modes: str = Query("baseline,+dict,+rag,+agents,+ensemble"),
+        seed: int = 42,
+        _: User = Depends(get_current_user),
+        session: AsyncSession = Depends(async_session),
+    ) -> dict[str, Any]:
+        """Получение оценки модели"""
+
+        providers = [
+            item.strip().lower()
+            for item in models.split(",")
+            if item.strip()
+        ]
+
+        selected_modes = [
+            item.strip()
+            for item in modes.split(",")
+            if item.strip()
+        ]
+
+        if sample_size not in (20, 50, 100):
+            raise HTTPException(
+                status_code=422,
+                detail="sample_size must be 20, 50 or 100"
+            )
+
+        if not selected_modes or set(selected_modes) - set(SUPPORTED_MODES):
+            raise HTTPException(
+                status_code=422,
+                detail=f"modes must be selected from {SUPPORTED_MODES}"
+            )
+
+        try:
+            runner = EvaluationRunner(session)
+            return await runner.evaluate(
+                providers=providers,
+                modes=selected_modes,
+                sample_size=sample_size,
+                seed=seed,
+            )
+
+        except (ValueError, FileNotFoundError) as exc:
+            raise HTTPException(
+                status_code=422,
+                detail=str(exc)
+            ) from exc
+
+        except Exception as exc:
+            raise HTTPException(
+                status_code=502,
+                detail=f"Evaluation failed: {type(exc).__name__}: {exc}"
+            ) from exc
+
+
+    @staticmethod
+    async def evaluate_batch(
+        data: EvaluationBatchRequest,
+        _: User = Depends(get_current_user),
+    ) -> dict[str, Any]:
+        """Массовое получение оценки"""
+
+        try:
+            from src.backend.worker import compare_models_task
+
+            task = compare_models_task.delay(
+                models=data.models,
+                modes=data.modes,
+                sample_size=data.sample_size,
+                seed=data.seed,
+            )
+
+        except Exception as exc:
+            raise HTTPException(
+                status_code=503,
+                detail=f"Could not enqueue evaluation task: {type(exc).__name__}"
+            ) from exc
+
+        return {
+            "task_id": task.id,
+            "status": "queued",
+            "sample_size": data.sample_size,
+            "models": data.models,
+            "modes": data.modes
+        }
+
+
+    @staticmethod
+    async def evaluation_task_status(
+        task_id: str,
+        _: User = Depends(get_current_user),
+    ) -> dict[str, Any]:
+        """Вернуть состояние и результат поставленной в очередь задачи Celery"""
+
+        try:
+            from src.backend.worker import celery_app
+            from celery.result import AsyncResult
+
+            result = AsyncResult(task_id, app=celery_app)
+            payload: dict[str, Any] = {
+                "task_id": task_id,
+                "status": result.status
+            }
+
+            if result.successful():
+                payload["result"] = result.result
+
+            elif result.failed():
+                payload["error"] = str(result.result)
+
+            return payload
+
+        except Exception as exc:
+            raise HTTPException(
+                status_code=503,
+                detail=f"Celery result backend unavailable: {type(exc).__name__}"
+            ) from exc
