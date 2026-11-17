@@ -1,0 +1,1002 @@
+[
+  {
+    "source_text": "Synthetic test profile 0001; favorite_game=Apex Legends; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=4100; games_owned=4; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Apex Legends; суммарное время в играх — около 4100 часов. В профиле 4 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0002; favorite_game=Warframe; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=4237; games_owned=11; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Warframe; суммарное время в играх — около 4237 часов. В профиле 11 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0003; favorite_game=Elden Ring; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=4374; games_owned=18; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Elden Ring; суммарное время в играх — около 4374 часов. В профиле 18 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0004; favorite_game=Baldur's Gate 3; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=4511; games_owned=25; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 4511 часов. В профиле 25 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0005; favorite_game=Stardew Valley; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=4648; games_owned=32; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 4648 часов. В профиле 32 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0006; favorite_game=Deep Rock Galactic; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=4785; games_owned=39; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 4785 часов. В профиле 39 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0007; favorite_game=Team Fortress 2; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=4922; games_owned=46; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 4922 часов. В профиле 46 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0008; favorite_game=Path of Exile; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=109; games_owned=53; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Path of Exile; суммарное время в играх — около 109 часов. В профиле 53 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0009; favorite_game=Terraria; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=246; games_owned=60; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Terraria; суммарное время в играх — около 246 часов. В профиле 60 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0010; favorite_game=Hades; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=383; games_owned=67; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Hades; суммарное время в играх — около 383 часов. В профиле 67 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0011; favorite_game=Portal 2; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=520; games_owned=74; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Portal 2; суммарное время в играх — около 520 часов. В профиле 74 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0012; favorite_game=Cyberpunk 2077; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=657; games_owned=81; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 657 часов. В профиле 81 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0013; favorite_game=Risk of Rain 2; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=794; games_owned=88; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 794 часов. В профиле 88 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0014; favorite_game=Dota 2; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=931; games_owned=9; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Dota 2; суммарное время в играх — около 931 часов. В профиле 9 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0015; favorite_game=Counter-Strike 2; preferred_style=кооперативный; favorite_genre=шутеры; total_playtime_hours=1068; games_owned=16; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 1068 часов. В профиле 16 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0016; favorite_game=Apex Legends; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=1205; games_owned=23; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Apex Legends; суммарное время в играх — около 1205 часов. В профиле 23 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0017; favorite_game=Warframe; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=1342; games_owned=30; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Warframe; суммарное время в играх — около 1342 часов. В профиле 30 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0018; favorite_game=Elden Ring; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=1479; games_owned=37; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Elden Ring; суммарное время в играх — около 1479 часов. В профиле 37 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0019; favorite_game=Baldur's Gate 3; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=1616; games_owned=44; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 1616 часов. В профиле 44 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0020; favorite_game=Stardew Valley; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=1753; games_owned=51; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 1753 часов. В профиле 51 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0021; favorite_game=Deep Rock Galactic; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=1890; games_owned=58; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 1890 часов. В профиле 58 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0022; favorite_game=Team Fortress 2; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=2027; games_owned=65; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 2027 часов. В профиле 65 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0023; favorite_game=Path of Exile; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=2164; games_owned=72; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Path of Exile; суммарное время в играх — около 2164 часов. В профиле 72 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0024; favorite_game=Terraria; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=2301; games_owned=79; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Terraria; суммарное время в играх — около 2301 часов. В профиле 79 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0025; favorite_game=Hades; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=2438; games_owned=86; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Hades; суммарное время в играх — около 2438 часов. В профиле 86 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0026; favorite_game=Portal 2; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=2575; games_owned=7; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Portal 2; суммарное время в играх — около 2575 часов. В профиле 7 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0027; favorite_game=Cyberpunk 2077; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=2712; games_owned=14; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 2712 часов. В профиле 14 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0028; favorite_game=Risk of Rain 2; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=2849; games_owned=21; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 2849 часов. В профиле 21 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0029; favorite_game=Dota 2; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=2986; games_owned=28; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Dota 2; суммарное время в играх — около 2986 часов. В профиле 28 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0030; favorite_game=Counter-Strike 2; preferred_style=сюжетный; favorite_genre=шутеры; total_playtime_hours=3123; games_owned=35; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 3123 часов. В профиле 35 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0031; favorite_game=Apex Legends; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=3260; games_owned=42; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Apex Legends; суммарное время в играх — около 3260 часов. В профиле 42 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0032; favorite_game=Warframe; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=3397; games_owned=49; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Warframe; суммарное время в играх — около 3397 часов. В профиле 49 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0033; favorite_game=Elden Ring; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=3534; games_owned=56; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Elden Ring; суммарное время в играх — около 3534 часов. В профиле 56 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0034; favorite_game=Baldur's Gate 3; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=3671; games_owned=63; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 3671 часов. В профиле 63 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0035; favorite_game=Stardew Valley; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=3808; games_owned=70; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 3808 часов. В профиле 70 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0036; favorite_game=Deep Rock Galactic; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=3945; games_owned=77; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 3945 часов. В профиле 77 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0037; favorite_game=Team Fortress 2; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=4082; games_owned=84; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 4082 часов. В профиле 84 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0038; favorite_game=Path of Exile; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=4219; games_owned=5; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Path of Exile; суммарное время в играх — около 4219 часов. В профиле 5 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0039; favorite_game=Terraria; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=4356; games_owned=12; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Terraria; суммарное время в играх — около 4356 часов. В профиле 12 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0040; favorite_game=Hades; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=4493; games_owned=19; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Hades; суммарное время в играх — около 4493 часов. В профиле 19 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0041; favorite_game=Portal 2; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=4630; games_owned=26; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Portal 2; суммарное время в играх — около 4630 часов. В профиле 26 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0042; favorite_game=Cyberpunk 2077; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=4767; games_owned=33; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 4767 часов. В профиле 33 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0043; favorite_game=Risk of Rain 2; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=4904; games_owned=40; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 4904 часов. В профиле 40 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0044; favorite_game=Dota 2; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=91; games_owned=47; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Dota 2; суммарное время в играх — около 91 часов. В профиле 47 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0045; favorite_game=Counter-Strike 2; preferred_style=казуальный; favorite_genre=шутеры; total_playtime_hours=228; games_owned=54; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 228 часов. В профиле 54 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0046; favorite_game=Apex Legends; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=365; games_owned=61; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Apex Legends; суммарное время в играх — около 365 часов. В профиле 61 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0047; favorite_game=Warframe; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=502; games_owned=68; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Warframe; суммарное время в играх — около 502 часов. В профиле 68 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0048; favorite_game=Elden Ring; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=639; games_owned=75; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Elden Ring; суммарное время в играх — около 639 часов. В профиле 75 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0049; favorite_game=Baldur's Gate 3; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=776; games_owned=82; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 776 часов. В профиле 82 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0050; favorite_game=Stardew Valley; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=913; games_owned=89; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 913 часов. В профиле 89 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0051; favorite_game=Deep Rock Galactic; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=1050; games_owned=10; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 1050 часов. В профиле 10 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0052; favorite_game=Team Fortress 2; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=1187; games_owned=17; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 1187 часов. В профиле 17 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0053; favorite_game=Path of Exile; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=1324; games_owned=24; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Path of Exile; суммарное время в играх — около 1324 часов. В профиле 24 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0054; favorite_game=Terraria; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=1461; games_owned=31; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Terraria; суммарное время в играх — около 1461 часов. В профиле 31 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0055; favorite_game=Hades; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=1598; games_owned=38; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Hades; суммарное время в играх — около 1598 часов. В профиле 38 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0056; favorite_game=Portal 2; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=1735; games_owned=45; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Portal 2; суммарное время в играх — около 1735 часов. В профиле 45 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0057; favorite_game=Cyberpunk 2077; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=1872; games_owned=52; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 1872 часов. В профиле 52 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0058; favorite_game=Risk of Rain 2; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=2009; games_owned=59; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 2009 часов. В профиле 59 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0059; favorite_game=Dota 2; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=2146; games_owned=66; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Dota 2; суммарное время в играх — около 2146 часов. В профиле 66 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0060; favorite_game=Counter-Strike 2; preferred_style=соревновательный; favorite_genre=шутеры; total_playtime_hours=2283; games_owned=73; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 2283 часов. В профиле 73 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0061; favorite_game=Apex Legends; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=2420; games_owned=80; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Apex Legends; суммарное время в играх — около 2420 часов. В профиле 80 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0062; favorite_game=Warframe; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=2557; games_owned=87; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Warframe; суммарное время в играх — около 2557 часов. В профиле 87 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0063; favorite_game=Elden Ring; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=2694; games_owned=8; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Elden Ring; суммарное время в играх — около 2694 часов. В профиле 8 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0064; favorite_game=Baldur's Gate 3; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=2831; games_owned=15; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 2831 часов. В профиле 15 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0065; favorite_game=Stardew Valley; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=2968; games_owned=22; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 2968 часов. В профиле 22 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0066; favorite_game=Deep Rock Galactic; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=3105; games_owned=29; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 3105 часов. В профиле 29 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0067; favorite_game=Team Fortress 2; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=3242; games_owned=36; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 3242 часов. В профиле 36 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0068; favorite_game=Path of Exile; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=3379; games_owned=43; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Path of Exile; суммарное время в играх — около 3379 часов. В профиле 43 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0069; favorite_game=Terraria; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=3516; games_owned=50; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Terraria; суммарное время в играх — около 3516 часов. В профиле 50 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0070; favorite_game=Hades; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=3653; games_owned=57; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Hades; суммарное время в играх — около 3653 часов. В профиле 57 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0071; favorite_game=Portal 2; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=3790; games_owned=64; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Portal 2; суммарное время в играх — около 3790 часов. В профиле 64 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0072; favorite_game=Cyberpunk 2077; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=3927; games_owned=71; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 3927 часов. В профиле 71 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0073; favorite_game=Risk of Rain 2; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=4064; games_owned=78; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 4064 часов. В профиле 78 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0074; favorite_game=Dota 2; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=4201; games_owned=85; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Dota 2; суммарное время в играх — около 4201 часов. В профиле 85 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0075; favorite_game=Counter-Strike 2; preferred_style=исследовательский; favorite_genre=шутеры; total_playtime_hours=4338; games_owned=6; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «шутеры». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 4338 часов. В профиле 6 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "шутеры"
+  },
+  {
+    "source_text": "Synthetic test profile 0076; favorite_game=Apex Legends; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=4475; games_owned=13; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Apex Legends; суммарное время в играх — около 4475 часов. В профиле 13 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0077; favorite_game=Warframe; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=4612; games_owned=20; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Warframe; суммарное время в играх — около 4612 часов. В профиле 20 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0078; favorite_game=Elden Ring; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=4749; games_owned=27; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Elden Ring; суммарное время в играх — около 4749 часов. В профиле 27 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0079; favorite_game=Baldur's Gate 3; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=4886; games_owned=34; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 4886 часов. В профиле 34 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0080; favorite_game=Stardew Valley; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=73; games_owned=41; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 73 часов. В профиле 41 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0081; favorite_game=Deep Rock Galactic; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=210; games_owned=48; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 210 часов. В профиле 48 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0082; favorite_game=Team Fortress 2; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=347; games_owned=55; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 347 часов. В профиле 55 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0083; favorite_game=Path of Exile; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=484; games_owned=62; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Path of Exile; суммарное время в играх — около 484 часов. В профиле 62 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0084; favorite_game=Terraria; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=621; games_owned=69; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Terraria; суммарное время в играх — около 621 часов. В профиле 69 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0085; favorite_game=Hades; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=758; games_owned=76; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Hades; суммарное время в играх — около 758 часов. В профиле 76 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0086; favorite_game=Portal 2; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=895; games_owned=83; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Portal 2; суммарное время в играх — около 895 часов. В профиле 83 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0087; favorite_game=Cyberpunk 2077; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=1032; games_owned=4; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 1032 часов. В профиле 4 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0088; favorite_game=Risk of Rain 2; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=1169; games_owned=11; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 1169 часов. В профиле 11 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0089; favorite_game=Dota 2; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=1306; games_owned=18; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Dota 2; суммарное время в играх — около 1306 часов. В профиле 18 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0090; favorite_game=Counter-Strike 2; preferred_style=кооперативный; favorite_genre=MOBA; total_playtime_hours=1443; games_owned=25; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 1443 часов. В профиле 25 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0091; favorite_game=Apex Legends; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=1580; games_owned=32; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Apex Legends; суммарное время в играх — около 1580 часов. В профиле 32 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0092; favorite_game=Warframe; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=1717; games_owned=39; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Warframe; суммарное время в играх — около 1717 часов. В профиле 39 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0093; favorite_game=Elden Ring; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=1854; games_owned=46; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Elden Ring; суммарное время в играх — около 1854 часов. В профиле 46 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0094; favorite_game=Baldur's Gate 3; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=1991; games_owned=53; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 1991 часов. В профиле 53 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0095; favorite_game=Stardew Valley; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=2128; games_owned=60; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 2128 часов. В профиле 60 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0096; favorite_game=Deep Rock Galactic; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=2265; games_owned=67; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 2265 часов. В профиле 67 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0097; favorite_game=Team Fortress 2; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=2402; games_owned=74; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 2402 часов. В профиле 74 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0098; favorite_game=Path of Exile; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=2539; games_owned=81; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Path of Exile; суммарное время в играх — около 2539 часов. В профиле 81 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0099; favorite_game=Terraria; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=2676; games_owned=88; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Terraria; суммарное время в играх — около 2676 часов. В профиле 88 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0100; favorite_game=Hades; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=2813; games_owned=9; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Hades; суммарное время в играх — около 2813 часов. В профиле 9 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0101; favorite_game=Portal 2; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=2950; games_owned=16; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Portal 2; суммарное время в играх — около 2950 часов. В профиле 16 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0102; favorite_game=Cyberpunk 2077; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=3087; games_owned=23; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 3087 часов. В профиле 23 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0103; favorite_game=Risk of Rain 2; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=3224; games_owned=30; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 3224 часов. В профиле 30 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0104; favorite_game=Dota 2; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=3361; games_owned=37; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Dota 2; суммарное время в играх — около 3361 часов. В профиле 37 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0105; favorite_game=Counter-Strike 2; preferred_style=сюжетный; favorite_genre=MOBA; total_playtime_hours=3498; games_owned=44; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 3498 часов. В профиле 44 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0106; favorite_game=Apex Legends; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=3635; games_owned=51; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Apex Legends; суммарное время в играх — около 3635 часов. В профиле 51 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0107; favorite_game=Warframe; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=3772; games_owned=58; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Warframe; суммарное время в играх — около 3772 часов. В профиле 58 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0108; favorite_game=Elden Ring; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=3909; games_owned=65; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Elden Ring; суммарное время в играх — около 3909 часов. В профиле 65 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0109; favorite_game=Baldur's Gate 3; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=4046; games_owned=72; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 4046 часов. В профиле 72 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0110; favorite_game=Stardew Valley; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=4183; games_owned=79; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 4183 часов. В профиле 79 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0111; favorite_game=Deep Rock Galactic; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=4320; games_owned=86; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 4320 часов. В профиле 86 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0112; favorite_game=Team Fortress 2; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=4457; games_owned=7; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 4457 часов. В профиле 7 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0113; favorite_game=Path of Exile; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=4594; games_owned=14; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Path of Exile; суммарное время в играх — около 4594 часов. В профиле 14 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0114; favorite_game=Terraria; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=4731; games_owned=21; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Terraria; суммарное время в играх — около 4731 часов. В профиле 21 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0115; favorite_game=Hades; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=4868; games_owned=28; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Hades; суммарное время в играх — около 4868 часов. В профиле 28 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0116; favorite_game=Portal 2; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=55; games_owned=35; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Portal 2; суммарное время в играх — около 55 часов. В профиле 35 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0117; favorite_game=Cyberpunk 2077; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=192; games_owned=42; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 192 часов. В профиле 42 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0118; favorite_game=Risk of Rain 2; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=329; games_owned=49; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 329 часов. В профиле 49 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0119; favorite_game=Dota 2; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=466; games_owned=56; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Dota 2; суммарное время в играх — около 466 часов. В профиле 56 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0120; favorite_game=Counter-Strike 2; preferred_style=казуальный; favorite_genre=MOBA; total_playtime_hours=603; games_owned=63; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 603 часов. В профиле 63 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0121; favorite_game=Apex Legends; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=740; games_owned=70; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Apex Legends; суммарное время в играх — около 740 часов. В профиле 70 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0122; favorite_game=Warframe; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=877; games_owned=77; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Warframe; суммарное время в играх — около 877 часов. В профиле 77 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0123; favorite_game=Elden Ring; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=1014; games_owned=84; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Elden Ring; суммарное время в играх — около 1014 часов. В профиле 84 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0124; favorite_game=Baldur's Gate 3; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=1151; games_owned=5; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 1151 часов. В профиле 5 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0125; favorite_game=Stardew Valley; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=1288; games_owned=12; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 1288 часов. В профиле 12 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0126; favorite_game=Deep Rock Galactic; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=1425; games_owned=19; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 1425 часов. В профиле 19 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0127; favorite_game=Team Fortress 2; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=1562; games_owned=26; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 1562 часов. В профиле 26 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0128; favorite_game=Path of Exile; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=1699; games_owned=33; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Path of Exile; суммарное время в играх — около 1699 часов. В профиле 33 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0129; favorite_game=Terraria; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=1836; games_owned=40; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Terraria; суммарное время в играх — около 1836 часов. В профиле 40 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0130; favorite_game=Hades; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=1973; games_owned=47; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Hades; суммарное время в играх — около 1973 часов. В профиле 47 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0131; favorite_game=Portal 2; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=2110; games_owned=54; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Portal 2; суммарное время в играх — около 2110 часов. В профиле 54 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0132; favorite_game=Cyberpunk 2077; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=2247; games_owned=61; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 2247 часов. В профиле 61 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0133; favorite_game=Risk of Rain 2; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=2384; games_owned=68; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 2384 часов. В профиле 68 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0134; favorite_game=Dota 2; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=2521; games_owned=75; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Dota 2; суммарное время в играх — около 2521 часов. В профиле 75 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0135; favorite_game=Counter-Strike 2; preferred_style=соревновательный; favorite_genre=MOBA; total_playtime_hours=2658; games_owned=82; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 2658 часов. В профиле 82 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0136; favorite_game=Apex Legends; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=2795; games_owned=89; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Apex Legends; суммарное время в играх — около 2795 часов. В профиле 89 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0137; favorite_game=Warframe; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=2932; games_owned=10; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Warframe; суммарное время в играх — около 2932 часов. В профиле 10 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0138; favorite_game=Elden Ring; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=3069; games_owned=17; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Elden Ring; суммарное время в играх — около 3069 часов. В профиле 17 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0139; favorite_game=Baldur's Gate 3; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=3206; games_owned=24; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 3206 часов. В профиле 24 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0140; favorite_game=Stardew Valley; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=3343; games_owned=31; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 3343 часов. В профиле 31 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0141; favorite_game=Deep Rock Galactic; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=3480; games_owned=38; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 3480 часов. В профиле 38 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0142; favorite_game=Team Fortress 2; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=3617; games_owned=45; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 3617 часов. В профиле 45 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0143; favorite_game=Path of Exile; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=3754; games_owned=52; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Path of Exile; суммарное время в играх — около 3754 часов. В профиле 52 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0144; favorite_game=Terraria; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=3891; games_owned=59; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Terraria; суммарное время в играх — около 3891 часов. В профиле 59 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0145; favorite_game=Hades; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=4028; games_owned=66; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Hades; суммарное время в играх — около 4028 часов. В профиле 66 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0146; favorite_game=Portal 2; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=4165; games_owned=73; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Portal 2; суммарное время в играх — около 4165 часов. В профиле 73 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0147; favorite_game=Cyberpunk 2077; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=4302; games_owned=80; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 4302 часов. В профиле 80 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0148; favorite_game=Risk of Rain 2; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=4439; games_owned=87; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 4439 часов. В профиле 87 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0149; favorite_game=Dota 2; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=4576; games_owned=8; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Dota 2; суммарное время в играх — около 4576 часов. В профиле 8 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0150; favorite_game=Counter-Strike 2; preferred_style=исследовательский; favorite_genre=MOBA; total_playtime_hours=4713; games_owned=15; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает исследовательский стиль и чаще выбирает жанр «MOBA». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 4713 часов. В профиле 15 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "MOBA"
+  },
+  {
+    "source_text": "Synthetic test profile 0151; favorite_game=Apex Legends; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=4850; games_owned=22; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Apex Legends; суммарное время в играх — около 4850 часов. В профиле 22 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0152; favorite_game=Warframe; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=4987; games_owned=29; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Warframe; суммарное время в играх — около 4987 часов. В профиле 29 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0153; favorite_game=Elden Ring; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=174; games_owned=36; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Elden Ring; суммарное время в играх — около 174 часов. В профиле 36 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0154; favorite_game=Baldur's Gate 3; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=311; games_owned=43; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 311 часов. В профиле 43 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0155; favorite_game=Stardew Valley; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=448; games_owned=50; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 448 часов. В профиле 50 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0156; favorite_game=Deep Rock Galactic; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=585; games_owned=57; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 585 часов. В профиле 57 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0157; favorite_game=Team Fortress 2; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=722; games_owned=64; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 722 часов. В профиле 64 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0158; favorite_game=Path of Exile; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=859; games_owned=71; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Path of Exile; суммарное время в играх — около 859 часов. В профиле 71 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0159; favorite_game=Terraria; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=996; games_owned=78; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Terraria; суммарное время в играх — около 996 часов. В профиле 78 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0160; favorite_game=Hades; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=1133; games_owned=85; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Hades; суммарное время в играх — около 1133 часов. В профиле 85 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0161; favorite_game=Portal 2; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=1270; games_owned=6; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Portal 2; суммарное время в играх — около 1270 часов. В профиле 6 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0162; favorite_game=Cyberpunk 2077; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=1407; games_owned=13; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 1407 часов. В профиле 13 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0163; favorite_game=Risk of Rain 2; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=1544; games_owned=20; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 1544 часов. В профиле 20 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0164; favorite_game=Dota 2; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=1681; games_owned=27; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Dota 2; суммарное время в играх — около 1681 часов. В профиле 27 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0165; favorite_game=Counter-Strike 2; preferred_style=кооперативный; favorite_genre=RPG; total_playtime_hours=1818; games_owned=34; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает кооперативный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 1818 часов. В профиле 34 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0166; favorite_game=Apex Legends; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=1955; games_owned=41; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Apex Legends; суммарное время в играх — около 1955 часов. В профиле 41 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0167; favorite_game=Warframe; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=2092; games_owned=48; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Warframe; суммарное время в играх — около 2092 часов. В профиле 48 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0168; favorite_game=Elden Ring; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=2229; games_owned=55; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Elden Ring; суммарное время в играх — около 2229 часов. В профиле 55 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0169; favorite_game=Baldur's Gate 3; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=2366; games_owned=62; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 2366 часов. В профиле 62 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0170; favorite_game=Stardew Valley; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=2503; games_owned=69; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 2503 часов. В профиле 69 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0171; favorite_game=Deep Rock Galactic; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=2640; games_owned=76; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 2640 часов. В профиле 76 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0172; favorite_game=Team Fortress 2; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=2777; games_owned=83; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 2777 часов. В профиле 83 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0173; favorite_game=Path of Exile; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=2914; games_owned=4; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Path of Exile; суммарное время в играх — около 2914 часов. В профиле 4 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0174; favorite_game=Terraria; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=3051; games_owned=11; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Terraria; суммарное время в играх — около 3051 часов. В профиле 11 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0175; favorite_game=Hades; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=3188; games_owned=18; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Hades; суммарное время в играх — около 3188 часов. В профиле 18 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0176; favorite_game=Portal 2; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=3325; games_owned=25; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Portal 2; суммарное время в играх — около 3325 часов. В профиле 25 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0177; favorite_game=Cyberpunk 2077; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=3462; games_owned=32; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 3462 часов. В профиле 32 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0178; favorite_game=Risk of Rain 2; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=3599; games_owned=39; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 3599 часов. В профиле 39 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0179; favorite_game=Dota 2; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=3736; games_owned=46; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Dota 2; суммарное время в играх — около 3736 часов. В профиле 46 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0180; favorite_game=Counter-Strike 2; preferred_style=сюжетный; favorite_genre=RPG; total_playtime_hours=3873; games_owned=53; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает сюжетный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 3873 часов. В профиле 53 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0181; favorite_game=Apex Legends; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=4010; games_owned=60; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Apex Legends; суммарное время в играх — около 4010 часов. В профиле 60 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0182; favorite_game=Warframe; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=4147; games_owned=67; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Warframe; суммарное время в играх — около 4147 часов. В профиле 67 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0183; favorite_game=Elden Ring; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=4284; games_owned=74; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Elden Ring; суммарное время в играх — около 4284 часов. В профиле 74 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0184; favorite_game=Baldur's Gate 3; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=4421; games_owned=81; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 4421 часов. В профиле 81 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0185; favorite_game=Stardew Valley; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=4558; games_owned=88; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 4558 часов. В профиле 88 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0186; favorite_game=Deep Rock Galactic; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=4695; games_owned=9; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Deep Rock Galactic; суммарное время в играх — около 4695 часов. В профиле 9 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0187; favorite_game=Team Fortress 2; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=4832; games_owned=16; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Team Fortress 2; суммарное время в играх — около 4832 часов. В профиле 16 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0188; favorite_game=Path of Exile; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=4969; games_owned=23; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Path of Exile; суммарное время в играх — около 4969 часов. В профиле 23 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0189; favorite_game=Terraria; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=156; games_owned=30; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Terraria; суммарное время в играх — около 156 часов. В профиле 30 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0190; favorite_game=Hades; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=293; games_owned=37; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Hades; суммарное время в играх — около 293 часов. В профиле 37 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0191; favorite_game=Portal 2; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=430; games_owned=44; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Portal 2; суммарное время в играх — около 430 часов. В профиле 44 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0192; favorite_game=Cyberpunk 2077; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=567; games_owned=51; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Cyberpunk 2077; суммарное время в играх — около 567 часов. В профиле 51 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0193; favorite_game=Risk of Rain 2; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=704; games_owned=58; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Risk of Rain 2; суммарное время в играх — около 704 часов. В профиле 58 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0194; favorite_game=Dota 2; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=841; games_owned=65; achievement_completion_percent=62.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Dota 2; суммарное время в играх — около 841 часов. В профиле 65 игр, доля выполненных достижений в условном наборе — 62%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0195; favorite_game=Counter-Strike 2; preferred_style=казуальный; favorite_genre=RPG; total_playtime_hours=978; games_owned=72; achievement_completion_percent=75.",
+    "target_text": "Игрок предпочитает казуальный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Counter-Strike 2; суммарное время в играх — около 978 часов. В профиле 72 игр, доля выполненных достижений в условном наборе — 75%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0196; favorite_game=Apex Legends; preferred_style=соревновательный; favorite_genre=RPG; total_playtime_hours=1115; games_owned=79; achievement_completion_percent=88.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Apex Legends; суммарное время в играх — около 1115 часов. В профиле 79 игр, доля выполненных достижений в условном наборе — 88%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0197; favorite_game=Warframe; preferred_style=соревновательный; favorite_genre=RPG; total_playtime_hours=1252; games_owned=86; achievement_completion_percent=10.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Warframe; суммарное время в играх — около 1252 часов. В профиле 86 игр, доля выполненных достижений в условном наборе — 10%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0198; favorite_game=Elden Ring; preferred_style=соревновательный; favorite_genre=RPG; total_playtime_hours=1389; games_owned=7; achievement_completion_percent=23.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Elden Ring; суммарное время в играх — около 1389 часов. В профиле 7 игр, доля выполненных достижений в условном наборе — 23%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0199; favorite_game=Baldur's Gate 3; preferred_style=соревновательный; favorite_genre=RPG; total_playtime_hours=1526; games_owned=14; achievement_completion_percent=36.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Baldur's Gate 3; суммарное время в играх — около 1526 часов. В профиле 14 игр, доля выполненных достижений в условном наборе — 36%.",
+    "category": "RPG"
+  },
+  {
+    "source_text": "Synthetic test profile 0200; favorite_game=Stardew Valley; preferred_style=соревновательный; favorite_genre=RPG; total_playtime_hours=1663; games_owned=21; achievement_completion_percent=49.",
+    "target_text": "Игрок предпочитает соревновательный стиль и чаще выбирает жанр «RPG». В библиотеке выделяется Stardew Valley; суммарное время в играх — около 1663 часов. В профиле 21 игр, доля выполненных достижений в условном наборе — 49%.",
+    "category": "RPG"
+  }
+]
