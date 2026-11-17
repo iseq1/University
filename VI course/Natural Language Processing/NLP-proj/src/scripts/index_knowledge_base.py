@@ -2,10 +2,8 @@
 
 from __future__ import annotations
 
-from pathlib import Path
 import logging
 import asyncio
-import sys
 
 from src.backend.db import Session
 from src.backend.retrieval import get_embedder, QdrantVectorStore, RetrivalService
@@ -13,9 +11,6 @@ from src.scripts import BaseScript
 
 
 LOGGER = logging.getLogger(__name__)
-ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
 
 
 class IndexKnowledgeBase(BaseScript):
