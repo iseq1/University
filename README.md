@@ -8,13 +8,17 @@
 ### Обучение с подкреплением (Python)
   1) [Задача о многоруком бандите](https://github.com/iseq1/University/tree/main/VI%20course/Reinforcement%20learning/I%20lab)
   2) [Обучение на марковских процессах](https://github.com/iseq1/University/tree/main/VI%20course/Reinforcement%20learning/II%20lab)
+  3) [Исследование метода Монте-Карло](http://github.com/iseq1/University/tree/main/VI%20course/Reinforcement%20learning/III%20lab)
 ### Обработка естественного языка (Python)
   1) [Геймерский паспорт](https://github.com/iseq1/University/tree/main/VI%20course/Natural%20Language%20Processing/NLP-proj)
 ### Компьютерное зрение (Python)
   1) [Автоматическое распознавание и сбор статистики с диаграмм](https://github.com/iseq1/University/tree/main/VI%20course/Computer%20Vision)
-
-
-
+### Управление проектами (-)
+  1) [Сравнительная таблица терминов](https://github.com/iseq1/University/tree/main/VI%20course/Project%20Management/I%20lab)
+  2) [Диаграмма Ганта](https://github.com/iseq1/University/tree/main/VI%20course/Project%20Management/II%20lab)
+  3) [Карта управления рисками](https://github.com/iseq1/University/tree/main/VI%20course/Project%20Management/III%20lab) 
+### Технологии распределения реестров - Блокчейн (Python)
+  1) [Обзорная презентация блокчейн-сети Avalanche (AVAX)]()
 
 
 ---
