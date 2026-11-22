@@ -445,3 +445,13 @@ poetry run celery -A src.worker.celery_app.celery_app worker --loglevel=info
 Созданы задачи `evaluate_model_task` и `compare_models_task`. Для фонового запуска API должен быть доступен Redis по `REDIS_URL`, а Celery worker должен быть запущен отдельно.
 
 **Ограничения экспериментальных данных:** тестовая выборка состоит из синтетических профилей и синтетических эталонных саммари. Полученные метрики характеризуют сходство генерации с этими эталонами, но сами по себе не доказывают фактическую точность описания реальных Steam-профилей. Статистические тесты и доверительные интервалы из бонусной части ТЗ в этом этапе не реализованы.
+
+## Этап 14 — HITL, feedback, кэш и фоновые задачи
+
+Результаты генерации с низкой оценкой Critic или проваленной валидацией отправляются на ручную проверку. Редакторы и администраторы работают с `/api/v1/hitl/queue`, `/api/v1/hitl/{id}/approve`, `/api/v1/hitl/{id}/feedback`, `/api/v1/hitl/{id}/reject`. Подтверждённые результаты пополняют SQL-базу знаний и инициируют переиндексацию Qdrant через Celery. Кэш LLM хранится в SQL с TTL 24 ч и счётчиком попаданий. См. `docs/stage-14-hitl.md`.
+
+```bash
+poetry run celery -A src.worker.celery_app.celery_app worker --loglevel=info
+poetry run pytest --cov=src --cov-report=term-missing
+```
+
