@@ -6,9 +6,9 @@ import re
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.core import get_settings, SteamIdentifierError
-from backend.gateways import SteamGateway
-from backend.utils import with_cache
+from src.backend.core import get_settings, SteamIdentifierError
+from src.backend.gateways import SteamGateway
+from src.backend.utils import with_cache
 
 
 STEAM_ID64_RE = re.compile(r"^7656119\d{10}$")

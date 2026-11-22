@@ -1,4 +1,7 @@
-"""Модульные тесты взаимодействия с Steam"""
+
+"""Модульные тесты взаимодействия с Steam."""
+
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
@@ -6,8 +9,6 @@ from src.backend.service.steam import SteamProfileService
 from src.backend.gateways.steam import SteamGateway
 from src.backend.gateways.steam.client import SteamAPIError
 from src.backend.core import SteamIdentifierError
-
-from unittest.mock import AsyncMock, MagicMock
 
 
 @pytest.fixture
@@ -17,10 +18,22 @@ def steam_gateway() -> SteamGateway:
     gateway = SteamGateway.__new__(SteamGateway)
 
     gateway.settings = MagicMock()
+
+    # Конфигурация Steam API
+    gateway.settings.steam_user_interface = "ISteamUser"
+    gateway.settings.steam_player_service_interface = "IPlayerService"
+
+    gateway.settings.steam_resolve_vanity_method = "ResolveVanityURL"
+    gateway.settings.steam_player_summaries_method = "GetPlayerSummaries"
+    gateway.settings.steam_owned_games_method = "GetOwnedGames"
+    gateway.settings.steam_recently_played_games_method = "GetRecentlyPlayedGames"
+
+    # Вместо настоящих HTTP-запросов используем AsyncMock
     gateway.client = MagicMock()
     gateway.client.call = AsyncMock()
 
     return gateway
+
 
 
 @pytest.mark.asyncio
@@ -300,13 +313,18 @@ def test_parse_profiles_url() -> None:
     assert SteamProfileService.parse_steam_identifier(value="steamcommunity.com/profiles/76561198000000000") == ("steam_id", "76561198000000000")
 
 
-@pytest.mark.parametrize("value", [
-    "Player123",
-    "https://example.com/id/sample",
-    "https://steamcommunity.com/id/",
-    "https://steamcommunity.com/profiles/not-a-steam-id",
-])
+@pytest.mark.parametrize(
+    "value",
+    [
+        "Player123",
+        "https://example.com/id/sample",
+        "https://steamcommunity.com/id/",
+        "https://steamcommunity.com/profiles/not-a-steam-id",
+    ],
+)
 def test_reject_invalid_identifiers(value: str) -> None:
+    """Проверка отклонения некорректных идентификаторов Steam."""
+
     with pytest.raises(SteamIdentifierError):
         SteamProfileService.parse_steam_identifier(value=value)
 

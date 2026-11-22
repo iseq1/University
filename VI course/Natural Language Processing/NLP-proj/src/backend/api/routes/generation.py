@@ -17,6 +17,7 @@ from src.backend.db import Session, Cache, ModelComparison, User
 from src.backend.gateways.llm import LLMGateway, get_llm_gateway
 from src.backend.retrieval.service import RetrivalService
 from src.backend.core import SteamIdentifierError, SteamAPIError
+from src.backend.hitl import CacheHandler, ActiveLearningHandler
 from src.backend.service import SteamProfileService
 from src.backend.agents import (
     CriticAgent,
@@ -350,15 +351,13 @@ async def _generate(
     ).hexdigest()
 
     if data.use_cache:
-        cached = await session.scalar(select(Cache).where(Cache.input_key == cache_key))
 
-        if cached:
-            cached.hits += 1
-            await session.commit()
+        cached = await CacheHandler.get_cached(session, cache_key)
+        if cached is not None:
             return GenerateResponse(
                 request_id=request_id,
                 steam_id=data.steam_id,
-                summary=cached.output,
+                summary=cached,
                 mode=data.mode,
                 cached=True,
             )
@@ -441,11 +440,19 @@ async def _generate(
             detail="LLM returned an empty summary"
         )
 
-    if data.use_cache:
-        session.add(Cache(input_key=cache_key, output=summary))
+    if data.mode == "full":
+        await ActiveLearningHandler.enqueue_if_uncertain(
+            session,
+            input_text=source,
+            model_output=summary,
+            critic_score=critic_score,
+            validation_passed=validation.get("validation_passed", True),
+        )
 
+    if data.use_cache:
         try:
-            await session.commit()
+            await CacheHandler.put_cached(session, cache_key, summary)
+
         except Exception:
             await session.rollback()
             logger.exception("Could not save generation cache")

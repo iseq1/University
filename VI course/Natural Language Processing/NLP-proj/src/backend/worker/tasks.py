@@ -62,3 +62,70 @@ def compare_models_task(
         dataset_path=dataset_path,
         seed=seed,
     ))
+
+@celery_app.task(name="reindex_knowledge_base_task")
+def reindex_knowledge_base_task(batch_size: int = 64) -> dict[str, int]:
+    """Обновить Qdrant на основе утвержденных примеров знаний из SQL"""
+    from src.scripts.index_knowledge_base import IndexKnowledgeBase
+    return {
+        "indexed": asyncio.run(IndexKnowledgeBase().run_index(batch_size))
+    }
+
+
+@celery_app.task(name="cleanup_cache_task")
+def cleanup_cache_task(ttl_hours: int = 24) -> dict[str, int]:
+    """Удалить старые строки из кэша генераций LLM"""
+    from src.backend.hitl import CacheHandler
+
+    async def execute():
+        """Выполнить отчистку кэша"""
+        result = None
+        session_generator = Session().get_session()
+        session = await anext(session_generator)
+
+        try:
+            result = await CacheHandler.clear_expired(session, ttl_hours=ttl_hours)
+
+        finally:
+            await session_generator.aclose()
+            return result
+
+
+    return {
+        "deleted": asyncio.run(execute())
+    }
+
+
+@celery_app.task(name="generate_batch_task")
+def generate_batch_task(items: list[dict]) -> dict[str, Any]:
+    """Создание пакета с помощью существующего конвейера API"""
+    from src.backend.api.routes.generation import _generate
+    from src.backend.api.schemas.generation import GenerateRequest
+
+    async def execute(items: list):
+        """Выполнение генерации"""
+
+        results = []
+        session_generator = Session().get_session()
+        session = await anext(session_generator)
+
+        try:
+            for item in items:
+
+                try:
+                    results.append((await _generate(GenerateRequest.model_validate(item), session)).model_dump(mode="json"))
+
+                except Exception as exc:
+                    results.append({
+                        "error": type(exc).__name__
+                    })
+
+        finally:
+            await session_generator.aclose()
+            return {
+                "count": len(results),
+                "results": results
+            }
+
+    return asyncio.run(execute(items=items))
+

@@ -2,8 +2,8 @@ from functools import lru_cache
 from typing import Any
 
 
-from backend.gateways.steam.client import SteamAPIClient, SteamAPIError
-from backend.core import get_settings
+from src.backend.gateways.steam.client import SteamAPIClient, SteamAPIError
+from src.backend.core import get_settings
 
 
 class SteamGateway:
