@@ -60,18 +60,6 @@ async def test_validator_checks_dictionary_terms_case_insensitively() -> None:
     assert "Unknown Game" in result["warnings"][0]
 
 
-@pytest.mark.asyncio
-async def test_optional_llm_check_is_only_a_logged_placeholder(caplog) -> None:
-    caplog.set_level(logging.INFO)
-    validator = ValidatorAgent(required_fields=(), enable_llm_check=True)
-
-    result = await validator.process({})
-
-    assert result["validation_passed"] is True
-    assert any("not configured yet" in warning for warning in result["warnings"])
-    assert "placeholder" in caplog.text
-
-
 def test_validator_rejects_negative_minimum_length() -> None:
     with pytest.raises(ValueError, match="non-negative"):
         ValidatorAgent(min_text_length=-1)

@@ -4,7 +4,7 @@ from typing import Any
 
 import httpx
 
-from backend.core import SteamAPIError
+from src.backend.core import SteamAPIError
 
 
 class SteamAPIClient:

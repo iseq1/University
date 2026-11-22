@@ -110,6 +110,12 @@ async def test_supervisor_logs_agent_failure_and_reraises() -> None:
     session.commit.assert_awaited_once()
 
 
+
 def test_supervisor_rejects_invalid_iteration_limit() -> None:
-    with pytest.raises(ValueError, match="max_iterations"):
+    """Supervisor отклоняет некорректный лимит итераций."""
+
+    with pytest.raises(
+        ValueError,
+        match="Максимальное количество итераций должно быть не менее 1",
+    ):
         Supervisor([], max_iterations=0)
