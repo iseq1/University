@@ -375,7 +375,7 @@ def main():
     parser.add_argument("--epsilons", type=float, nargs="+",
                         default=[0.02, 0.05, 0.10, 0.20, 0.30])
     parser.add_argument("--budgets", type=int, nargs="+",
-                        default=[1000, 3000, 5000, 10_000, 100_000])
+                        default=[1000, 3000, 5000, 10_000])
     args = parser.parse_args()
     run_experiments(
         args.episodes,

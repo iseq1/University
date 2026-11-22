@@ -130,23 +130,22 @@ class GreedyHandler(Base):
 
         for episode_idx in range(n_episodes):
             state = env.reset(seed=seed + episode_idx)
-            done = False
-            steps = 0
 
-            while not done and steps < MAX_STEPS:
+            for step in range(1, MAX_STEPS + 1):
                 action = self.action(
                     q_values=q_values,
                     state=state,
                     rng=rng,
                 )
 
-                state, reward, done, info = env.step(action)
-                steps += 1
+                next_state, reward, done, info = env.step(action)
+                total_steps += 1
+                state = next_state
 
-                if reward > 0:
-                    successful_episodes += 1
-
-            total_steps += steps
+                if done:
+                    if reward > 0:
+                        successful_episodes += 1
+                    break
 
         success_rate = successful_episodes / n_episodes
         average_steps = total_steps / n_episodes
