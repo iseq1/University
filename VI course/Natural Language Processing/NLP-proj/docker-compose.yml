@@ -1,0 +1,169 @@
+services:
+  # =========================
+  # PostgreSQL
+  # =========================
+  postgres:
+    image: postgres:16-alpine
+    container_name: gamer-passport-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gamer_passport
+      POSTGRES_USER: gamer_passport
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gamer_passport}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U gamer_passport -d gamer_passport
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # =========================
+  # Redis
+  # =========================
+  redis:
+    image: redis:7-alpine
+    container_name: gamer-passport-redis
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # =========================
+  # Qdrant
+  # =========================
+  qdrant:
+    image: qdrant/qdrant:v1.13.0
+    container_name: gamer-passport-qdrant
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:6333:6333"
+      - "127.0.0.1:6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  # =========================
+  # FastAPI
+  # =========================
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gamer-passport-api
+    restart: unless-stopped
+    command:
+      - uvicorn
+      - src.backend.api.main:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://gamer_passport:${POSTGRES_PASSWORD:-gamer_passport}@postgres:5432/gamer_passport
+      REDIS_URL: redis://redis:6379/0
+      QDRANT_URL: http://qdrant:6333
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+
+  # =========================
+  # Streamlit
+  # =========================
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gamer-passport-frontend
+    restart: unless-stopped
+    command:
+      - streamlit
+      - run
+      - src/frontend/app.py
+      - --server.address=0.0.0.0
+      - --server.port=8501
+      - --server.headless=true
+    env_file:
+      - .env
+    environment:
+      API_BASE_URL: http://api:8000
+    ports:
+      - "127.0.0.1:8501:8501"
+    depends_on:
+      - api
+
+  # =========================
+  # Celery Worker
+  # =========================
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gamer-passport-worker
+    restart: unless-stopped
+    command:
+      - celery
+      - -A
+      - src.backend.worker.celery_app
+      - worker
+      - --loglevel=info
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://gamer_passport:${POSTGRES_PASSWORD:-gamer_passport}@postgres:5432/gamer_passport
+      REDIS_URL: redis://redis:6379/0
+      QDRANT_URL: http://qdrant:6333
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # =========================
+  # Celery Beat
+  # =========================
+  beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gamer-passport-beat
+    restart: unless-stopped
+    command:
+      - celery
+      - -A
+      - src.backend.worker.celery_app
+      - beat
+      - --loglevel=info
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://gamer_passport:${POSTGRES_PASSWORD:-gamer_passport}@postgres:5432/gamer_passport
+      REDIS_URL: redis://redis:6379/0
+      QDRANT_URL: http://qdrant:6333
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  redis_data:
+  qdrant_data:
