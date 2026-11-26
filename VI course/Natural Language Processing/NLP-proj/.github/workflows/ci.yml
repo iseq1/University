@@ -1,0 +1,26 @@
+name: Python CI
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+      - name: Ruff lint (stage 15 files)
+        run: python -m ruff check frontend/utils tests/unit/test_stage15_frontend.py
+      - name: Compile sources
+        run: python -m compileall -q src frontend
+      - name: Run unit tests
+        env:
+          DATABASE_URL: sqlite+aiosqlite:///./test_ci.db
+          JWT_SECRET_KEY: ci-only-secret-with-at-least-32-characters
+        run: python -m pytest tests/unit -q --disable-warnings
