@@ -455,3 +455,21 @@ poetry run celery -A src.worker.celery_app.celery_app worker --loglevel=info
 poetry run pytest --cov=src --cov-report=term-missing
 ```
 
+## Этап 15: Streamlit, Docker Compose и CI
+
+Добавлен интерфейс `frontend/app.py` с разделами генерации, пакетной обработки,
+базы знаний, HITL, оценки качества, логов и мониторинга. Интерфейс общается
+только с существующим FastAPI через `frontend/utils/api.py`.
+
+```bash
+cp .env.example .env
+docker compose up --build -d
+```
+
+UI: http://localhost:8080 (или http://localhost:8501).
+Для локального запуска без Docker: `python -m streamlit run src/frontend/app.py`,
+а API отдельно: `python run.py`.
+
+Документация: `docs/stage-15-deployment.md` и `docs/stage-15-final-report.md`.
+CI: `.github/workflows/ci.yml` (unit tests, компиляция, lint новых модулей).
+
